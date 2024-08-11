@@ -130,35 +130,78 @@ body
 {
 	width: 40%;
 	height: 40%;
-	background-color: #ffb61a1f;
+	/* background-color: #ff1a1a; */
 	border-radius: 10px;
     position: relative;
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
 }
-.player_1
+.select_player > .player > .player_1
 {
-    background-image: url("../img/player_1.svg");
-    background-size: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
-.player_2
+.select_player > .player > .player_2
 {
-    background-image: url("../img/player_2.svg");
-    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    overflow: hidden;
 }
+
+.select_player > .player > .player_2 > .img1
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    top: -100%;
+    animation: player_animation_img1 0.25s ease 4;
+    top: 0;
+    
+}
+.select_player > .player > .player_2 > .img2
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    top: -200%;
+    animation: player_animation_img2 0.25s ease 4;
+    top: 0%;
+    
+}
+
 
 .select_player > .player > .threangl
 {
-    /* background-color: red; */
     border-radius: 10px;
     width: 100px;
     height: 100px;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -125%) rotate(0deg);
+    animation: threanglanimation 1s ease infinite;
 }
 
 .select_player > .player > h3
 {
     font-size: xx-large;
+    margin: 0;
+    padding: 0;
     font-weight: bold;
     color: rgb(226, 222, 222);
     text-align: center;
@@ -167,13 +210,14 @@ body
     position: absolute;
     width: 100%;
     height: 20%;
-    bottom: 0px;
+    top: 85%;
+    
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.select_player >  .vs
+.select_player > .vs
 {
     border-radius: 10px;
     width: 25%;
@@ -184,6 +228,81 @@ body
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: vsanimation 1s ease infinite;
+}
+
+@keyframes vsanimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.07);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes threanglanimation {
+    0% {
+        transform: translate(-50%, -125%);
+    }
+    50% {
+        transform: translate(-50%, -100%);
+    }
+
+    100% {
+        transform: translate(-50%, -125%);
+    }
+}
+
+
+@keyframes player_animation_img1 {
+    0% {
+        top : -100%;
+        content: url("../img/player_1.svg");
+    }
+    25% {
+        top : 0%;
+        content: url("../img/player_2.svg");
+    }
+    50% {
+        top : 100%;
+        content: url("../img/player_3.svg");
+    }
+    75% {
+        top : 200%;
+        content: url("../img/player_4.svg");
+    }
+    100% {
+        top : 100%;
+        content: url("../img/player_5.svg");
+    }
+    
+}
+
+@keyframes player_animation_img2 {
+    0% {
+        top : -100%;
+        content: url("../img/player_5.svg");
+    }
+    25% {
+        top : -200%;
+        content: url("../img/player_4.svg");
+    }
+    50% {
+        top : -100%;
+        content: url("../img/player_3.svg");
+    }
+    75% {
+        top : 0%;
+        content: url("../img/player_2.svg");
+    }
+    100% {
+        top : 0%;
+        content: url("../img/player_3.svg");
+    }
 }
 
 

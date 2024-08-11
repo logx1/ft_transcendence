@@ -8,9 +8,9 @@
 </head>
 <body>
     <div class="conatainer">
+        <local_select_players></local_select_players>
 
-
-        <my-counter></my-counter>
+        <!-- <my-counter></my-counter> -->
         
         <!-- <div class="menu">
             <div class="selectgame">
@@ -28,24 +28,40 @@
                 </div>
             </div>
         </div> -->
-        <!-- <div class="select_player">
+
+          <div class="select_player">
             <img src="/img/vs_icon.svg" class="vs" alt="">
-            <div class="player player_1">
-                <img src="/img/triangle_w.svg" class="threangl">
+            <div class="player">
                 
+                <img src="../img/player_1.svg" class="player_1">
+    
+                <img src="/img/triangle_w.svg" class="threangl">            
                 <h3>player_1</h3>
             </div>
             
-            <div class="player player_2">
+            <div class="player">
+                <div class="player_2">
+                    <img class="img1" src="../img/player_2.svg" >
+                    <img class="img2" src="../img/player_3.svg" >
+                </div>
+                
                 <img src="/img/triangle_y.svg" class="threangl">
                 <h3>player_2</h3>
             </div>     
-        </div> -->
-    </div>
+        </div>
+    </div> 
 
 
 
 
-    <script src="./js/routing.js"></script>
+    <!-- <script type="module" src="./js/routing.js"></script>
+    <script>
+
+        function select_local()
+        {
+            history.pushState({page: 1}, "local", "#select_local");
+        }
+    </script> -->
+
 </body>
 </html>
