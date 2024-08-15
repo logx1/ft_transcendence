@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/game_style.css">
     <title>game</title>
 </head>
 <body>
     <div class="conatainer">
-        <local_select_players></local_select_players>
+        <!-- <local_select_players></local_select_players> -->
 
         <!-- <my-counter></my-counter> -->
         
@@ -29,26 +30,75 @@
             </div>
         </div> -->
 
-          <div class="select_player">
-            <img src="/img/vs_icon.svg" class="vs" alt="">
+          <!-- <div class="select_player">
+            <img src="./img/vs_icon.svg" class="vs" alt="">
             <div class="player">
                 
-                <img src="../img/player_1.svg" class="player_1">
+                <img src="./img/player_1.svg" class="player_1">
     
-                <img src="/img/triangle_w.svg" class="threangl">            
+                <img src="./img/triangle_w.svg" class="threangl">            
                 <h3>player_1</h3>
             </div>
             
             <div class="player">
                 <div class="player_2">
-                    <img class="img1" src="../img/player_2.svg" >
-                    <img class="img2" src="../img/player_3.svg" >
+                    <img class="img1" src="./img/player_2.svg" >
+                    <img class="img2" src="./img/player_3.svg" >
                 </div>
                 
-                <img src="/img/triangle_y.svg" class="threangl">
+                <img src="./img/triangle_y.svg" class="threangl">
                 <h3>player_2</h3>
             </div>     
+        </div> -->
+        <div class="gametable">
+            <div class="top">
+                <div class="player_1">
+                    <img src="./img/player_4.svg" alt="player 1">
+                    <span>player_1</span>
+                </div>
+                <div class="score">
+                    <span class="left_scor">0</span>
+                    <span style="color: #FFB71A;">:</span>
+                    <span class="right_scor">0</span>
+
+                </div>
+
+                <div class="player_2">
+                    <span>player_2</span>
+                    <img src="./img/player_5.svg" alt="player 1">
+                </div>
+            </div>
+            <canvas class="table"></canvas>
+
+            <div class="buttom">
+                <div class="player_1_option">
+                    <div class="wall">
+                        <img src="./img/wall_icon.svg" alt="">
+                    </div>
+                    <div class="speed">
+                        <img src="./img/speed_icon.svg" alt="">
+                    </div>
+                    <div class="long_rockit">
+                        <img src="./img/long_rockit.svg" alt="">
+                    </div>
+                </div>
+                <div class="logo">
+                    <img src="./img/logo.svg" alt="">
+                </div>
+                <div class="player_2_option">
+                    <div class="wall">
+                        <img src="./img/wall_icon.svg" alt="">
+                    </div>
+                    <div class="speed">
+                        <img src="./img/speed_icon.svg" alt="">
+                    </div>
+                    <div class="long_rockit">
+                        <img src="./img/long_rockit.svg" alt="">
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </div> 
 
 
