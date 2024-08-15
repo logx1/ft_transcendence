@@ -9,6 +9,8 @@ let rockit_width = 15;
 let rockit_height = table_height/5;
 let speedx = 5;
 let speedy = 0;
+let left_rockit_score = 0;
+let right_rockit_score = 0;
 
 
 
@@ -31,12 +33,13 @@ class rockit
 
 class ball
 {
-    constructor(x,y, radius, color)
+    constructor(x,y, radius, color , status)
     {
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.color = color;
+        this.status = false;
     }
     draw()
     {
@@ -59,9 +62,16 @@ class ball
         }
         if(this.x + this.radius >= table_width)
         {
-            this.x = table_width/2;
-            this.y = table_height/2;
-            speedx = -speedx;
+            this.x = left_rockit.x + rockit_width + this.radius;
+            this.y = left_rockit.y + rockit_height/2;
+            this.status = false;
+        }
+
+        if(this.x - this.radius <= 0)
+        {
+            this.x = right_rockit.x - this.radius;
+            this.y = right_rockit.y + rockit_height/2;
+            this.status = false;
         }
         if((this.y + this.radius >= table_height) || (this.y - this.radius <= 0))
         {
@@ -69,6 +79,8 @@ class ball
         }
     }
 }
+
+
 
 
 let left_rockit = new rockit(10, table_height/2 - rockit_height/2, rockit_width, rockit_height, '#FFB71A');
@@ -86,7 +98,11 @@ let update = function()
     context.clearRect(0, 0, table_width, table_height);
     left_rockit.draw();
     right_rockit.draw();
-    balll.move();
+    if(balll.status === true)
+    {
+        balll.move();
+    }
+    
     balll.draw();
 }
 update();
@@ -96,6 +112,7 @@ let keys = {};
 window.addEventListener('keydown', function(e)
 {
     keys[e.keyCode] = true;
+    balll.status = true;
     console.log(keys);
 });
 
@@ -131,6 +148,23 @@ function keys_tracker()
 
 keys_tracker();
 
+function score_tracker()
+{
+    if(balll.x + balll.radius >= right_rockit.x + right_rockit.width/2)
+    {
+        left_rockit_score++;
+        
+    }
+    if(balll.x - balll.radius <= left_rockit.x + left_rockit.width/2 )
+    {
+        right_rockit_score++;
+       
+    }
+    console.log(left_rockit_score + ' ' + right_rockit_score);
+    requestAnimationFrame(score_tracker);
+}
+
+score_tracker();
 
 
 
