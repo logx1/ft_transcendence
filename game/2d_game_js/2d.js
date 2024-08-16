@@ -3,12 +3,15 @@ let context = table.getContext('2d');
 context.imageSmoothingEnabled = true;
 table.width = getComputedStyle(table).getPropertyValue("width").slice(0, -2);
 table.height = getComputedStyle(table).getPropertyValue("height").slice(0, -2);
+
+let left_score_element = document.getElementById('left_scor');
+let right_score_element = document.getElementById('right_scor');
 let table_width = table.width;
 let table_height = table.height;
 let rockit_width = 15;
 let rockit_height = table_height/5;
-let speedx = 5;
-let speedy = 0;
+let speedx = 15;
+let speedy = 5;
 let left_rockit_score = 0;
 let right_rockit_score = 0;
 
@@ -65,6 +68,8 @@ class ball
             this.x = left_rockit.x + rockit_width + this.radius;
             this.y = left_rockit.y + rockit_height/2;
             this.status = false;
+            left_rockit_score++;
+            left_score_element.innerHTML = left_rockit_score;
         }
 
         if(this.x - this.radius <= 0)
@@ -72,6 +77,8 @@ class ball
             this.x = right_rockit.x - this.radius;
             this.y = right_rockit.y + rockit_height/2;
             this.status = false;
+            right_rockit_score++;
+            right_score_element.innerHTML = right_rockit_score;
         }
         if((this.y + this.radius >= table_height) || (this.y - this.radius <= 0))
         {
@@ -147,24 +154,6 @@ function keys_tracker()
 }
 
 keys_tracker();
-
-function score_tracker()
-{
-    if(balll.x + balll.radius >= right_rockit.x + right_rockit.width/2)
-    {
-        left_rockit_score++;
-        
-    }
-    if(balll.x - balll.radius <= left_rockit.x + left_rockit.width/2 )
-    {
-        right_rockit_score++;
-       
-    }
-    console.log(left_rockit_score + ' ' + right_rockit_score);
-    requestAnimationFrame(score_tracker);
-}
-
-score_tracker();
 
 
 
