@@ -9,9 +9,10 @@ let right_score_element = document.getElementById('right_scor');
 let table_width = table.width;
 let table_height = table.height;
 let rockit_width = 15;
-let rockit_height = table_height/5;
-let speedx = 8;
+let rockit_height = table_height/4;
+let speedx = 5;
 let speedy = 3;
+let max_speed = 12;
 let left_rockit_score = 0;
 let right_rockit_score = 0;
 
@@ -67,6 +68,11 @@ class ball
 
 
             speedx = -speedx;
+            speedx = speedx * 1.15;
+            if(speedx > max_speed)
+            {
+                speedx = max_speed;
+            }
         }
         if((this.x - this.radius <= left_rockit.x + left_rockit.width) && (this.y + this.radius>= left_rockit.y) && (this.y - this.radius <= left_rockit.y + left_rockit.height))
         {
@@ -78,6 +84,11 @@ class ball
             speedy = speedx + (speedy * variation) * 0.45;
 
             speedx = -speedx;
+            speedx = speedx * 1.05;
+            if(speedx > max_speed)
+            {
+                speedx = max_speed;
+            }
         }
         if(this.x + this.radius > table_width)
         {
