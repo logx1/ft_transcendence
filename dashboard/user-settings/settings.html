@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="head.css">
+    <link rel="stylesheet" type="text/css" href="../sidebar.css">
+    <link rel="stylesheet" type="text/css" href="settings.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user Settings</title>
+</head>
+<body>
+    <div class="head-container">
+        <div class="pfp-square">
+            <label class="label" for="file">
+                <span>Change Image</span>
+            </label>
+            <input id="file" type="file" class="input" onchange="loadFile(event)"/>
+        </div>
+        <div class="content-container">
+            <div class="first-last">
+                <h3>First-name & last-name</h3>
+            </div>
+            <div class="Username">Username</div>
+        </div>
+    </div>
+    <div class="sidebar-container">
+        <div class="small-sidebar-container">
+            <button class="small-sidebar-icon"></button>
+        </div>
+        <div class="logo-container"></div>
+        <div class="menu-container">
+            <div class="user-chat-container">
+                <button class="user-chat-icon"></button>
+                <button class="user-chat-text">Chat</button>
+            </div>
+            <div class="user-settings-container">
+                <button class="user-settings-icon"></button>
+                <button class="user-settings-text">Settings</button>
+            </div>
+            <div class="user-profile-container">
+                <button class="user-profile-icon"></button>
+                <button class="user-profile-text">Profile</button>
+            </div>
+        </div>
+        <div class="logout-wrapper">
+            <div class="logout-container">
+                <button class="logout-icon"></button>
+                <button class="logout-text">Log out</button>
+            </div>
+        </div>
+    </div>
+    <div class="body-container">
+        <div class="column-container">
+            <div class="edit-profile-container">
+                <button class="edit-profile">Edit Profile</button>
+            </div>
+            <div class="change-password-container">
+                <button class="change-password">Change Password</button>
+            </div>
+        </div>
+        <!-- <div class="change-name-container">
+            <div class="first-name">Full Name:</div>
+            <div class="name-area-wrapper">
+                <img src="../icons/profile.svg" alt="icon" class="name-icon">
+                <textarea class="name-area"></textarea>
+            </div>
+            <div class="username">Username:</div>
+            <div class="username-wrapper">
+                <img src="../icons/online-hover.svg" alt="icon" class="name-icon">
+                <textarea class="username-area"></textarea>
+            </div>
+        </div> -->
+        <div class="change-password">
+            <div class="old-password">Old Password:</div>
+            <div class="old-pass-wrapper">
+                <input class="old-pass-area" type="password"></input>
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('old-pass-area')">
+                    <img src="../icons/eye.svg" alt="Show Password" class="toggle-icon">
+                </button>
+            </div>
+            <div class="new-password">New Password:</div>
+            <div class="new-pass-wrapper">
+                <input class="new-pass-area" type="password"></input>
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('new-pass-area')">
+                    <img src="../icons/eye.svg" alt="Show Password" class="toggle-icon">
+                </button>
+            </div>
+            <div class="repeat-new-password">Repeat New Password:</div>
+            <div class="repeat-new-password-wrapper">
+                <input class="repeat-new-password-area" type="password"></input>
+                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('repeat-new-password-area')">
+                    <img src="../icons/eye.svg" alt="Show Password" class="toggle-icon">
+                </button>
+            </div>
+        </div>
+        <div class="update-cancel">
+            <button class="cancel">Cancel</button>
+            <button class="enter">Submit</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
