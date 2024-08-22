@@ -10,6 +10,7 @@ let table_width = table.width;
 let table_height = table.height;
 let rockit_width = 15;
 let rockit_height = table_height/4;
+let defoult_speed = 5;
 let speedx = 5;
 let speedy = 3;
 let max_speed = 12;
@@ -63,16 +64,16 @@ class ball
             this.x = right_rockit.x - this.radius;
 
             // try to add some variation to the ball direction
-            let variation = ((this.y - right_rockit.y) % (right_rockit.height/2)) / (right_rockit.height/2);
-            speedy = speedx + (speedy * variation) * 0.45;
+            // let variation = ((this.y - right_rockit.y) % (right_rockit.height/2)) / (right_rockit.height/2);
+            // speedy = speedx + (speedy * variation) * 0.45;
 
 
             speedx = -speedx;
             speedx = speedx * 1.15;
-            if(speedx > max_speed)
-            {
-                speedx = max_speed;
-            }
+            // if(speedx > max_speed)
+            // {
+            //     speedx = max_speed;
+            // }
         }
         if((this.x - this.radius <= left_rockit.x + left_rockit.width) && (this.y + this.radius>= left_rockit.y) && (this.y - this.radius <= left_rockit.y + left_rockit.height))
         {
@@ -80,15 +81,15 @@ class ball
             this.x = left_rockit.x + left_rockit.width + this.radius;
 
             // try to add some variation to the ball direction
-            let variation = ((this.y - left_rockit.y) % (left_rockit.height/2)) / (left_rockit.height/2);
-            speedy = speedx + (speedy * variation) * 0.45;
+            // let variation = ((this.y - left_rockit.y) % (left_rockit.height/2)) / (left_rockit.height/2);
+            // speedy = speedx + (speedy * variation) * 0.45;
 
             speedx = -speedx;
-            speedx = speedx * 1.05;
-            if(speedx > max_speed)
-            {
-                speedx = max_speed;
-            }
+            // speedx = speedx * 1.05;
+            // if(speedx > max_speed)
+            // {
+            //     speedx = max_speed;
+            // }
         }
         if(this.x + this.radius > table_width)
         {
@@ -105,9 +106,10 @@ class ball
             this.y = right_rockit.y + rockit_height/2;
             this.status = false;
             right_rockit_score++;
+            speedx = speedx % defoult_speed;
             right_score_element.innerHTML = right_rockit_score;
         }
-        if((this.y + this.radius >= table_height) || (this.y - this.radius <= 0))
+        if((this.y + this.radius > table_height) || (this.y - this.radius < 0))
         {
             speedy = -speedy;
         }
