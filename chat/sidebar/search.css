@@ -1,0 +1,21 @@
+.sidebar > .search {
+    height: 5%;
+    width: 90%;
+    display: flex;
+    align-self: center;
+    background-color: rgb(54, 51, 49);
+}
+
+.sidebar > .search > #search-icon {
+    align-self: center;
+    padding: 10px;
+}
+
+.sidebar > .search > #search-message {
+    background-color: rgb(54, 51, 49);
+    border: none;
+    outline: none;
+    color: white;
+    padding: 5px;
+    font-size: 16px;
+}

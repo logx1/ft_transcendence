@@ -1,0 +1,51 @@
+.conversation-panel > .type-msj
+{
+    display: flex;
+    height: 10%;
+    width: 90%;
+    border: 1px solid rgb(250, 171, 0);
+    margin-left: 5%;
+}
+
+.conversation-panel > .type-msj > .img-background{
+    width: 200px;
+    min-width: 200px;
+    height: 100%;
+}
+
+.conversation-panel > .type-msj > .img-background img{
+    width: 100%;
+    margin-top: 13px;
+    height: 80%;
+}
+
+.conversation-panel > .type-msj > .type{
+    width: 80%;
+    height: 10px;
+    padding-top: 60px;
+    display: flex;
+    align-self: center;
+    height: 100%;
+}
+
+.conversation-panel > .type-msj > .type > .text{
+    color: rgb(215, 225, 232);
+    border: 0;
+    height: 50px;
+    background-color: #2a2927;
+    outline: none;
+    font-size: large;
+}
+
+.conversation-panel > .type-msj > .send-symbole
+{
+    height: 100%;
+    display: flex;
+    align-self: center;
+    width: 200px;
+}
+
+.conversation-panel > .type-msj > .send-symbole img{
+    height: 80%;
+    margin-top: 10px;
+}

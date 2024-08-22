@@ -1,0 +1,61 @@
+.sidebar > .contact{
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebar > .contact > .user{
+    height: 8%;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.sidebar > .contact > .user > .profil_img
+{
+    align-self: center;
+    width: 30%;
+    height: 100%;
+    display: flex;
+}
+
+.sidebar > .contact > .user > .profil_img > img
+{
+    width: 100%;
+}
+
+.info
+{
+    width: 60%;
+    height: 100%;
+    padding-left: 10px;
+    overflow: hidden;
+}
+
+.user .name{
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+    margin: 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user .last_msg{
+    color: rgb(161, 158, 158);
+    font-size: 18px;
+    margin-top: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.line{
+    margin-left: 60px;
+    margin-top: 6px;
+    margin-bottom: 1px;
+    width: 60%;
+    height: 1px;
+    background-color: rgb(103, 107, 110);
+}

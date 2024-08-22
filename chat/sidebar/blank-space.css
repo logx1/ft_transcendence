@@ -1,0 +1,44 @@
+.sidebar > .blank-space
+{
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    height: 5%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar > .blank-space .new
+{
+    width: 30%;
+    display: flex;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.sidebar > .blank-space .new p
+{
+    margin-top: 0;
+    color: rgba(255, 255, 255, 0.52);
+}
+
+.sidebar > .blank-space > .unrid_msg
+{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 20px;
+}
+
+.sidebar > .blank-space > .unrid_msg > p
+{
+    color: #FFB71A;
+    background-color: #45423D;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 3px;
+}
