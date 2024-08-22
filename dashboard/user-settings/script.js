@@ -41,3 +41,11 @@ function togglePasswordVisibility(inputClass) {
         icon.alt = "Show Password";
     }
 }
+
+function showContainer(containerClass) {
+    document.querySelector('.edit-profile-container').style.display = 'none';
+    document.querySelector('.change-password-container').style.display = 'none';
+
+    // Show the selected container
+    document.querySelector(`.${containerClass}`).style.display = 'block';
+}

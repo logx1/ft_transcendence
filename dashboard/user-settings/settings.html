@@ -52,13 +52,13 @@
     <div class="body-container">
         <div class="column-container">
             <div class="edit-profile-container">
-                <button class="edit-profile">Edit Profile</button>
+                <button class="edit-profile" onclick="showContainer('edit-profile-container')">Edit Profile</button>
             </div>
             <div class="change-password-container">
-                <button class="change-password">Change Password</button>
+                <button class="change-password" onclick="showContainer('change-password-container')">Change Password</button>
             </div>
         </div>
-        <!-- <div class="change-name-container">
+        <div class="change-name-container">
             <div class="first-name">Full Name:</div>
             <div class="name-area-wrapper">
                 <img src="../icons/profile.svg" alt="icon" class="name-icon">
@@ -69,8 +69,8 @@
                 <img src="../icons/online-hover.svg" alt="icon" class="name-icon">
                 <textarea class="username-area"></textarea>
             </div>
-        </div> -->
-        <div class="change-password">
+        </div>
+        <div class="change-password" style="display: none;">
             <div class="old-password">Old Password:</div>
             <div class="old-pass-wrapper">
                 <input class="old-pass-area" type="password"></input>
