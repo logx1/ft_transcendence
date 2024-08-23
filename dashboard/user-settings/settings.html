@@ -52,13 +52,13 @@
     <div class="body-container">
         <div class="column-container">
             <div class="edit-profile-container">
-                <button class="edit-profile" onclick="showContainer('edit-profile-container')">Edit Profile</button>
+                <button class="edit-profile" onclick="showEditProfile()">Edit Profile</button>
             </div>
-            <div class="change-password-container">
-                <button class="change-password" onclick="showContainer('change-password-container')">Change Password</button>
+            <div class="change-password-button-container">
+                <button class="change-password"onclick="showChangePassword()">Change Password</button>
             </div>
         </div>
-        <div class="change-name-container">
+        <div class="change-name-container" style="display: none;">
             <div class="first-name">Full Name:</div>
             <div class="name-area-wrapper">
                 <img src="../icons/profile.svg" alt="icon" class="name-icon">
@@ -70,7 +70,7 @@
                 <textarea class="username-area"></textarea>
             </div>
         </div>
-        <div class="change-password" style="display: none;">
+        <div class="change-password-container" >
             <div class="old-password">Old Password:</div>
             <div class="old-pass-wrapper">
                 <input class="old-pass-area" type="password"></input>
@@ -80,14 +80,14 @@
             </div>
             <div class="new-password">New Password:</div>
             <div class="new-pass-wrapper">
-                <input class="new-pass-area" type="password"></input>
+                <input class="new-pass-area" type="password" placeholder="Enter your New Password:"></input>
                 <button type="button" class="toggle-password" onclick="togglePasswordVisibility('new-pass-area')">
                     <img src="../icons/eye.svg" alt="Show Password" class="toggle-icon">
                 </button>
             </div>
             <div class="repeat-new-password">Repeat New Password:</div>
             <div class="repeat-new-password-wrapper">
-                <input class="repeat-new-password-area" type="password"></input>
+                <input class="repeat-new-password-area" type="password" placeholder="Repeat your New Password:"></input>
                 <button type="button" class="toggle-password" onclick="togglePasswordVisibility('repeat-new-password-area')">
                     <img src="../icons/eye.svg" alt="Show Password" class="toggle-icon">
                 </button>
@@ -95,7 +95,7 @@
         </div>
         <div class="update-cancel">
             <button class="cancel">Cancel</button>
-            <button class="enter">Submit</button>
+            <button class="enter" onclick="verify()">Submit</button>
         </div>
     </div>
     <script src="script.js"></script>

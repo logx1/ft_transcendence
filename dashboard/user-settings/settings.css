@@ -23,6 +23,8 @@
     width: 100%;
 }
 
+/* /////////////////////// */
+
 .column-container > .edit-profile-container {
     display: flex;
     flex-direction: center;
@@ -44,16 +46,11 @@
     font-family: 'Alfa Slab One', sans-serif;
     cursor: pointer;
 }
+/* /////////////////////// */
 
-.edit-profile-container > .edit-profile:active {
-    color: rgb(45, 44, 42);
-    background-color: #bb8c08;
-    border-color: #bb8c08;
-}
-
-.column-container > .change-password-container {
+.column-container > .change-password-button-container {
     display: flex;
-    flex-direction: center;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -61,7 +58,7 @@
     margin-left: 10px;
 }
 
-.change-password-container > .change-password {
+.change-password-button-container > .change-password {
     width: 50%;
     height: 50px;
     font-size: 11px;
@@ -73,10 +70,10 @@
     cursor: pointer;
 }
 
-.change-password-container > .change-password:active {
-    color: rgb(45, 44, 42);
-    background-color: #bb8c08;
-    border-color: #bb8c08;
+.active-button {
+    color: rgb(45, 44, 42) !important;
+    background-color: #bb8c08 !important;
+    border-color: #bb8c08 !important;
 }
 
 /* /////////////////////// */
@@ -230,7 +227,7 @@
 
 /* /////////////////////// */
 
-.body-container > .change-password {
+.body-container > .change-password-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -239,7 +236,7 @@
     margin-top: 120px;
 }
 
-.change-password > .old-password {
+.change-password-container > .old-password {
     color: #bb8c08;
     font-size: small;
     margin-left: 40px;
@@ -255,7 +252,7 @@
     border-radius: 25px;
     background-color: transparent;
     border: #684d04 solid;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 .old-pass-area {
@@ -279,10 +276,20 @@
 
 /* /////////////////////// */
 
-.change-password > .new-password {
+.body-container > .change-password-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    height: 30%;
+    margin-top: 120px;
+}
+
+.change-password-container > .new-password {
     color: #bb8c08;
     font-size: small;
     margin-left: 40px;
+    /* animation: glitch ease-in-out 0.35s 2; */
 }
 
 .new-pass-wrapper {
@@ -295,7 +302,7 @@
     border-radius: 25px;
     background-color: transparent;
     border: #684d04 solid;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 .new-pass-area {
@@ -319,7 +326,16 @@
 
 /* /////////////////////// */
 
-.change-password > .repeat-new-password {
+.body-container > .change-password-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    height: 30%;
+    margin-top: 120px;
+}
+
+.change-password-container > .repeat-new-password {
     color: #bb8c08;
     font-size: small;
     margin-left: 40px;
@@ -378,6 +394,27 @@
     align-items: center;
 }
 
-.change-name-container, .change-password {
+.change-name-container, .change-password-container {
     display: none;
+}
+
+
+
+
+@keyframes glitch
+{
+    0% {
+        transform: translateX(0px);
+        color: red;
+        }
+
+        50% {
+            transform: translateX(20px);
+            color: red;
+            }
+
+    100% {
+        transform: translateX(0px);;
+        color: red;
+    }
 }
