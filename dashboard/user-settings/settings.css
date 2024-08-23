@@ -309,7 +309,7 @@
     overflow: hidden;
     width: 90% !important;
     height: 35px !important;
-    border-radius: 25px ;
+    border-radius: 25px;
     text-align: start;
     flex-grow: 1;
     margin-left: 10px;
@@ -320,7 +320,7 @@
     outline: none;
     padding-top: 4px;
     font-family: 'Alfa Slab One', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     resize: none;
 }
 
@@ -398,23 +398,21 @@
     display: none;
 }
 
-
-
-
 @keyframes glitch
 {
     0% {
-        transform: translateX(0px);
-        color: red;
+            transform: translateX(0px);
+            border-color: rgb(123, 1, 1);
         }
 
-        50% {
+    50% {
             transform: translateX(20px);
-            color: red;
-            }
+            border-color: rgb(123, 1, 1);
+        }
 
     100% {
-        transform: translateX(0px);;
-        color: red;
+            transform: translateX(0px);;
+            border-color: rgb(123, 1, 1);
     }
 }
+

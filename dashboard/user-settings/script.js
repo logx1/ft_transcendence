@@ -58,21 +58,24 @@ function showChangePassword() {
     document.querySelector('.edit-profile').classList.remove('active-button');
 }
 
+function verify() {
+    const newPasswordElement_inp = document.querySelector('.new-pass-wrapper');
+    const newPasswordElement_rep = document.querySelector('.repeat-new-password-wrapper');
+    const inputField = document.querySelector('body > div.body-container > div.change-password-container > div.new-pass-wrapper > input');
 
-function verify()
-{
-    val1 = document.querySelector('body > div.body-container > div.change-password-container > div.new-pass-wrapper > input').value;
-    val2 = document.querySelector('body > div.body-container > div.change-password-container > div.repeat-new-password-wrapper > input').value;
-   if (val1 != val2) {
-        // console.log("error");
-       
-        document.querySelector('.change-password-container > .new-password').style.animation = "glitch ease-in-out 0.35s 2";
+    const val1 = inputField.value;
+    const val2 = document.querySelector('body > div.body-container > div.change-password-container > div.repeat-new-password-wrapper > input').value;
 
-        
-        document.querySelector('body > div.body-container > div.change-password-container > div.new-pass-wrapper > input').placeholder = "lol";
-        console.log(val1);
-   }else
-   {
-    console.log("done")
-   }
+    if (val1 != val2) {       
+        newPasswordElement_inp.style.animation = "glitch ease-out 0.20s 3";
+        newPasswordElement_rep.style.animation = "glitch ease-out 0.20s 3";
+
+        newPasswordElement_inp.addEventListener('animationend', function() {
+            newPasswordElement_inp.style.animation = 'none';
+        }, { once: true });
+
+        newPasswordElement_rep.addEventListener('animationend', function() {
+            newPasswordElement_rep.style.animation = 'none';
+        }, {once: true});
+    }
 }
