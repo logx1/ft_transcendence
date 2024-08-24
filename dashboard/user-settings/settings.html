@@ -58,7 +58,7 @@
                 <button class="change-password"onclick="showChangePassword()">Change Password</button>
             </div>
         </div>
-        <div class="change-name-container" style="display: none;">
+        <div class="change-name-container">
             <div class="first-name">Full Name:</div>
             <div class="name-area-wrapper">
                 <img src="../icons/profile.svg" alt="icon" class="name-icon">
@@ -69,8 +69,12 @@
                 <img src="../icons/online-hover.svg" alt="icon" class="name-icon">
                 <textarea class="username-area"></textarea>
             </div>
+            <div class="update-cancel">
+                <button class="cancel">Cancel</button>
+                <button class="enter" onclick="verify()">Submit</button>
+            </div>
         </div>
-        <div class="change-password-container" >
+        <div class="change-password-container" style="display: none;">
             <div class="old-password">Old Password:</div>
             <div class="old-pass-wrapper">
                 <input class="old-pass-area" type="password"></input>
@@ -92,10 +96,13 @@
                     <img src="../icons/eye.svg" alt="Show Password" class="toggle-icon">
                 </button>
             </div>
-        </div>
-        <div class="update-cancel">
-            <button class="cancel">Cancel</button>
-            <button class="enter" onclick="verify()">Submit</button>
+            <div class="password-status-container">
+                <p class="stats-text" style="display: none;">Your password has been updated successfully!</p>
+            </div>
+            <div class="update-cancel">
+                <button class="cancel">Cancel</button>
+                <button class="enter" onclick="verify()">Submit</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

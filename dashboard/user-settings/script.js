@@ -55,18 +55,20 @@ function showChangePassword() {
     document.querySelector('.change-name-container').style.display = 'none';
 
     document.querySelector('.change-password').classList.add('active-button');
+    document.querySelector('.edit-profile').classList.add('unactive-button');
     document.querySelector('.edit-profile').classList.remove('active-button');
 }
 
 function verify() {
     const newPasswordElement_inp = document.querySelector('.new-pass-wrapper');
     const newPasswordElement_rep = document.querySelector('.repeat-new-password-wrapper');
+
     const inputField = document.querySelector('body > div.body-container > div.change-password-container > div.new-pass-wrapper > input');
 
     const val1 = inputField.value;
     const val2 = document.querySelector('body > div.body-container > div.change-password-container > div.repeat-new-password-wrapper > input').value;
 
-    if (val1 != val2) {       
+    if (val1 != val2 || !val1 || !val2) {       
         newPasswordElement_inp.style.animation = "glitch ease-out 0.20s 3";
         newPasswordElement_rep.style.animation = "glitch ease-out 0.20s 3";
 
@@ -77,5 +79,24 @@ function verify() {
         newPasswordElement_rep.addEventListener('animationend', function() {
             newPasswordElement_rep.style.animation = 'none';
         }, {once: true});
+
+        if (document.querySelector('.password-status-container > .stats-text').style.display = 'block'){
+            document.querySelector('.password-status-container > .stats-text').style.display = 'none';
+        }
+    }
+
+    else {
+        document.querySelector('.password-status-container').style.display = 'flex';
+        const up = document.querySelector('.password-status-container > .stats-text');
+
+        if (document.querySelector('.password-status-container > .stats-text').style.display = 'none'){
+            document.querySelector('.password-status-container > .stats-text').style.display = 'block';
+        }
+
+        up.style.animation = "slide-up ease-out 0.10s 1";
+
+        up.addEventListener('animationend', function() {
+            up.style.animation = 'none';
+        }, { once: true });
     }
 }
