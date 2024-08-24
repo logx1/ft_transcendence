@@ -174,13 +174,14 @@
     .sidebar-container > .logout-wrapper > .logout-container {
         display: flex;
         flex-direction: row;
+        align-items: center;
+        margin-bottom: 10px;
         height: 40px;
         width: 90%;
         padding: 9px;
         gap: 10px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-
     }
 
     .logout-container > .logout-icon {
@@ -191,12 +192,11 @@
         background-size: contain;
         cursor: pointer;
         border: none;
-        width: 40px;
-        height: 30px;
+        width: 35px;
+        height: 25px;
     }
 
     .logout-container > .logout-text {
-        display: flex;
         color: #696969;
         font-family: 'Alfa Slab One', sans-serif;
         background-repeat: no-repeat;
@@ -206,6 +206,11 @@
         cursor: pointer;
         width: 100px;
         height: 30px;
+    }
+
+    .sidebar-container > .logout-wrapper > .logout-container:hover {
+        background-color: #141212;
+        border-radius: 5%;
     }
 
 }
