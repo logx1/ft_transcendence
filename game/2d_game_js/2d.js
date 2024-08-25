@@ -11,8 +11,8 @@ let table_height = table.height;
 let rockit_width = 15;
 let rockit_height = table_height/4;
 let defoult_speed = 5;
-let speedx = 5;
-let speedy = 3;
+let speedx = 8;
+let speedy = 5;
 let max_speed = 12;
 let left_rockit_score = 0;
 let right_rockit_score = 0;
@@ -69,7 +69,7 @@ class ball
 
 
             speedx = -speedx;
-            speedx = speedx * 1.15;
+            // speedx = speedx * 1.15;
             // if(speedx > max_speed)
             // {
             //     speedx = max_speed;
@@ -106,7 +106,7 @@ class ball
             this.y = right_rockit.y + rockit_height/2;
             this.status = false;
             right_rockit_score++;
-            speedx = speedx % defoult_speed;
+            // speedx = speedx % defoult_speed;
             right_score_element.innerHTML = right_rockit_score;
         }
         if((this.y + this.radius > table_height) || (this.y - this.radius < 0))
@@ -183,6 +183,18 @@ function keys_tracker()
 }
 
 keys_tracker();
+
+
+let gameSocket = new WebSocket(
+        'ws://'
+        + '10.11.7.8:8000'
+        + '/ws/socket-server/'
+    );
+
+gameSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    console.log(data);
+};
 
 
 
