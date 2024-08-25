@@ -1,0 +1,69 @@
+.conversation-panel > .peer-profil
+{
+    display: flex;
+    height: 13%;
+    /* background-color: beige; */
+}
+
+.conversation-panel > .peer-profil > .profil_img
+{
+    width: 200px;
+    min-width: 200px;
+    display: flex;
+    position: relative;
+}
+
+.conversation-panel > .peer-profil > .profil_img > .dot-status
+{
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgb(9, 255, 0);
+    position: absolute;
+    top: 30px;
+    right: 20px;
+}
+
+.conversation-panel > .peer-profil > .peer-info
+{
+    padding-top: 30px;
+}
+
+.conversation-panel > .peer-profil > .peer-info > .peer-name
+{
+    color: white;
+}
+
+.conversation-panel > .peer-profil > .peer-info > .peer-status
+{
+    color: rgb(0, 255, 26);
+    font-size: 22px;
+}
+
+.conversation-panel > .peer-profil > .profil_img img
+{
+    width: 80%;
+    height: 80%;
+    align-self: center;
+    padding-left: 40px;
+}
+
+.conversation-panel > .peer-profil > .play-signs
+{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 100px;
+    width: 100%;
+    height: 100%;
+}
+
+.conversation-panel > .peer-profil > .play-signs > .play-sign
+{
+    width: 60px;
+}
+
+.conversation-panel > .peer-profil > .play-signs > .play-sign2
+{
+    width: 40px;
+    padding-left: 10px;
+}
