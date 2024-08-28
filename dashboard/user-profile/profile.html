@@ -9,7 +9,6 @@
     <title>User Profile</title>
 </head>
 <body>
-    <div class="popup"></div>
     <div class="head-container">
             <div class="pfp-square"></div>
                 <div class="content-container">
@@ -18,7 +17,7 @@
                         <h3>First-name & last-name</h3>
                     </div>
                     <div class="Username">Username</div>
-                    <button class="status" onclick="popBox()">Enter your status here...</button>
+                    <button class="status" onclick="popBox()" id="status-button">Enter your status here...</button>
                     <div class="status-container">
                         <!-- <div class="online-container">
                             <div class="online-image"></div>
@@ -36,14 +35,14 @@
                             <button class="add-friend-image"></button>
                             <button class="add-friend-status">Add</button>
                         </div> -->
-                        <div class="sent-friend-container">
+                        <!-- <div class="sent-friend-container">
                             <div class="sent-friend-image"></div>
                             <div class="sent-friend-status">Sent</div>
-                        </div>
-                        <!-- <div class="friend-container">
+                        </div> -->
+                        <div class="friend-container">
                             <div class="friend-image"></div>
                             <div class="friend-status">Friends</div>
-                        </div> -->
+                        </div>
                         <div class="score-container">
                             <div class="score-image"></div>
                             <div class="score-status">10</div>
@@ -214,6 +213,19 @@
     </div>
     <div class="history-container">
         <button class="history">view all history</button>
+    </div>
+    <div class="popup-container" style="display: none;">
+        <div class="popup-box">
+                <p class="enter">Enter your status:</p>
+                <textarea class="input-text" id="textarea" maxlength="30"></textarea>
+                <div class="counter">
+                    <p class="counter_characters">0</p><p>/</p><p>30</p>
+                </div>
+            <div class="update-cancel">
+                <button class="cancel">Cancel</button>
+                <button class="enter">Submit</button>
+            </div>
+        </div>
     </div>
 <script src="script.js"></script>
 </body>
