@@ -5,7 +5,7 @@ window.onload = function() {
     menu_icon_box.onclick = function() {
         box.classList.toggle("active");
     };
- 
+
     // Close the sidebar when clicking outside of it
     document.addEventListener('click', function(event) {
         let isClickInside = box.contains(event.target) || menu_icon_box.contains(event.target);
@@ -14,7 +14,7 @@ window.onload = function() {
             box.classList.remove("active");
         }
     });
- 
+
     // Close the sidebar when the window is resized
     window.addEventListener('resize', function() {
         box.classList.remove("active");
