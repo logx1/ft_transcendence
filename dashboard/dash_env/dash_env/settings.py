@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'dash_env',
+    'dash_env',
     'dash_app',
     'rest_framework',
 ]

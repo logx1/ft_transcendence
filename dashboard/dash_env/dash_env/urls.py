@@ -20,5 +20,5 @@ from dash_app.views import UserListView
 
 urlpatterns = [ #list that stores all the URLs, each entry maps a URL to a view
     path('admin/', admin.site.urls),
-    path('users/', UserListView.as_view(), name='user-list'),
+    path('api/users/', UserListView, name='user-list'),
 ]
