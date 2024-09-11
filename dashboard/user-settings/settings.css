@@ -183,6 +183,21 @@
     resize: none;
 }
 
+.change-name-container > .name-status-container {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    width: 700px;
+    height: 30px;
+    margin-top: 30px;
+}
+
+.name-status-container > .stats-text {
+    color: #3a7642;
+    font-size: 10px;
+}
+
 /* /////////////////////// */
 
 .change-password-container > .update-cancel {
