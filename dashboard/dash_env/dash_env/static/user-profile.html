@@ -10,7 +10,9 @@
     </head>
 <body>
     <div class="head-container">
-            <div class="pfp-square"></div>
+            <div class="pfp-square">
+                <img src="/icons/profile_photo.svg" id="pfp" class="profile-picture">
+            </div>
                 <div class="content-container">
                     <div class="first-last">
                         <button class="edit"></button>
@@ -21,13 +23,13 @@
                     </div>
                     <button class="status" onclick="popBox()" id="status">Enter your status here...</button>
                     <div class="status-container">
-                        <div class="online-container" style="display: none;">
+                        <div class="online-container" style="display: none;" id="online">
                             <div class="online-image"></div>
-                            <div class="status-text">Online</div>
+                            <div class="status-text" id="online-text">Online</div>
                         </div>
-                        <div class="offline-container" style="display: flex;">
+                        <div class="offline-container" style="display: flex;" id="offline">
                         <div class="offline-image"></div>
-                        <div class="status-text">Offline</div>
+                        <div class="status-text" id="offline-text">Offline</div>
                         </div>
                         <div class="time-container">
                             <div class="time-image"></div>
@@ -47,7 +49,7 @@
                         </div>
                         <div class="score-container">
                             <div class="score-image"></div>
-                            <div class="score-status">10</div>
+                            <div class="score-status" id="score">10</div>
                         </div>
                     
                     </div>
@@ -61,7 +63,7 @@
                 <div class="Goals">Goals</div>
                 <div class="Date">Date</div>
             </div>
-            <div class="no-matches-container" style="display: block;">no matches yet.</div>
+            <div class="no-matches-container" style="display: flex;">no matches yet.</div>
             <div class="content-container" style="display: none;">
                 <div class="stats-container">
                     <div class="games-container">

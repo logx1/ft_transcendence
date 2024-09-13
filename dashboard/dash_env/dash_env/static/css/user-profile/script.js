@@ -55,6 +55,22 @@ function updateStatus() {
     if (!txtarea){
         document.getElementById("status").innerHTML = "Enter your status here...";
     }
+
+    const data = { status: txtarea }
+    fetch('http://127.0.0.1:8000/user-info/5/', {
+        method: 'PUT',
+        headers: {
+            'Content-Type':'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Status updated successfully:', data);
+    })
+    .catch((error) => {
+        console.error('Error updating status:', error);
+    });
 }
 
 document.addEventListener('click', function(event) {
@@ -79,36 +95,65 @@ function updateData(data){
     const username_ = document.getElementById('username');
     const date_ = document.getElementById('date');
     const status_ = document.getElementById('status');
+    const score_ = document.getElementById('score');
+    const img_ = document.getElementById('pfp');
 
     fullname_.innerHTML = '';
     username_.innerHTML = '';
-    status_.innerHTML = '';
     date_.innerHTML = '';
+    status_.innerHTML = '';
+    score_.innerHTML = '';
+    img_.innerHTML = '';
 
     const fname = document.createElement('fname');
     const uname = document.createElement('uname');
-    const stats = document.createElement('stats');
     const time = document.createElement('time');
+    const stts = document.createElement('stts');
+    const scr = document.createElement('scr');
 
     let date = new Date(data.date_cr);
     let formattedDate = date.toLocaleDateString();
 
+    var base64Img = data.profile_picture;
+    pfp.setAttribute('src', "data:image/jpg;base64," + base64Img);
+    
     fname.textContent = data.full_name;
     uname.textContent = data.username;
-    stats.textContent = data.status;
     time.textContent = formattedDate;
+    stts.textContent = data.status;
+    scr.textContent = data.total_score;
 
     fullname_.appendChild(fname);
     username_.appendChild(uname);
-    status_.appendChild(stats);
     date_.appendChild(time);
+    status_.appendChild(stts);
+    score_.appendChild(scr);
+    // img_.appendChild(img);
 }
 
-fetch('http://127.0.0.1:8000/user-info/')
-    .then(response => response.json())
+fetch('http://127.0.0.1:8000/user-info/5/', {
+    method: 'GET',
+    })
+
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Server is offline');
+        }
+        return response.json();
+    })
+
     .then(data => {
+        document.getElementById('offline').style.display = 'none';
+        document.getElementById('online').style.display = 'flex';
         updateData(data);
     })
     .catch(error => {
-        console.error('Error fetching data', error);
-})
+        if (error.message === 'Server is offline') {
+            document.getElementById('online').style.display = 'none';
+            document.getElementById('offline').style.display = 'flex';
+            console.error('Server is offline');
+        }
+        else {
+            console.error('Error fetching data', error);
+        }
+});

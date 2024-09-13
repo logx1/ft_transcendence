@@ -1,13 +1,14 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from .models import User
 from django import forms
 from rest_framework import status
 from .serializers import UserSerializer
 from django.http import JsonResponse
-import os
+import json
+import base64
 
 @api_view(['GET', 'POST'])
 def UserListView(request):
@@ -65,42 +66,47 @@ def delete_user(request, pk):
     return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
 # ////////////////
+from PIL import Image
+from io import BytesIO
 
-def loginU(request):
-    file_path = os.path.join(settings.BASE_DIR, 'dash_env', 'static', 'login.html')
-
+def ConvImg(img_path):
     try:
-        with open(file_path, 'r') as file:
-            html_content = file.read()
-        user = User.objects.first()
-        return HttpResponse(html_content, content_type='text/html')
+        with open(img_path, "rb") as img:
+            data = base64.b64encode(img.read())
+            base64_string = data.decode("utf-8")
+            print(base64_string)
+            return base64_string
 
     except FileNotFoundError:
-        return HttpResponse("File Not Found.", status=404)
+        print("file not found")
+        return None
 
-def serve_html(request):
-    file_path = os.path.join(settings.BASE_DIR, 'dash_env', 'static', 'user-profile.html')
+    except Exception as e:
+        print ("an error occured: {e}")
+        return None
 
+@api_view(['GET', 'PUT'])
+def GetUserData(request, user_id):
     try:
-        with open(file_path, 'r') as file:
-            html_content = file.read()
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return JsonResponse({'error': 'user not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        user = User.objects.first()
-        return HttpResponse(html_content, content_type='text/html')
-
-    except FileNotFoundError:
-        return HttpResponse("File Not Found.", status=404)
-
-def GetUserData(request):
-    user = User.objects.first()
-    if user:
+    if request.method == 'GET':
+        profile_64 = ConvImg("images/mudkip.png")
         data = {
             'id': user.id,
             'full_name': user.full_name,
             'username': user.username,
-            'status': user.status,
             'date_cr': user.date_cr,
+            'status': user.status,
+            'total_score': user.total_score,
+            'profile_picture': profile_64,
         }
-        return (JsonResponse(data))
-    else:
-        return (JsonResponse({'error': 'user not found'}, status=status.HTTP_404_NOT_FOUND))
+        return JsonResponse(data)
+
+    elif request.method == 'PUT':
+        data = json.loads(request.body)
+        user.status = data.get('status', user.status)
+        user.save()
+        return JsonResponse({'message': 'Updated!', 'status': user.status})

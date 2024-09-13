@@ -16,14 +16,15 @@ Including another URLconf
 """
 from django.urls import path
 from django.contrib import admin
-from dash_app.views import UserListView, UpdateUser, delete_user, GetUserData, serve_html, loginU
+from dash_app.views import UpdateUser, delete_user, GetUserData
 
 urlpatterns = [ #list that stores all the URLs, each entry maps a URL to a view
     # path('api/users/<int:pk>/', UpdateUser, name='user-update'),
     # path('api/users/<int:pk>/delete', delete_user, name='user-delete'),
     # path('api/users/', UserListView, name='user-list'),
+    # path('user-profile/', serve_html, name='serve'),
+    # path('login/', loginU, name='login')
     path('admin/', admin.site.urls),
-    path('user-info/', GetUserData, name='user-profile'),
-    path('user-profile/', serve_html, name='serve'),
-    path('login/', loginU, name='login')
+    path('user-info/<int:user_id>/', GetUserData, name='user-profile'),
+    # path('status-info/<int:user_id>/', StatusInfo, name='status'),
 ]
