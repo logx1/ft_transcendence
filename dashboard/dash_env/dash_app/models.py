@@ -14,7 +14,7 @@ class User(models.Model):
     full_name = models.CharField(max_length=200)
     date_cr = models.DateField(auto_now_add=True)
     total_score = models.IntegerField(default=0)
-    profile_picture = models.ImageField(upload_to='images/')
+    profile_picture = models.ImageField()
     status = models.CharField(max_length=30)
 
     def __str__(self):

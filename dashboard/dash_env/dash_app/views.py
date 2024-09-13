@@ -66,24 +66,10 @@ def delete_user(request, pk):
     return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
 # ////////////////
-from PIL import Image
-from io import BytesIO
 
-def ConvImg(img_path):
-    try:
-        with open(img_path, "rb") as img:
-            data = base64.b64encode(img.read())
-            base64_string = data.decode("utf-8")
-            print(base64_string)
-            return base64_string
-
-    except FileNotFoundError:
-        print("file not found")
-        return None
-
-    except Exception as e:
-        print ("an error occured: {e}")
-        return None
+def ConvImg(image):
+    with open(image.path, 'rb') as img_file:
+        return base64.b64encode(img_file.read()).decode('utf-8')
 
 @api_view(['GET', 'PUT'])
 def GetUserData(request, user_id):
@@ -93,7 +79,7 @@ def GetUserData(request, user_id):
         return JsonResponse({'error': 'user not found'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        profile_64 = ConvImg("images/mudkip.png")
+        profile_64 = ConvImg(user.profile_picture)
         data = {
             'id': user.id,
             'full_name': user.full_name,
