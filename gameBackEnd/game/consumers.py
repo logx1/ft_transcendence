@@ -1,141 +1,146 @@
-import json
-import time
-import threading
 import asyncio
-
-from asgiref.sync import async_to_sync
-from channels.generic.websocket import WebsocketConsumer
-from channels.layers import get_channel_layer
-from asgiref.sync import async_to_sync
+from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 
-
-# creat aclass of cameMechanics how will be responsible for the game mechanics and he take to objict of GameConsumer
-
-class GameMechanics:
-    def __init__(self, player1, player2):
-        self.player1 = player1
-        self.player2 = player2
-        self.channel_layer = get_channel_layer()
-        self.ball_speed = 1
-        self.ball_direction = 1
+class GameConsumer(AsyncJsonWebsocketConsumer):
+    clients = 0
+    groups = []
     
-    def start(self):
-        print('Before calling game_loop')
-        async_to_sync(self.game_loop)()
-        print('After calling game_loop')
+    async def connect(self):
 
-    async def game_loop(self):
-        await self.channel_layer.group_send(
-            'gamee',
+        cookies = self.scope['cookies']
+
+        token = cookies.get('access')
+        if not token:
+            await self.close()
+        print(cookies)
+        if GameConsumer.clients == 0:
+            GameConsumer.groups.append("group" + str(len(GameConsumer.groups)))
+            print(str(GameConsumer.groups))
+        self.groups = GameConsumer.groups[len(GameConsumer.groups) - 1]
+        GameConsumer.clients += 1
+        
+
+        await self.channel_layer.group_add(self.groups, self.channel_name)
+        await self.accept()
+        
+
+        if GameConsumer.clients == 2:
+            await self.channel_layer.group_send(
+                self.groups,
                 {
-                    'type': 'chat_message',
-                    'left_y': 11,
-                    'right_y': 11,
+                    "type": "send_start_game",
+                    "start_game": "the group : " + self.groups + " is ready to play"
                 }
             )
-        await asyncio.sleep(1)
+            GameConsumer.clients = 0
 
 
+    async def disconnect(self, close_code):
+        GameConsumer.clients -= 1
+        await self.channel_layer.group_discard("game", self.channel_name)
 
-
-class GameConsumer(WebsocketConsumer):
-    players_number = 0
-    instances = []
-
-    def start(self):
-        print('game started')
-
-
-    def connect(self):
-        self.room_group_name = 'gamee'
-
-        async_to_sync(self.channel_layer.group_add)(
-            self.room_group_name,
-            self.channel_name,
-        )
-
-        self.accept()
-        GameConsumer.players_number += 1
-        print(f'players number: {GameConsumer.players_number}', flush=True)
-        
-        GameConsumer.instances.append(self)
-
-        self.send(text_data=json.dumps({
-            'type': 'connection established',
-            'message': 'welcome from the server your now connected',
-        }))
-
-
-        if GameConsumer.players_number == 2:
-            print('players number:', GameConsumer.players_number)
-            GameMechanics(GameConsumer.instances[0], GameConsumer.instances[1]).start()
-        
-    
-    def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        # print('text data:', text_data_json)
-
-        if 'table_width' in text_data_json:
-            self.table_width = text_data_json['table_width']
-            self.table_height = text_data_json['table_height']
-            table_height = self.table_height
-            table_width = self.table_width
-            self.ball_x = table_width/2
-            self.ball_y = table_height/2
-            print('table width:', table_width)
-            print('table height:', table_height)
-            return
-        self.ball_x += 1
-        self.ball_y += 1
-
-        left_y = text_data_json['left_y']
-
-        right_y = text_data_json['right_y']
-        
-        async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name,
-            {
-                'type': 'chat_message',  # i don't now wht we need to add this line 
-                'left_y': left_y,
-                'right_y': right_y,
-            }
+    async def receive_json(self, content):
+        print("the player " + self.groups + " send: " + str(content))
+        if "left_r" in content:
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_left_corictor",
+                    "left_r": content.get("left_r", 0)
+                }
+            )
+        if "right_r" in content:
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_right_corictor",
+                    "right_r": content.get("right_r", 0)
+                }
             )
 
-    def disconnect(self, close_code):
-        GameConsumer.players_number -= 1
-        async_to_sync(self.channel_layer.group_discard)(
-            self.room_group_name,
-            self.channel_name,
+        if "top_r" in content:
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_top_corictor",
+                    "top_r": content.get("top_r", 0),
+                    "ball_x": content.get("ball_x", 0),
+                }
+            )
+        if "down_r" in content:
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_down_corictor",
+                    "down_r": content.get("down_r", 0),
+                    "ball_x": content.get("ball_x", 0),
+                }
+            )
+
+
+        else:
+            await self.channel_layer.group_send(
+            self.groups,
+            {
+                "type": "send.rock",
+                "left_y": content.get("left_y", 0),
+                "right_y": content.get("right_y",0),
+            }
         )
+        # if GameConsumer.clients == 2 and "table_width" in content:
+        #     print(GameConsumer.clients)
+        #     self.loop_task = asyncio.create_task(self.send_welcome_message(self.table_width, self.table_height))
 
-
-
-
-
-
+    async def send_ball(self, event):
+        await self.send_json(
+            {
+                "ball_x": event["ball_x"],
+                "ball_y": event["ball_y"],
+            }
+        )
     
-    def chat_message(self, event):
+    async def send_rock(self, event):
+        await self.send_json(
+            {
+                "left_y": event["left_y"],
+                "right_y": event["right_y"],
+            }
+        )
+    async def send_start_game(self, event):
+        await self.send_json({
+            "start_game": event["start_game"]
+        })
+    async def send_left_corictor(self, event):
+        await self.send_json({
+            "left_r": event["left_r"]
+        })
+    async def send_right_corictor(self, event):
+        await self.send_json({
+            "right_r": event["right_r"]
+        })
 
-        left_y = event['left_y']
-        right_y = event['right_y']
+    async def send_top_corictor(self, event):
+        await self.send_json({
+            "top_r": event["top_r"],
+            "ball_x": event["ball_x"],
+        })
 
-        self.send(text_data=json.dumps({
+    async def send_down_corictor(self, event):
+        await self.send_json({
+            "down_r": event["down_r"],
+            "ball_x": event["ball_x"],
+        })
 
-            'left_y': left_y,
+    async def send_welcome_message(self, socket1, socket2):
+        while True:
+            await asyncio.sleep(1)
+            await socket1.send_json({
+                "message": "Welcome to the game"
+            })
+            await socket2.send_json({
+                "message": "Welcome to the game"
+            })
 
-            'right_y': right_y,
-
-        }))
-
-
-
-
-
-        
-
-
-
-
-    
-
+            json_data = await socket1.receive_json({})
+       
