@@ -3,53 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../game/css/style.css">
     <link rel="stylesheet" href="./css/game_style.css">
     <title>game</title>
 </head>
 <body>
     <div class="conatainer">
-        <!-- <local_select_players></local_select_players> -->
-
-        <!-- <my-counter></my-counter> -->
-        
-        <!-- <div class="menu">
-            <div class="selectgame">
-                <div class="card b_local">
-                    <p>Ping pong online has become a popular way for players to enjoy the classic game from the comfort of their own homes. With the rise of online gaming platforms and virtual reality technology, it's now possible to play ping pong against opponents from all around the world. Players can choose from a variety of game modes, including singles, doubles, and tournaments, and even customize their experience with different tables, paddles, and balls.</p>
-                    <button onclick="select_game()">LOCAL</button>
-                </div>
-                <div class="card b_online">
-                    <p>Ping pong online has become a popular way for players to enjoy the classic game from the comfort of their own homes. With the rise of online gaming platforms and virtual reality technology, it's now possible to play ping pong against opponents from all around the world. Players can choose from a variety of game modes, including singles, doubles, and tournaments, and even customize their experience with different tables, paddles, and balls.</p>
-                    <button onclick="select_game()">ONLINE</button>
-                </div>
-                <div class="card b_bot">
-                    <p>Ping pong online has become a popular way for players to enjoy the classic game from the comfort of their own homes. With the rise of online gaming platforms and virtual reality technology, it's now possible to play ping pong against opponents from all around the world. Players can choose from a variety of game modes, including singles, doubles, and tournaments, and even customize their experience with different tables, paddles, and balls.</p>
-                    <button onclick="select_game()">BOT</button>
-                </div>
-            </div>
-        </div> -->
-
-          <!-- <div class="select_player">
-            <img src="./img/vs_icon.svg" class="vs" alt="">
-            <div class="player">
-                
-                <img src="./img/player_1.svg" class="player_1">
-    
-                <img src="./img/triangle_w.svg" class="threangl">            
-                <h3>player_1</h3>
-            </div>
-            
-            <div class="player">
-                <div class="player_2">
-                    <img class="img1" src="./img/player_2.svg" >
-                    <img class="img2" src="./img/player_3.svg" >
-                </div>
-                
-                <img src="./img/triangle_y.svg" class="threangl">
-                <h3>player_2</h3>
-            </div>     
-        </div> -->
+      
         <div class="gametable">
             <div class="top">
                 <div class="player_1">
@@ -98,21 +58,10 @@
                 </div>
             </div>
         </div>
-        
+        <button onclick="start_game();"> join </button>
     </div> 
 
 
-
-
-    <!-- <script type="module" src="./js/routing.js"></script>
-    <script>
-
-        function select_local()
-        {
-            history.pushState({page: 1}, "local", "#select_local");
-        }
-    </script> -->
-    
     <script src="./2d_game_js/2d.js"></script>
 </body>
 </html>

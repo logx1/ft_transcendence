@@ -1,17 +1,10 @@
+function start_game()
+{
 let gameSocket = new WebSocket(
     'ws://'
-    + '10.11.4.1:8000'
+    + '127.0.0.1:8000'
     + '/ws/game/'
 );
-
-
-
-
-
-
-
-
-
 
 let table = document.getElementById('table');
 let context = table.getContext('2d');
@@ -23,25 +16,22 @@ let left_score_element = document.getElementById('left_scor');
 let right_score_element = document.getElementById('right_scor');
 let table_width = table.width;
 let table_height = table.height;
-let rockit_width = 15;
 let rockit_height = table_height/4;
-let defoult_speed = 5;
 let speedx = table_width/130;
-let speedy = 0;
-let max_speed = 12;
+let speedy = table_height/130;
+let ball_radius = table_width/90;
+let rockit_width = table_width/90;
 let left_rockit_score = 0;
 let right_rockit_score = 0;
 
 gameSocket.onopen = function(event) {
     gameSocket.send(JSON.stringify({
         table_width: table_width,
-        table_height: table_height
+        table_height: table_height,
+        left_rockit_x: left_rockit.x + rockit_width,
+        right_rockit_x: right_rockit.x,
     }));
-
 };
-
-
-
 
 
 
@@ -92,12 +82,18 @@ class ball
         {
             this.x = right_rockit.x - this.radius;
             speedx = -speedx;
+            gameSocket.send(JSON.stringify({
+                'right_r': balll.x,
+            }));
         }
         if((this.x - this.radius <= left_rockit.x + left_rockit.width) && (this.y + this.radius>= left_rockit.y) && (this.y - this.radius <= left_rockit.y + left_rockit.height))
         {
             this.x = left_rockit.x + left_rockit.width + this.radius;
 
             speedx = -speedx;
+            gameSocket.send(JSON.stringify({
+                'left_r': balll.x,
+            }));
         }
         if(this.x + this.radius > table_width)
         {
@@ -116,9 +112,22 @@ class ball
             right_rockit_score++;
             right_score_element.innerHTML = right_rockit_score;
         }
-        if((this.y + this.radius > table_height) || (this.y - this.radius < 0))
+        if(this.y + this.radius > table_height)
         {
             speedy = -speedy;
+            gameSocket.send(JSON.stringify({
+                'down_r': balll.y,
+                'ball_x': balll.x / table_width,
+            }));
+
+        }
+        if(this.y - this.radius < 0)
+        {
+            speedy = -speedy;
+            gameSocket.send(JSON.stringify({
+                'top_r': balll.y,
+                'ball_x': balll.x / table_width,
+            }));
         }
     }
 }
@@ -132,7 +141,7 @@ left_rockit.draw();
 let right_rockit = new rockit(table_width - rockit_width - 10, table_height/2 - rockit_height/2, rockit_width, rockit_height, '#FFB71A');
 right_rockit.draw();
 
-let balll = new ball(table_width/2, table_height/2, 15, 'white');
+let balll = new ball(table_width/2, table_height/2, ball_radius, 'white');
 balll.draw();
 
 
@@ -151,7 +160,39 @@ gameSocket.onmessage = function(e) {
         right_rockit.y = data['right_y'];
         balll.status = true;
     }
-    console.log(data);
+    if (data['start_game'])
+    {
+        balll.status = true;
+    }
+    if (data['left_r'])
+    {
+        balll.x = left_rockit.x + left_rockit.width + ball_radius;
+        console.log("left_r");
+    
+    }
+
+    if (data['right_r'])
+    {
+        balll.x = right_rockit.x - ball_radius;
+        console.log("right_r");
+    }
+
+    if (data['top_r'])
+    {
+        balll.y = ball_radius;
+        balll.x = data['ball_x'] * table_width;
+    }
+
+
+    if (data['down_r'])
+    {
+        balll.y = table_height - ball_radius;
+        balll.x = data['ball_x'] * table_width;
+    }
+    if (data['start_game'])
+    {
+        console.log(data['start_game']);
+    }
 };
 
 
@@ -240,6 +281,8 @@ function keys_tracker()
 keys_tracker();
 
 
+
+}
 
 
 
