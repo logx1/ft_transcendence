@@ -19,12 +19,20 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
             print(str(GameConsumer.groups))
         self.groups = GameConsumer.groups[len(GameConsumer.groups) - 1]
         GameConsumer.clients += 1
+
         
 
         await self.channel_layer.group_add(self.groups, self.channel_name)
         await self.accept()
+        if GameConsumer.clients == 1:
+            await self.send_json({
+                "player": 1
+            })
+        if GameConsumer.clients == 2:
+            await self.send_json({
+                "player": 2
+            })
         
-
         if GameConsumer.clients == 2:
             await self.channel_layer.group_send(
                 self.groups,
@@ -88,10 +96,7 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
                 "right_y": content.get("right_y",0),
             }
         )
-        # if GameConsumer.clients == 2 and "table_width" in content:
-        #     print(GameConsumer.clients)
-        #     self.loop_task = asyncio.create_task(self.send_welcome_message(self.table_width, self.table_height))
-
+       
     async def send_ball(self, event):
         await self.send_json(
             {
@@ -132,15 +137,5 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
             "ball_x": event["ball_x"],
         })
 
-    async def send_welcome_message(self, socket1, socket2):
-        while True:
-            await asyncio.sleep(1)
-            await socket1.send_json({
-                "message": "Welcome to the game"
-            })
-            await socket2.send_json({
-                "message": "Welcome to the game"
-            })
 
-            json_data = await socket1.receive_json({})
        
