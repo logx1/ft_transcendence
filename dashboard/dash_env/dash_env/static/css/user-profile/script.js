@@ -113,22 +113,21 @@ function updateData(data){
 
     let date = new Date(data.date_cr);
     let formattedDate = date.toLocaleDateString();
-
-    var base64Img = data.profile_picture;
-    pfp.setAttribute('src', "data:image/jpg;base64," + base64Img);
     
     fname.textContent = data.full_name;
     uname.textContent = data.username;
     time.textContent = formattedDate;
     stts.textContent = data.status;
     scr.textContent = data.total_score;
+    img_.src = data.profile_picture;
+
+    console.log(img_.src)
 
     fullname_.appendChild(fname);
     username_.appendChild(uname);
     date_.appendChild(time);
     status_.appendChild(stts);
     score_.appendChild(scr);
-    // img_.appendChild(img);
 }
 
 fetch('http://127.0.0.1:8000/user-info/5/', {
@@ -157,3 +156,6 @@ fetch('http://127.0.0.1:8000/user-info/5/', {
             console.error('Error fetching data', error);
         }
 });
+
+    // var base64Img = data.profile_picture;
+    // pfp.setAttribute('src', "data:image/jpg;base64," + base64Img);
