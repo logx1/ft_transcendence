@@ -104,7 +104,9 @@
 .conatainer > .gametable > .table
 {
     width: 90%;
-    height: 50%;
+    height: 45%;
+    max-width: 1000px;
+    max-height: 500px;
     border: 5px solid #FFB71A;
     background-color: #262522;
     border-radius: 19px;

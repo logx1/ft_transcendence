@@ -1,3 +1,11 @@
+function start_game()
+{
+let gameSocket = new WebSocket(
+    'ws://'
+    + '127.0.0.1:8000'
+    + '/ws/game/'
+);
+
 let table = document.getElementById('table');
 let context = table.getContext('2d');
 context.imageSmoothingEnabled = true;
@@ -8,14 +16,22 @@ let left_score_element = document.getElementById('left_scor');
 let right_score_element = document.getElementById('right_scor');
 let table_width = table.width;
 let table_height = table.height;
-let rockit_width = 15;
 let rockit_height = table_height/4;
-let defoult_speed = 5;
-let speedx = 8;
-let speedy = 5;
-let max_speed = 12;
+let speedx = table_width/130;
+let speedy = table_height/130;
+let ball_radius = table_width/90;
+let rockit_width = table_width/90;
 let left_rockit_score = 0;
 let right_rockit_score = 0;
+
+gameSocket.onopen = function(event) {
+    gameSocket.send(JSON.stringify({
+        table_width: table_width,
+        table_height: table_height,
+        left_rockit_x: left_rockit.x + rockit_width,
+        right_rockit_x: right_rockit.x,
+    }));
+};
 
 
 
@@ -31,6 +47,7 @@ class rockit
     }
     draw()
     {
+        
         context.fillStyle = this.color;
         context.fillRect(this.x, this.y, this.width, this.height);
     }
@@ -58,38 +75,25 @@ class ball
 
         this.x += speedx;
         this.y += speedy;
+
+
+
         if((this.x + this.radius >= right_rockit.x) && (this.y + this.radius >= right_rockit.y) && (this.y - this.radius <= right_rockit.y + right_rockit.height))
         {
-            // for fix the problem of the ball stuck in the rockit
             this.x = right_rockit.x - this.radius;
-
-            // try to add some variation to the ball direction
-            // let variation = ((this.y - right_rockit.y) % (right_rockit.height/2)) / (right_rockit.height/2);
-            // speedy = speedx + (speedy * variation) * 0.45;
-
-
             speedx = -speedx;
-            // speedx = speedx * 1.15;
-            // if(speedx > max_speed)
-            // {
-            //     speedx = max_speed;
-            // }
+            gameSocket.send(JSON.stringify({
+                'right_r': balll.x,
+            }));
         }
         if((this.x - this.radius <= left_rockit.x + left_rockit.width) && (this.y + this.radius>= left_rockit.y) && (this.y - this.radius <= left_rockit.y + left_rockit.height))
         {
-            // for fix the problem of the ball stuck in the rockit
             this.x = left_rockit.x + left_rockit.width + this.radius;
 
-            // try to add some variation to the ball direction
-            // let variation = ((this.y - left_rockit.y) % (left_rockit.height/2)) / (left_rockit.height/2);
-            // speedy = speedx + (speedy * variation) * 0.45;
-
             speedx = -speedx;
-            // speedx = speedx * 1.05;
-            // if(speedx > max_speed)
-            // {
-            //     speedx = max_speed;
-            // }
+            gameSocket.send(JSON.stringify({
+                'left_r': balll.x,
+            }));
         }
         if(this.x + this.radius > table_width)
         {
@@ -106,12 +110,24 @@ class ball
             this.y = right_rockit.y + rockit_height/2;
             this.status = false;
             right_rockit_score++;
-            // speedx = speedx % defoult_speed;
             right_score_element.innerHTML = right_rockit_score;
         }
-        if((this.y + this.radius > table_height) || (this.y - this.radius < 0))
+        if(this.y + this.radius > table_height)
         {
             speedy = -speedy;
+            gameSocket.send(JSON.stringify({
+                'down_r': balll.y,
+                'ball_x': balll.x / table_width,
+            }));
+
+        }
+        if(this.y - this.radius < 0)
+        {
+            speedy = -speedy;
+            gameSocket.send(JSON.stringify({
+                'top_r': balll.y,
+                'ball_x': balll.x / table_width,
+            }));
         }
     }
 }
@@ -125,11 +141,66 @@ left_rockit.draw();
 let right_rockit = new rockit(table_width - rockit_width - 10, table_height/2 - rockit_height/2, rockit_width, rockit_height, '#FFB71A');
 right_rockit.draw();
 
-let balll = new ball(table_width/2, table_height/2, 15, 'white');
+let balll = new ball(table_width/2, table_height/2, ball_radius, 'white');
 balll.draw();
+
+
+
+
+gameSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    if ( data['left_y']) {
+
+        left_rockit.y = data['left_y'];
+        balll.status = true;
+
+    }
+    if (data['right_y'])
+    {
+        right_rockit.y = data['right_y'];
+        balll.status = true;
+    }
+    if (data['start_game'])
+    {
+        balll.status = true;
+    }
+    if (data['left_r'])
+    {
+        balll.x = left_rockit.x + left_rockit.width + ball_radius;
+        console.log("left_r");
+    
+    }
+
+    if (data['right_r'])
+    {
+        balll.x = right_rockit.x - ball_radius;
+        console.log("right_r");
+    }
+
+    if (data['top_r'])
+    {
+        balll.y = ball_radius;
+        balll.x = data['ball_x'] * table_width;
+    }
+
+
+    if (data['down_r'])
+    {
+        balll.y = table_height - ball_radius;
+        balll.x = data['ball_x'] * table_width;
+    }
+    if (data['start_game'])
+    {
+        console.log(data['start_game']);
+    }
+};
+
+
+
 
 let update = function()
 {
+
     requestAnimationFrame(update);
     context.clearRect(0, 0, table_width, table_height);
     left_rockit.draw();
@@ -143,13 +214,15 @@ let update = function()
 }
 update();
 
+
+
 let keys = {};
 
 window.addEventListener('keydown', function(e)
 {
     keys[e.keyCode] = true;
     balll.status = true;
-    console.log(keys);
+    // console.log(keys);
 });
 
 window.addEventListener('keyup', function(e)
@@ -159,25 +232,48 @@ window.addEventListener('keyup', function(e)
 
 function keys_tracker()
 {
+    
    if(keys[87] && left_rockit.y > 0)
    {
        left_rockit.y -= 10;
+       gameSocket.send(JSON.stringify({
+        'left_y': left_rockit.y,
+        'right_y': right_rockit.y,
+    }));
    }
    if(keys[83] && left_rockit.y < table_height - rockit_height)
    {
        left_rockit.y += 10;
+       gameSocket.send(JSON.stringify({
+
+        'left_y': left_rockit.y,
+
+        'right_y': right_rockit.y,
+    }));
    }
 
 
    if(keys[38] && right_rockit.y > 0)
    {
     right_rockit.y -= 10;
+    gameSocket.send(JSON.stringify({
+
+        'left_y': left_rockit.y,
+
+        'right_y': right_rockit.y,
+    }));
+
    }
    if(keys[40] && right_rockit.y < table_height - rockit_height)
    {
     right_rockit.y += 10;
-   }
+    gameSocket.send(JSON.stringify({
 
+        'left_y': left_rockit.y,
+
+        'right_y': right_rockit.y,
+    }));
+   }
 
    requestAnimationFrame(keys_tracker);
 }
@@ -185,16 +281,8 @@ function keys_tracker()
 keys_tracker();
 
 
-let gameSocket = new WebSocket(
-        'ws://'
-        + '10.11.7.8:8000'
-        + '/ws/socket-server/'
-    );
 
-gameSocket.onmessage = function(e) {
-    const data = JSON.parse(e.data);
-    console.log(data);
-};
+}
 
 
 
