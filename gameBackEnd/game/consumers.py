@@ -49,7 +49,6 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
         await self.channel_layer.group_discard("game", self.channel_name)
 
     async def receive_json(self, content):
-        print("the player " + self.groups + " send: " + str(content))
         if "left_r" in content:
             await self.channel_layer.group_send(
                 self.groups,
@@ -136,6 +135,3 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
             "down_r": event["down_r"],
             "ball_x": event["ball_x"],
         })
-
-
-       
