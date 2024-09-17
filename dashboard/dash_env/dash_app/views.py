@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.base import ContentFile
 from django.conf import settings
 from .models import User
 from django import forms
@@ -67,10 +67,6 @@ def delete_user(request, pk):
 
 # ////////////////
 
-def ConvImg(image):
-    with open(image.path, 'rb') as img_file:
-        return base64.b64encode(img_file.read()).decode('utf-8')
-
 @api_view(['GET', 'PUT'])
 def GetUserData(request, user_id):
     try:
@@ -79,7 +75,6 @@ def GetUserData(request, user_id):
         return JsonResponse({'error': 'user not found'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        profile_64 = ConvImg(user.profile_picture)
         data = {
             'id': user.id,
             'full_name': user.full_name,
@@ -87,7 +82,7 @@ def GetUserData(request, user_id):
             'date_cr': user.date_cr,
             'status': user.status,
             'total_score': user.total_score,
-            'profile_picture': profile_64,
+            'profile_picture': user.profile_picture.url if user.profile_picture else None,
         }
         return JsonResponse(data)
 
@@ -96,3 +91,27 @@ def GetUserData(request, user_id):
         user.status = data.get('status', user.status)
         user.save()
         return JsonResponse({'message': 'Updated!', 'status': user.status})
+
+@api_view(['GET', 'PUT'])
+def ModifyUserData(request, user_id):
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return JsonResponse({'error':'User Not Found'}, status= status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        data = {
+            'id': user.id,
+            'full_name': user.full_name,
+            'username': user.username,
+            'password': user.password,
+            'profile_picture': user.profile_picture.url if user.profile_picture else None,
+        }
+        return JsonResponse(data)
+    elif request.method == 'PUT':
+        if 'profile_picture' in request.FILES:
+            user.profile_picture = request.FILES['profile_picture']
+            user.save()
+            return JsonResponse({'message': 'Updated', 'profile_picture': user.profile_picture.url if user.profile_picture else None})
+        else:
+            return JsonResponse({'error': 'No profile picture in request'}, status=status.HTTP_400_BAD_REQUEST)

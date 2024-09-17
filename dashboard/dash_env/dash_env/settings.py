@@ -128,6 +128,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "dash_env", "static"),
 ]
 
+MEDIA_URL = '/dash_env/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Only for development, make sure this is in your settings
 if DEBUG:
     STATICFILES_FINDERS = [

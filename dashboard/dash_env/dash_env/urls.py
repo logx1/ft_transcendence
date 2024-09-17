@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.urls import path
 from django.contrib import admin
-from dash_app.views import UpdateUser, delete_user, GetUserData
+from dash_app.views import ModifyUserData, UpdateUser, delete_user, GetUserData
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [ #list that stores all the URLs, each entry maps a URL to a view
     # path('api/users/<int:pk>/', UpdateUser, name='user-update'),
@@ -26,5 +28,6 @@ urlpatterns = [ #list that stores all the URLs, each entry maps a URL to a view
     # path('login/', loginU, name='login')
     path('admin/', admin.site.urls),
     path('user-info/<int:user_id>/', GetUserData, name='user-profile'),
+    path('user-setting/<int:user_id>/', ModifyUserData, name='user-settings'),
     # path('status-info/<int:user_id>/', StatusInfo, name='status'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
