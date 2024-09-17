@@ -95,6 +95,7 @@ function verify() {
             up.style.animation = 'none';
         }, { once: true });
     }
+
     ////////fetch area
 
     if (document.getElementById('old_pass').value != ol_pass){
@@ -105,16 +106,19 @@ function verify() {
         oldPasswordEl.addEventListener('animationend', function() {
             oldPasswordEl.style.animation = 'none';
         }, { once: true });
+
+        if (document.querySelector('.password-status-container > .stats-text').style.display = 'block'){
+            document.querySelector('.password-status-container > .stats-text').style.display = 'none';
+        }
     }
     else{
         document.querySelector('p1').style.display = 'none';
 
         var formData = new FormData();
         formData.append('password', document.getElementById('rp_pass').value);
-
     }
 
-    fetch('http://127.0.0.1:8000/user-setting/5/', {
+    fetch('http://127.0.0.1:8000/user-setting/6/', {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -152,7 +156,7 @@ function verify_info() {
     formData.append('username', document.getElementById('username_txt').value);
     formData.append('password', document.getElementById('old_pass').value);
 
-    fetch('http://127.0.0.1:8000/user-setting/5/', {
+    fetch('http://127.0.0.1:8000/user-setting/6/', {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -193,7 +197,7 @@ function updateData(data){
     username_.appendChild(uname);
 }
 
-fetch('http://127.0.0.1:8000/user-setting/5/', {
+fetch('http://127.0.0.1:8000/user-setting/6/', {
     method:'GET',
 })
     .then(response => response.json())
@@ -216,3 +220,12 @@ document.getElementById('fullname_txt').addEventListener('change', function() {
 document.getElementById('username_txt').addEventListener('change', function() {
     localStorage.setItem('username', this.value);
 });
+
+document.getElementById('updatee').addEventListener('submit', function(event) {
+    event.preventDefault();
+    verify();
+});
+
+// fetch ('http://127.0.0.1:8000/matches-history/5/', {
+//     method: 'GET',
+// })

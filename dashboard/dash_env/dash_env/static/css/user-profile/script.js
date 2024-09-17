@@ -57,7 +57,7 @@ function updateStatus() {
     localStorage.setItem('status', txtarea);
 
     const data = { status: txtarea }
-    fetch('http://127.0.0.1:8000/user-info/5/', {
+    fetch('http://127.0.0.1:8000/user-info/6/', {
         method: 'PUT',
         headers: {
             'Content-Type':'application/json',
@@ -130,7 +130,7 @@ function updateData(data){
     score_.appendChild(scr);
 }
 
-fetch('http://127.0.0.1:8000/user-info/5/', {
+fetch('http://127.0.0.1:8000/user-info/6/', {
     method: 'GET',
     })
 
