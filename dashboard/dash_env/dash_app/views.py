@@ -111,7 +111,18 @@ def ModifyUserData(request, user_id):
     elif request.method == 'PUT':
         if 'profile_picture' in request.FILES:
             user.profile_picture = request.FILES['profile_picture']
-            user.save()
-            return JsonResponse({'message': 'Updated', 'profile_picture': user.profile_picture.url if user.profile_picture else None})
-        else:
-            return JsonResponse({'error': 'No profile picture in request'}, status=status.HTTP_400_BAD_REQUEST)
+        if 'full_name' in request.data and request.data['full_name'].strip() != '':
+            user.full_name = request.data['full_name']
+        if 'username' in request.data and request.data['username'].strip() != '':
+            user.username = request.data['username']
+        if 'password' in request.data and request.data['password'].strip() != '':
+            user.password = request.data['password']
+        user.save()
+        return JsonResponse({
+            'message': 'updated',
+            'profile_picture': user.profile_picture.url if user.profile_picture else None,
+            'full_name': user.full_name,
+            'username': user.username,
+            'password': user.password
+        })
+    

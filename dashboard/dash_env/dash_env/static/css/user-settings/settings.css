@@ -316,6 +316,17 @@
     resize: none;
 }
 
+p{
+    display: inline;
+    font-size: 15px;
+}
+
+p1{
+    display: none;
+    font-size: 10px;
+    color: rgb(152, 0, 0);
+}
+
 /* /////////////////////// */
 
 .change-password-container > .new-password {

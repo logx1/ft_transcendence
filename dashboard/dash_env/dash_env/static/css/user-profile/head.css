@@ -121,6 +121,11 @@ stts {
     cursor: pointer;
 }
 
+stts:empty::before {
+    content: "Enter your status here...";
+    color: rgb(132, 132, 132);
+}
+
 .status-container {
     display: flex;
     flex-direction: row;

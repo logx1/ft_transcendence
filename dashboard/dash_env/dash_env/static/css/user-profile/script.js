@@ -44,17 +44,17 @@ function closeBox() {
     document.querySelector('.popup-container').style.display = 'none';
 }
 
+window.addEventListener('load', function() {
+    document.getElementById('textarea').value = localStorage.getItem('status');
+});
+
 function updateStatus() {
     document.querySelector('.popup-container').style.display = 'none';
 
     let textarea = document.getElementById('textarea');
     let txtarea = textarea.value;
 
-    document.getElementById("status").innerHTML = txtarea;
-
-    if (!txtarea){
-        document.getElementById("status").innerHTML = "Enter your status here...";
-    }
+    localStorage.setItem('status', txtarea);
 
     const data = { status: txtarea }
     fetch('http://127.0.0.1:8000/user-info/5/', {
@@ -156,6 +156,3 @@ fetch('http://127.0.0.1:8000/user-info/5/', {
             console.error('Error fetching data', error);
         }
 });
-
-    // var base64Img = data.profile_picture;
-    // pfp.setAttribute('src', "data:image/jpg;base64," + base64Img);
