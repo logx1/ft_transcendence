@@ -62,25 +62,28 @@
             <div class="first-name">Full Name:</div>
             <div class="name-area-wrapper">
                 <img src="/icons/profile.svg" alt="icon" class="name-icon">
-                <textarea class="name-area"></textarea>
+                <textarea class="name-area" id="fullname_txt"></textarea>
             </div>
             <div class="username">Username:</div>
             <div class="username-wrapper">
                 <img src="/icons/online-hover.svg" alt="icon" class="name-icon">
-                <textarea class="username-area"></textarea>
+                <textarea class="username-area" id="username_txt"></textarea>
             </div>
             <div class="name-status-container">
                 <p class="stats-text" style="display: none;">Your info has been updated successfully!</p>
             </div>
             <div class="update-cancel">
                 <button class="cancel">Cancel</button>
-                <button class="enter" onclick="verify_info()">Submit</button>
+                <button class="enter" id="updatee_name" onclick="verify_info()">Submit</button>
             </div>
         </div>
         <div class="change-password-container" style="display: none;">
-            <div class="old-password">Old Password:</div>
+            <div class="old-password">
+                <p>Old Password:</p>
+                <p1 id="p1_pass">Password doesn't match.</p1>
+            </div>
             <div class="old-pass-wrapper">
-                <input class="old-pass-area" type="password"></input>
+                <input class="old-pass-area" type="password" id="old_pass"></input>
                 <button type="button" class="toggle-password" onclick="togglePasswordVisibility('old-pass-area')">
                     <img src="/icons/eye.svg" alt="Show Password" class="toggle-icon">
                 </button>
@@ -94,7 +97,7 @@
             </div>
             <div class="repeat-new-password">Repeat New Password:</div>
             <div class="repeat-new-password-wrapper">
-                <input class="repeat-new-password-area" type="password"></input>
+                <input class="repeat-new-password-area" type="password" id="rp_pass"></input>
                 <button type="button" class="toggle-password" onclick="togglePasswordVisibility('repeat-new-password-area')">
                     <img src="/icons/eye.svg" alt="Show Password" class="toggle-icon">
                 </button>
@@ -104,7 +107,7 @@
             </div>
             <div class="update-cancel">
                 <button class="cancel">Cancel</button>
-                <button class="enter" onclick="verify()">Submit</button>
+                <button class="enter" id="updatee" onclick="verify()">Submit</button>
             </div>
         </div>
     </div>

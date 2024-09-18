@@ -95,11 +95,49 @@ function verify() {
             up.style.animation = 'none';
         }, { once: true });
     }
+
+    ////////fetch area
+
+    if (document.getElementById('old_pass').value != ol_pass){
+        document.querySelector('p1').style.display = 'inline';
+        const oldPasswordEl = document.querySelector('.old-pass-wrapper');
+        oldPasswordEl.style.animation = "glitch ease-out 0.20s 3";
+
+        oldPasswordEl.addEventListener('animationend', function() {
+            oldPasswordEl.style.animation = 'none';
+        }, { once: true });
+
+        if (document.querySelector('.password-status-container > .stats-text').style.display = 'block'){
+            document.querySelector('.password-status-container > .stats-text').style.display = 'none';
+        }
+    }
+    else{
+        document.querySelector('p1').style.display = 'none';
+
+        var formData = new FormData();
+        formData.append('password', document.getElementById('rp_pass').value);
+    }
+
+    fetch('http://127.0.0.1:8000/user-setting/6/', {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+        },
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
 
 ///////////
 
 var imageData;
+var ol_pass;
 
 function loadFile(event) {
     var reader = new FileReader();
@@ -114,8 +152,11 @@ function loadFile(event) {
 function verify_info() {
     var formData = new FormData();
     formData.append('profile_picture', document.querySelector('input[type="file"]').files[0]);
+    formData.append('full_name', document.getElementById('fullname_txt').value);
+    formData.append('username', document.getElementById('username_txt').value);
+    formData.append('password', document.getElementById('old_pass').value);
 
-    fetch('http://127.0.0.1:8000/user-setting/5/', {
+    fetch('http://127.0.0.1:8000/user-setting/6/', {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -141,16 +182,22 @@ function updateData(data){
 
     const fname = document.createElement('fname');
     const uname = document.createElement('uname');
+    const pass = document.createElement('pass');
     
     fname.textContent = data.full_name;
     uname.textContent = data.username;
+    pass.textContent = data.password;
     img_.style.backgroundImage = 'url(' + data.profile_picture + ')';
+    ol_pass = data.password;
+
+    console.log ("full_name:", fname.textContent)
+    console.log("username:", uname.textContent)
    
     fullname_.appendChild(fname);
     username_.appendChild(uname);
 }
 
-fetch('http://127.0.0.1:8000/user-setting/5/', {
+fetch('http://127.0.0.1:8000/user-setting/6/', {
     method:'GET',
 })
     .then(response => response.json())
@@ -160,3 +207,25 @@ fetch('http://127.0.0.1:8000/user-setting/5/', {
     .catch(error => {
         console.error('Error fetching data', error);
 })
+
+window.addEventListener('load', function(){
+    document.getElementById('fullname_txt').value = localStorage.getItem('full_name');
+    document.getElementById('username_txt').value = localStorage.getItem('username');
+});
+
+document.getElementById('fullname_txt').addEventListener('change', function() {
+    localStorage.setItem('full_name', this.value);
+});
+
+document.getElementById('username_txt').addEventListener('change', function() {
+    localStorage.setItem('username', this.value);
+});
+
+document.getElementById('updatee').addEventListener('submit', function(event) {
+    event.preventDefault();
+    verify();
+});
+
+// fetch ('http://127.0.0.1:8000/matches-history/5/', {
+//     method: 'GET',
+// })

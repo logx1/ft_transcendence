@@ -1,14 +1,12 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from django.core.files.base import ContentFile
 from django.conf import settings
-from .models import User
+from .models import User, Matches
 from django import forms
 from rest_framework import status
-from .serializers import UserSerializer
+from .serializers import UserSerializer, MatchesSerializer
 from django.http import JsonResponse
 import json
-import base64
 
 @api_view(['GET', 'POST'])
 def UserListView(request):
@@ -75,16 +73,8 @@ def GetUserData(request, user_id):
         return JsonResponse({'error': 'user not found'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        data = {
-            'id': user.id,
-            'full_name': user.full_name,
-            'username': user.username,
-            'date_cr': user.date_cr,
-            'status': user.status,
-            'total_score': user.total_score,
-            'profile_picture': user.profile_picture.url if user.profile_picture else None,
-        }
-        return JsonResponse(data)
+            serializer = UserSerializer(user)
+            return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'PUT':
         data = json.loads(request.body)
@@ -100,18 +90,33 @@ def ModifyUserData(request, user_id):
         return JsonResponse({'error':'User Not Found'}, status= status.HTTP_404_NOT_FOUND)
     
     if request.method == 'GET':
-        data = {
-            'id': user.id,
-            'full_name': user.full_name,
-            'username': user.username,
-            'password': user.password,
-            'profile_picture': user.profile_picture.url if user.profile_picture else None,
-        }
-        return JsonResponse(data)
+        serializer = UserSerializer(user)
+        return JsonResponse(serializer.data, safe=False)
     elif request.method == 'PUT':
         if 'profile_picture' in request.FILES:
             user.profile_picture = request.FILES['profile_picture']
-            user.save()
-            return JsonResponse({'message': 'Updated', 'profile_picture': user.profile_picture.url if user.profile_picture else None})
-        else:
-            return JsonResponse({'error': 'No profile picture in request'}, status=status.HTTP_400_BAD_REQUEST)
+        if 'full_name' in request.data and request.data['full_name'].strip() != '':
+            user.full_name = request.data['full_name']
+        if 'username' in request.data and request.data['username'].strip() != '':
+            user.username = request.data['username']
+        if 'password' in request.data and request.data['password'].strip() != '':
+            user.password = request.data['password']
+        user.save()
+        return JsonResponse({
+            'message': 'updated',
+            'profile_picture': user.profile_picture.url if user.profile_picture else None,
+            'full_name': user.full_name,
+            'username': user.username,
+            'password': user.password
+        })
+
+# @api_view(['GET'])
+def GetUserHistory(request, user_id):
+    try:
+        match = Matches.objects.get(id=user_id)
+    except Matches.DoesNotExist:
+        return JsonResponse({'error':'UserNotFound'}, status=status.HTTP_404_NOT_FOUND)
+    
+    # if request.method == 'GET':
+    serializer = MatchesSerializer(match)
+    return JsonResponse(serializer.data, safe=False)
