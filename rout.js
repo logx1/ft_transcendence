@@ -24,7 +24,7 @@ async function getProfile() {
 
 async function fetchProfile() {
     let lol = await getProfile();
-    console.log(lol);
+    // console.log(lol);
     if (lol.detail == "Unauthenticated user") {
        console.log("logged in");
         history.pushState(null, "title 1", "#login");
@@ -118,6 +118,9 @@ window.play_online = function() {
 
 
 window.addEventListener('hashchange', hashChange);
+
+
+
 
 
 

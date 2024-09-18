@@ -46,8 +46,8 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
 
     async def disconnect(self, close_code):
         GameConsumer.clients -= 1
-        await self.channel_layer.group_discard("game", self.channel_name)
-
+        # awai//aofgkaiodg gergnaefg,t self.channel_layer.group_discard("game", self.channel_name)
+# this commit for jga 
     async def receive_json(self, content):
         if "left_r" in content:
             await self.channel_layer.group_send(
@@ -82,6 +82,22 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
                     "type": "send_down_corictor",
                     "down_r": content.get("down_r", 0),
                     "ball_x": content.get("ball_x", 0),
+                }
+            )
+        if "right_score" in content:
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_right_score",
+                    "right_score": content.get("right_score", 0)
+                }
+            )
+        if "left_score" in content:
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_left_score",
+                    "left_score": content.get("left_score", 0)
                 }
             )
 
@@ -134,4 +150,12 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
         await self.send_json({
             "down_r": event["down_r"],
             "ball_x": event["ball_x"],
+        })
+    async def send_right_score(self, event):
+        await self.send_json({
+            "right_score": event["right_score"]
+        })
+    async def send_left_score(self, event):
+        await self.send_json({
+            "left_score": event["left_score"]
         })

@@ -23,6 +23,8 @@ let ball_radius = table_width/90;
 let rockit_width = table_width/90;
 let left_rockit_score = 0;
 let right_rockit_score = 0;
+let left_permision = false;
+let right_permision = false;
 
 gameSocket.onopen = function(event) {
     gameSocket.send(JSON.stringify({
@@ -91,6 +93,20 @@ class ball
             this.x = left_rockit.x + left_rockit.width + this.radius;
 
             speedx = -speedx;
+            if(speedx < 0 && speedx > -(table_width/100))
+            {
+                speedx += -0.5;
+            }else if(speedx > 0 && speedx < table_width/100)
+            {
+                speedx += 0.5;
+            }
+            if(speedy < 0 && speedy > -(table_height/100))
+            {
+                speedy += -0.5;
+            }else if(speedy > 0 && speedy < table_height/100)
+            {
+                speedy += 0.5;
+            }
             gameSocket.send(JSON.stringify({
                 'left_r': balll.x,
             }));
@@ -101,7 +117,14 @@ class ball
             this.y = left_rockit.y + rockit_height/2;
             this.status = false;
             left_rockit_score++;
-            left_score_element.innerHTML = left_rockit_score;
+            if(left_permision === true)
+            {
+                console.log("left_rockit_score");
+                gameSocket.send(JSON.stringify({
+                    'left_score': left_rockit_score,
+                }));
+                left_score_element.innerHTML = left_rockit_score;
+            }  
         }
 
         if(this.x - this.radius < 0)
@@ -110,7 +133,14 @@ class ball
             this.y = right_rockit.y + rockit_height/2;
             this.status = false;
             right_rockit_score++;
-            right_score_element.innerHTML = right_rockit_score;
+            if(right_permision === true)
+            {
+                console.log("right_rockit_score");
+                gameSocket.send(JSON.stringify({
+                    'right_score': right_rockit_score,
+                }));
+                right_score_element.innerHTML = right_rockit_score;
+            } 
         }
         if(this.y + this.radius > table_height)
         {
@@ -149,16 +179,26 @@ balll.draw();
 
 gameSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
-    if ( data['left_y']) {
+    if (data['left_y'] && right_permision === true) {
 
         left_rockit.y = data['left_y'];
-        balll.status = true;
+        if(balll.x < table_width/2)
+        {
+            balll.status = true;
+        }
+        console.log("i am the lift one");
+
 
     }
-    if (data['right_y'])
+    if (data['right_y'] && left_permision === true)
     {
         right_rockit.y = data['right_y'];
-        balll.status = true;
+        if(balll.x > table_width/2)
+        {
+            balll.status = true;
+        }
+
+        console.log("cowcow");
     }
     if (data['start_game'])
     {
@@ -166,6 +206,7 @@ gameSocket.onmessage = function(e) {
     }
     if (data['left_r'])
     {
+
         balll.x = left_rockit.x + left_rockit.width + ball_radius;
         console.log("left_r");
     
@@ -173,12 +214,14 @@ gameSocket.onmessage = function(e) {
 
     if (data['right_r'])
     {
+
         balll.x = right_rockit.x - ball_radius;
         console.log("right_r");
     }
 
     if (data['top_r'])
     {
+
         balll.y = ball_radius;
         balll.x = data['ball_x'] * table_width;
     }
@@ -186,13 +229,34 @@ gameSocket.onmessage = function(e) {
 
     if (data['down_r'])
     {
+
         balll.y = table_height - ball_radius;
         balll.x = data['ball_x'] * table_width;
     }
-    if (data['start_game'])
+    if (data['player'])
     {
-        console.log(data['start_game']);
+        if(data['player'] === 1)
+        {
+            left_permision = true;
+        }
+        if(data['player'] === 2)
+        {
+            right_permision = true;
+        }
     }
+
+    if (data['right_score'])
+    {
+        console.log("right_rockit_score is received");
+        right_score_element.innerHTML = data['right_score'];
+    }
+
+    if (data['left_score'])
+    {
+        console.log("left_rockit_score is received");
+        left_score_element.innerHTML = data['left_score'];
+    }
+
 };
 
 
@@ -200,7 +264,6 @@ gameSocket.onmessage = function(e) {
 
 let update = function()
 {
-
     requestAnimationFrame(update);
     context.clearRect(0, 0, table_width, table_height);
     left_rockit.draw();
@@ -209,7 +272,6 @@ let update = function()
     {
         balll.move();
     }
-    
     balll.draw();
 }
 update();
@@ -221,7 +283,7 @@ let keys = {};
 window.addEventListener('keydown', function(e)
 {
     keys[e.keyCode] = true;
-    balll.status = true;
+    
     // console.log(keys);
 });
 
@@ -233,44 +295,55 @@ window.addEventListener('keyup', function(e)
 function keys_tracker()
 {
     
-   if(keys[87] && left_rockit.y > 0)
+   if(keys[87] && left_rockit.y > 0 && left_permision === true)
    {
-       left_rockit.y -= 10;
-       gameSocket.send(JSON.stringify({
+        if(balll.x < table_width/2)
+        {
+            balll.status = true;
+        }
+
+
+        left_rockit.y -= 10;
+        gameSocket.send(JSON.stringify({
         'left_y': left_rockit.y,
-        'right_y': right_rockit.y,
     }));
    }
-   if(keys[83] && left_rockit.y < table_height - rockit_height)
-   {
-       left_rockit.y += 10;
-       gameSocket.send(JSON.stringify({
+   if(keys[83] && left_rockit.y < table_height - rockit_height && left_permision === true)
+   { 
+        if(balll.x < table_width/2)
+        {
+            balll.status = true;
+        }
+
+        left_rockit.y += 10;
+        gameSocket.send(JSON.stringify({
 
         'left_y': left_rockit.y,
-
-        'right_y': right_rockit.y,
     }));
    }
 
 
-   if(keys[38] && right_rockit.y > 0)
+   if(keys[38] && right_rockit.y > 0 && right_permision === true)
    {
+    if(balll.x > table_width/2)
+    {
+        balll.status = true;
+    }
     right_rockit.y -= 10;
     gameSocket.send(JSON.stringify({
 
-        'left_y': left_rockit.y,
-
         'right_y': right_rockit.y,
     }));
 
    }
-   if(keys[40] && right_rockit.y < table_height - rockit_height)
+   if(keys[40] && right_rockit.y < table_height - rockit_height && right_permision === true)
    {
+    if(balll.x > table_width/2)
+    {
+        balll.status = true;
+    }
     right_rockit.y += 10;
     gameSocket.send(JSON.stringify({
-
-        'left_y': left_rockit.y,
-
         'right_y': right_rockit.y,
     }));
    }
@@ -280,9 +353,5 @@ function keys_tracker()
 
 keys_tracker();
 
-
-
 }
-
-
 
