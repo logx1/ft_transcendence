@@ -10,11 +10,11 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /match_history
 
 # Install dependencies
-COPY requirements.txt /match_history/
+COPY ./requirements.txt /match_history/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
-COPY ./match_history/ /match_history/
+COPY . /match_history/
 
 # Check if manage.py exists
 RUN if [ ! -f /match_history/manage.py ]; then echo "manage.py not found"; exit 1; fi

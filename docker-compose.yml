@@ -2,7 +2,7 @@ version: '3'
 
 services:
   match_history:
-    build: .
+    build: ./match_history
     image: match_history
     container_name: match_history
     ports:
