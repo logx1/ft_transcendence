@@ -1,3 +1,5 @@
+let username = localStorage.getItem('username')
+
 window.onload = function() {
     let menu_icon_box = document.querySelector(".small-sidebar-container");
     let box = document.querySelector(".sidebar-container");
@@ -57,7 +59,7 @@ function updateStatus() {
     localStorage.setItem('status', txtarea);
 
     const data = { status: txtarea }
-    fetch('http://127.0.0.1:8000/user-info/6/', {
+    fetch(`http://127.0.0.1:8000/user-setting/${username}/`, {
         method: 'PUT',
         headers: {
             'Content-Type':'application/json',
@@ -130,7 +132,7 @@ function updateData(data){
     score_.appendChild(scr);
 }
 
-fetch('http://127.0.0.1:8000/user-info/6/', {
+fetch(`http://127.0.0.1:8000/user-setting/${username}/`, {
     method: 'GET',
     })
 
@@ -156,3 +158,87 @@ fetch('http://127.0.0.1:8000/user-info/6/', {
             console.error('Error fetching data', error);
         }
 });
+
+function CompareRes(first, sec){
+    console.log("first(id:6) ",first);
+    console.log("second(id:5)", sec);
+
+    if (first > sec){
+        document.getElementById('plus').style.display = 'flex';
+        document.getElementById('minus').style.display = 'none';
+        document.getElementById('equal').style.display = 'none';
+    }
+    else if (first < sec){
+        console.log("here!")
+        document.getElementById('plus').style.display = 'none';
+        document.getElementById('minus').style.display = 'flex';
+        document.getElementById('equal').style.display = 'none';
+    }
+    else if (first == sec){
+        document.getElementById('plus').style.display = 'none';
+        document.getElementById('minus').style.display = 'none';
+        document.getElementById('equal').style.display = 'flex';
+    }
+}
+
+// function updateHistoryData(data) {
+//     Promise.all([
+//         fetch(`http://127.0.0.1:8000/matches-history/${username}/`, {
+//             method: 'GET'
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             first_username = data.username;
+//             first_result = data.user_result;
+//         }),
+
+//         fetch('http://127.0.0.1:8000/f-user/Arthur/', {
+//             method: 'GET'
+//         })
+//         .then(response => response.json())
+//         .then(data => {
+//             second_username = data.username;
+//             second_result = data.user_result;
+//         })
+//     ])
+//     .then(() => {
+
+//         const fPlayerUser = document.getElementById('first-user-name');
+//         const sPlayerUser = document.getElementById('second-user-name');
+//         const fPlayerRes = document.getElementById('f-user-score')
+//         const sPlayerRes = document.getElementById('sec-user-score');
+
+//         fPlayerUser.innerHTML = '';
+//         sPlayerUser.innerHTML = '';
+//         fPlayerRes.innerHTML = '';
+//         sPlayerRes.innerHTML = '';
+
+//         const fplayer_us = document.createElement('fplayer_us');
+//         const splayer_us = document.createElement('splayer_us');
+//         const fplayer_res = document.createElement('fplayer_res');
+//         const splayer_res = document.createElement('splayer_res');
+
+//         fplayer_us.textContent = first_username;
+//         splayer_us.textContent = second_username;
+//         fplayer_res.textContent = first_result;
+//         splayer_res.textContent = second_result;
+
+//         fPlayerUser.appendChild(fplayer_us);
+//         sPlayerUser.appendChild(splayer_us);
+//         fPlayerRes.appendChild(fplayer_res);
+//         sPlayerRes.appendChild(splayer_res);
+//         CompareRes(fplayer_res.textContent, splayer_res.textContent);
+//     })
+//     .catch(error => console.error('Error:', error));
+// }
+
+// fetch(`http://127.0.0.1:8000/matches-history/1/`, {
+//     method: 'GET',
+// })
+
+// .then(response => response.json())
+// .then(data => {
+//     document.getElementById('no-matches-container').style.display = 'none';
+//     document.getElementById('content-container').style.display = 'flex';
+//     updateHistoryData(data);
+// })

@@ -1,10 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.conf import settings
-from .models import User, Matches
+from .models import User
 from django import forms
 from rest_framework import status
-from .serializers import UserSerializer, MatchesSerializer
+from .serializers import UserSerializer
 from django.http import JsonResponse
 import json
 
@@ -63,12 +63,12 @@ def delete_user(request, pk):
     user.delete()
     return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
-# ////////////////
+# //////////////////////////////-/-/-/-/-/----->
 
 @api_view(['GET', 'PUT'])
-def GetUserData(request, user_id):
+def GetUserData(request, username):
     try:
-        user = User.objects.get(id=user_id)
+        user = User.objects.get(username=username)
     except User.DoesNotExist:
         return JsonResponse({'error': 'user not found'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -82,25 +82,50 @@ def GetUserData(request, user_id):
         user.save()
         return JsonResponse({'message': 'Updated!', 'status': user.status})
 
-@api_view(['GET', 'PUT'])
-def ModifyUserData(request, user_id):
+def check_username(username):
     try:
-        user = User.objects.get(id=user_id)
+        User.objects.get(username=username)
+    except User.DoesNotExist:
+        return username
+    raise forms.ValidationError("A user with this username already exists.")
+
+def check_full_name(full_name):
+    try:
+        User.objects.get(full_name=full_name)
+    except User.DoesNotExist:
+        return full_name
+    raise forms.ValidationError("A user with this name already exists.")
+
+@api_view(['GET', 'PUT'])
+def ModifyUserData(request, username):
+    try:
+        user = User.objects.get(username=username)
     except User.DoesNotExist:
         return JsonResponse({'error':'User Not Found'}, status= status.HTTP_404_NOT_FOUND)
-    
+
     if request.method == 'GET':
         serializer = UserSerializer(user)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'PUT':
+
         if 'profile_picture' in request.FILES:
             user.profile_picture = request.FILES['profile_picture']
+
         if 'full_name' in request.data and request.data['full_name'].strip() != '':
+            # if User.objects.filter(full_name=request.data['full_name']).exists():
+            #     return JsonResponse({'error': 'Full Name already exists'}, status=status.HTTP_400_BAD_REQUEST)
+            # else:
             user.full_name = request.data['full_name']
+
         if 'username' in request.data and request.data['username'].strip() != '':
-            user.username = request.data['username']
+            if User.objects.filter(username=request.data['username']).exists():
+                return JsonResponse(data={'error': 'Username already exists'}, status=400)
+            else:
+                user.username = request.data['username']
+
         if 'password' in request.data and request.data['password'].strip() != '':
             user.password = request.data['password']
+
         user.save()
         return JsonResponse({
             'message': 'updated',
@@ -111,12 +136,25 @@ def ModifyUserData(request, user_id):
         })
 
 # @api_view(['GET'])
-def GetUserHistory(request, user_id):
-    try:
-        match = Matches.objects.get(id=user_id)
-    except Matches.DoesNotExist:
-        return JsonResponse({'error':'UserNotFound'}, status=status.HTTP_404_NOT_FOUND)
-    
-    # if request.method == 'GET':
-    serializer = MatchesSerializer(match)
-    return JsonResponse(serializer.data, safe=False)
+# def getUsername_Result(request, user_id):
+#     try:
+#         user = User.objects.get(id=user_id)
+#     except User.DoesNotExist:
+#         return JsonResponse({'error': 'UserNot Found'}, status=status.HTTP_404_NOT_FOUND)
+#     if request.method == 'GET':
+#         data = {
+#             'username': user.username,
+#             'user_result': user.user_result
+#         }
+#         return JsonResponse(data)
+
+# @api_view(['GET'])
+# def GetUserHistory(request, user_id):
+#     try:
+#         match = Matches.objects.get(id=user_id)
+#     except Matches.DoesNotExist:
+#         return JsonResponse({'error':'UserNotFound'}, status=status.HTTP_404_NOT_FOUND)
+
+#     if request.method == 'GET':
+#         serializer = MatchesSerializer(match)
+#         return JsonResponse(serializer.data, safe=False)

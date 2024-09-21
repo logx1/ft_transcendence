@@ -1,3 +1,6 @@
+// let username = localStorage.getItem('username')
+// let username = "usr1"
+
 window.onload = function() {
     let menu_icon_box = document.querySelector(".small-sidebar-container");
     let box = document.querySelector(".sidebar-container");
@@ -118,7 +121,7 @@ function verify() {
         formData.append('password', document.getElementById('rp_pass').value);
     }
 
-    fetch('http://127.0.0.1:8000/user-setting/6/', {
+    fetch(`http://127.0.0.1:8000/user-setting/${username}/`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -149,6 +152,44 @@ function loadFile(event) {
     reader.readAsDataURL(event.target.files[0]);
 }
 
+function TriggerErrorUsername() {
+    const usr = document.querySelector('.change-name-container > .username');
+    const usr_wrap = document.querySelector('.username-wrapper');
+    document.querySelector('p1').style.display = 'inline';
+    document.querySelector('p').style.color = 'rgba(152, 0, 0, 0.773)';
+
+    usr.style.animation = "glitch ease-out 0.20s 3";
+    usr_wrap.style.animation = "glitch ease-out 0.20s 3";
+
+    usr.addEventListener('animationend', function() {
+        usr.style.animation = 'none';
+        document.querySelector('p').style.color = '#bb8c08';
+    }, {once: true});
+    usr_wrap.addEventListener('animationend', function() {
+        usr_wrap.style.animation = 'none';
+    }, {once: true});
+}
+
+// function TriggerErrorFullName() {
+//     const usr = document.querySelector('.change-name-container > .first-name');
+//     const usr_wrap = document.querySelector('.name-area-wrapper');
+//     document.querySelector('p1').style.display = 'inline';
+//     document.querySelector('p').style.color = 'rgba(152, 0, 0, 0.773)';
+
+//     usr.style.animation = "glitch ease-out 0.20s 3";
+//     usr_wrap.style.animation = "glitch ease-out 0.20s 3";
+
+//     usr.addEventListener('animationend', function() {
+//         usr.style.animation = 'none';
+//         document.querySelector('p').style.color = '#bb8c08';
+//     }, {once: true});
+//     usr_wrap.addEventListener('animationend', function() {
+//         usr_wrap.style.animation = 'none';
+//     }, {once: true});
+// }
+
+let ussrr = "rr"
+
 function verify_info() {
     var formData = new FormData();
     formData.append('profile_picture', document.querySelector('input[type="file"]').files[0]);
@@ -156,19 +197,22 @@ function verify_info() {
     formData.append('username', document.getElementById('username_txt').value);
     formData.append('password', document.getElementById('old_pass').value);
 
-    fetch('http://127.0.0.1:8000/user-setting/6/', {
+    fetch(`http://127.0.0.1:8000/user-setting/${ussrr}/`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
         },
         body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
     })
     .catch((error) => {
-        console.error('Error:', error);
+        console.log("tsssst: ", error.message);
+        if (error.message === "Username already exists")
+            TriggerErrorUsername();
     });
 }
 
@@ -197,7 +241,7 @@ function updateData(data){
     username_.appendChild(uname);
 }
 
-fetch('http://127.0.0.1:8000/user-setting/6/', {
+fetch(`http://127.0.0.1:8000/user-setting/${ussrr}/`, {
     method:'GET',
 })
     .then(response => response.json())
@@ -225,7 +269,3 @@ document.getElementById('updatee').addEventListener('submit', function(event) {
     event.preventDefault();
     verify();
 });
-
-// fetch ('http://127.0.0.1:8000/matches-history/5/', {
-//     method: 'GET',
-// })

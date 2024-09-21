@@ -63,57 +63,32 @@
                 <div class="Goals">Goals</div>
                 <div class="Date">Date</div>
             </div>
-            <div class="no-matches-container" style="display: none;">no matches yet.</div>
-            <div class="content-container">
-                <div class="stats-container">
+            <div class="no-matches-container" style="display: flex;" id="no-matches-container">no matches yet.</div>
+            <div class="content-container" style="display: none;" id="content-container">
+                <div class="stats-container" style="display: flex;">
                     <div class="games-container">
                         <div class="games-icon">
+
                             <div class="games-image-local"></div>
                             <div class="games-text">LOCAL</div>
+
+                            <div class="games-image-bot" style="display: none;"></div>
+                            <div class="games-text" style="display: none;">BOT</div>
+
+                            <div class="games-image-online" style="display: none;"></div>
+                            <div class="games-text" style="display: none;">ONLINE</div>
+
                         </div>
                         <div class="games-users">
                             <div class="f-user">
                                 <div class="arrow_1"></div>
-                                <div class="first-user-text">Username_1</div>
+                                <div class="first-user-text" id="first-user-name">Username_1</div>
                             </div>
                             <div class="sec-user">
                                 <div class="arrow_2"></div>
-                                <div class="second-user-text">Username_2</div>
+                                <div class="second-user-text" id="second-user-name">Username_2</div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="Results-container">
-                        <div class="res-num">
-                            <div class="f-user-score">1</div>
-                            <div class="sec-user-score">1</div>
-                        </div>
-                        <div class="res-icon">
-                            <div class="res-image-minus"></div>
-                        </div>
-                    </div>
-
-                    <div class="Accuracy-container">
-                        <div class="f-user-accuracy">50%</div>
-                        <div class="sec-user-accuracy">50%</div>
-                    </div>
-                    <div class="goals-container">
-                        <div class="f-user-goal">7</div>
-                        <div class="sec-user-goal">5</div>
-                    </div>
-                    <div class="date-container">01/01/2024</div>
-                </div>
-                <div class="stats-container" style="display: none;">
-                    <div class="games-container">
-                        <div class="games-icon">
-                            <div class="games-image-bot"></div>
-                            <div class="games-text">BOT</div>
-                        </div>
-                        <div class="games-users">
-                            <div class="f-user">
-                                <div class="arrow_1"></div>
-                                <div class="first-user-text">Username_1</div>
-                            </div>
-                            <div class="sec-user">
+                            <div class="sec-user" style="display: none;">
                                 <div class="arrow_2"></div>
                                 <div class="second-user-text">Bot</div>
                             </div>
@@ -121,11 +96,13 @@
                     </div>
                     <div class="Results-container">
                         <div class="res-num">
-                            <div class="f-user-score">1</div>
-                            <div class="sec-user-score">1</div>
+                            <div class="f-user-score" id="f-user-score">1</div>
+                            <div class="sec-user-score" id="sec-user-score">1</div>
                         </div>
                         <div class="res-icon">
-                            <div class="res-image-equal"></div>
+                            <div class="res-image-minus" style="display: none;" id="minus"></div>
+                            <div class="res-image-plus" style="display: none;" id="plus"></div>
+                            <div class="res-image-equal" style="display: none;" id="equal"></div>
                         </div>
                     </div>
 
@@ -133,51 +110,10 @@
                         <div class="f-user-accuracy">50%</div>
                         <div class="sec-user-accuracy">50%</div>
                     </div>
-
                     <div class="goals-container">
                         <div class="f-user-goal">7</div>
                         <div class="sec-user-goal">5</div>
                     </div>
-
-                    <div class="date-container">01/01/2024</div>
-                </div>
-                <div class="stats-container" style="display: none;">
-                    <div class="games-container">
-                        <div class="games-icon">
-                            <div class="games-image-online"></div>
-                            <div class="games-text">ONLINE</div>
-                        </div>
-                        <div class="games-users">
-                            <div class="f-user">
-                                <div class="arrow_1"></div>
-                                <div class="first-user-text">Username_1</div>
-                            </div>
-                            <div class="sec-user">
-                                <div class="arrow_2"></div>
-                                <div class="second-user-text">Username_2</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Results-container">
-                        <div class="res-num">
-                            <div class="f-user-score">1</div>
-                            <div class="sec-user-score">1</div>
-                        </div>
-                        <div class="res-icon">
-                            <div class="res-image-plus"></div>
-                        </div>
-                    </div>
-
-                    <div class="Accuracy-container">
-                        <div class="f-user-accuracy">50%</div>
-                        <div class="sec-user-accuracy">50%</div>
-                    </div>
-
-                    <div class="goals-container">
-                        <div class="f-user-goal">7</div>
-                        <div class="sec-user-goal">5</div>
-                    </div>
-
                     <div class="date-container">01/01/2024</div>
                 </div>
             </div>

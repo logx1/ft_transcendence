@@ -16,18 +16,17 @@ Including another URLconf
 """
 from django.urls import path
 from django.contrib import admin
-from dash_app.views import ModifyUserData, GetUserHistory, UpdateUser, delete_user, GetUserData
+from dash_app.views import ModifyUserData ,GetUserData, UserListView
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [ #list that stores all the URLs, each entry maps a URL to a view
     # path('api/users/<int:pk>/', UpdateUser, name='user-update'),
     # path('api/users/<int:pk>/delete', delete_user, name='user-delete'),
-    # path('api/users/', UserListView, name='user-list'),
-    # path('user-profile/', serve_html, name='serve'),
-    # path('login/', loginU, name='login')
+    path('api/users/', UserListView, name='user-list'),
     path('admin/', admin.site.urls),
-    path('user-info/<int:user_id>/', GetUserData, name='user-profile'),
-    path('user-setting/<int:user_id>/', ModifyUserData, name='user-settings'),
-    path('matches-history/<int:user_id>/', GetUserHistory, name='user-history'),
+    path('user-info/<str:username>/', GetUserData, name='user-profile'),
+    path('user-setting/<str:username>/', ModifyUserData, name='user-settings'),
+    # path('matches-history/<str:username>/', GetUserHistory, name='user-history'),
+    # path('f-user/<int:user_id>/', getUsername_Result, name='username'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
