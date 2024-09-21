@@ -78,8 +78,6 @@ class ball
         this.x += speedx;
         this.y += speedy;
 
-
-
         if((this.x + this.radius >= right_rockit.x) && (this.y + this.radius >= right_rockit.y) && (this.y - this.radius <= right_rockit.y + right_rockit.height))
         {
             this.x = right_rockit.x - this.radius;
@@ -238,10 +236,38 @@ gameSocket.onmessage = function(e) {
         if(data['player'] === 1)
         {
             left_permision = true;
+
+            setTimeout(() => {
+                fetch('http://127.0.0.1:8000/api/user/', { method: 'GET', credentials: 'include', })
+                    .then(response => response.json()) // Convert the response data to a JSON object
+                    .then(data => {
+                        console.log(data.name);
+
+                        gameSocket.send(JSON.stringify({
+                            'name1': data.name,
+                        }));
+                       
+                        document.querySelector('body > game-online > div > div > div.top > div.player_1 > span').innerHTML = data.name;
+                    });
+            }, 10);
+
         }
         if(data['player'] === 2)
         {
             right_permision = true;
+            setTimeout(() => {
+
+                fetch('http://127.0.0.1:8000/api/user/', { method: 'GET', credentials: 'include', })
+                    .then(response => response.json()) // Convert the response data to a JSON object
+                    .then(data => {
+                        console.log(data.name);
+                        gameSocket.send(JSON.stringify({
+                            'name2': data.name,
+                        }));
+                       
+                        document.querySelector('body > game-online > div > div > div.top > div.player_2 > span').innerHTML = data.name;
+                    });
+            }, 10);
         }
     }
 
@@ -256,10 +282,18 @@ gameSocket.onmessage = function(e) {
         console.log("left_rockit_score is received");
         left_score_element.innerHTML = data['left_score'];
     }
+    if (data['name1'])
+    {
+       console.log("the ==> " + data['name1']);
+       document.querySelector('body > game-online > div > div > div.top > div.player_1 > span').innerHTML = data['name1'];
 
+    }
+    if (data['name2'])
+    {
+         console.log("the ==> " + data['name2']);
+            document.querySelector('body > game-online > div > div > div.top > div.player_2 > span').innerHTML = data['name2'];
+    }
 };
-
-
 
 
 let update = function()

@@ -20,18 +20,10 @@ class gameLocal extends HTMLElement{
         </style>
             `;
             this.innerHTML += data;
-            
             setTimeout(() => {
                 start_game();
-                fetch('http://127.0.0.1:8000/api/user/', { method: 'GET', credentials: 'include', })
-                    .then(response => response.json()) // Convert the response data to a JSON object
-                    .then(data => {
-                        console.log(data.name);
-                       
-                        this.querySelector('body > game-online > div > div > div.top > div.player_1 > span').innerHTML = data.name;
- 
-                    }); // Log the data
-            }, 1000);
+            }, 100);
+
         })
     }
 }

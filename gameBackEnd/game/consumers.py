@@ -5,6 +5,9 @@ from channels.generic.websocket import AsyncJsonWebsocketConsumer
 class GameConsumer(AsyncJsonWebsocketConsumer):
     clients = 0
     groups = []
+
+    name11 = "game1"
+    name22 = "game2"
     
     async def connect(self):
 
@@ -42,6 +45,20 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
                 }
             )
             GameConsumer.clients = 0
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_left_opponent",
+                    "name1": GameConsumer.name11
+                }
+            )
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_right_opponent",
+                    "name2": GameConsumer.name22
+                }
+            )
 
 
     async def disconnect(self, close_code):
@@ -100,7 +117,24 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
                     "left_score": content.get("left_score", 0)
                 }
             )
-
+        if "name1" in content:
+            GameConsumer.name11 = content.get("name1", 0)
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_left_opponent",
+                    "name1": content.get("name1", 0)
+                }
+            )
+        if "name2" in content:
+            GameConsumer.name22 = content.get("name2", 0)
+            await self.channel_layer.group_send(
+                self.groups,
+                {
+                    "type": "send_right_opponent",
+                    "name2": content.get("name2", 0)
+                }
+            )
 
         else:
             await self.channel_layer.group_send(
@@ -158,4 +192,12 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
     async def send_left_score(self, event):
         await self.send_json({
             "left_score": event["left_score"]
+        })
+    async def send_left_opponent(self, event):
+        await self.send_json({
+            "name1": event["name1"]
+        })
+    async def send_right_opponent(self, event):
+        await self.send_json({
+            "name2": event["name2"]
         })
