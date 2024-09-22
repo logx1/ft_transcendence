@@ -16,17 +16,13 @@ Including another URLconf
 """
 from django.urls import path
 from django.contrib import admin
-from dash_app.views import ModifyUserData ,GetUserData, UserListView
+from dash_app.views import ModifyUserData ,GetUserData, UserListView, getUserHistory
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [ #list that stores all the URLs, each entry maps a URL to a view
-    # path('api/users/<int:pk>/', UpdateUser, name='user-update'),
-    # path('api/users/<int:pk>/delete', delete_user, name='user-delete'),
     path('api/users/', UserListView, name='user-list'),
     path('admin/', admin.site.urls),
     path('user-info/<str:username>/', GetUserData, name='user-profile'),
     path('user-setting/<str:username>/', ModifyUserData, name='user-settings'),
-    # path('matches-history/<str:username>/', GetUserHistory, name='user-history'),
-    # path('f-user/<int:user_id>/', getUsername_Result, name='username'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

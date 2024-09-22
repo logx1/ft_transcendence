@@ -170,25 +170,7 @@ function TriggerErrorUsername() {
     }, {once: true});
 }
 
-// function TriggerErrorFullName() {
-//     const usr = document.querySelector('.change-name-container > .first-name');
-//     const usr_wrap = document.querySelector('.name-area-wrapper');
-//     document.querySelector('p1').style.display = 'inline';
-//     document.querySelector('p').style.color = 'rgba(152, 0, 0, 0.773)';
-
-//     usr.style.animation = "glitch ease-out 0.20s 3";
-//     usr_wrap.style.animation = "glitch ease-out 0.20s 3";
-
-//     usr.addEventListener('animationend', function() {
-//         usr.style.animation = 'none';
-//         document.querySelector('p').style.color = '#bb8c08';
-//     }, {once: true});
-//     usr_wrap.addEventListener('animationend', function() {
-//         usr_wrap.style.animation = 'none';
-//     }, {once: true});
-// }
-
-let ussrr = "rr"
+let ussrr = "tst1"
 
 function verify_info() {
     var formData = new FormData();
@@ -210,9 +192,7 @@ function verify_info() {
         }
     })
     .catch((error) => {
-        console.log("tsssst: ", error.message);
-        if (error.message === "Username already exists")
-            TriggerErrorUsername();
+        TriggerErrorUsername();
     });
 }
 

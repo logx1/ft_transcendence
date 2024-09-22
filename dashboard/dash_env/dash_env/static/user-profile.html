@@ -60,7 +60,7 @@
                 <div class="Games">Games</div>
                 <div class="Results">Results</div>
                 <div class="Accuracy">Accuracy</div>
-                <div class="Goals">Goals</div>
+                <!-- <div class="Goals">Goals</div> -->
                 <div class="Date">Date</div>
             </div>
             <div class="no-matches-container" style="display: flex;" id="no-matches-container">no matches yet.</div>
@@ -69,14 +69,14 @@
                     <div class="games-container">
                         <div class="games-icon">
 
-                            <div class="games-image-local"></div>
-                            <div class="games-text">LOCAL</div>
+                            <div id="local-ic" class="games-image-local" style="display: none;"></div>
+                            <div id="local-txt" class="games-text" style="display: none;">LOCAL</div>
 
-                            <div class="games-image-bot" style="display: none;"></div>
-                            <div class="games-text" style="display: none;">BOT</div>
+                            <div id="bot-ic" class="games-image-bot" style="display: none;"></div>
+                            <div id="bot-txt" class="games-text" style="display: none;">BOT</div>
 
-                            <div class="games-image-online" style="display: none;"></div>
-                            <div class="games-text" style="display: none;">ONLINE</div>
+                            <div id="online-ic" class="games-image-online" style="display: none;"></div>
+                            <div id="online-txt" class="games-text" style="display: none;">ONLINE</div>
 
                         </div>
                         <div class="games-users">
@@ -107,14 +107,10 @@
                     </div>
 
                     <div class="Accuracy-container">
-                        <div class="f-user-accuracy">50%</div>
-                        <div class="sec-user-accuracy">50%</div>
+                        <div class="f-user-accuracy" id="firstAcc">50%</div>
+                        <div class="sec-user-accuracy" id="secAcc">50%</div>
                     </div>
-                    <div class="goals-container">
-                        <div class="f-user-goal">7</div>
-                        <div class="sec-user-goal">5</div>
-                    </div>
-                    <div class="date-container">01/01/2024</div>
+                    <div class="date-container" id="game-date">01/01/2024</div>
                 </div>
             </div>
     </div>

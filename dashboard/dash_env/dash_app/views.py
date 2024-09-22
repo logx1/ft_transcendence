@@ -112,9 +112,6 @@ def ModifyUserData(request, username):
             user.profile_picture = request.FILES['profile_picture']
 
         if 'full_name' in request.data and request.data['full_name'].strip() != '':
-            # if User.objects.filter(full_name=request.data['full_name']).exists():
-            #     return JsonResponse({'error': 'Full Name already exists'}, status=status.HTTP_400_BAD_REQUEST)
-            # else:
             user.full_name = request.data['full_name']
 
         if 'username' in request.data and request.data['username'].strip() != '':
@@ -134,27 +131,3 @@ def ModifyUserData(request, username):
             'username': user.username,
             'password': user.password
         })
-
-# @api_view(['GET'])
-# def getUsername_Result(request, user_id):
-#     try:
-#         user = User.objects.get(id=user_id)
-#     except User.DoesNotExist:
-#         return JsonResponse({'error': 'UserNot Found'}, status=status.HTTP_404_NOT_FOUND)
-#     if request.method == 'GET':
-#         data = {
-#             'username': user.username,
-#             'user_result': user.user_result
-#         }
-#         return JsonResponse(data)
-
-# @api_view(['GET'])
-# def GetUserHistory(request, user_id):
-#     try:
-#         match = Matches.objects.get(id=user_id)
-#     except Matches.DoesNotExist:
-#         return JsonResponse({'error':'UserNotFound'}, status=status.HTTP_404_NOT_FOUND)
-
-#     if request.method == 'GET':
-#         serializer = MatchesSerializer(match)
-#         return JsonResponse(serializer.data, safe=False)

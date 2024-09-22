@@ -1,4 +1,4 @@
-let username = localStorage.getItem('username')
+let username = "tst1"
 
 window.onload = function() {
     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -159,86 +159,76 @@ fetch(`http://127.0.0.1:8000/user-setting/${username}/`, {
         }
 });
 
-function CompareRes(first, sec){
-    console.log("first(id:6) ",first);
-    console.log("second(id:5)", sec);
-
-    if (first > sec){
+function CompareRes(first, sec, user, winner){
+    if (first == sec){
+        document.getElementById('plus').style.display = 'none';
+        document.getElementById('minus').style.display = 'none';
+        document.getElementById('equal').style.display = 'flex';
+    }else if (winner === user)
+    {
         document.getElementById('plus').style.display = 'flex';
         document.getElementById('minus').style.display = 'none';
         document.getElementById('equal').style.display = 'none';
-    }
-    else if (first < sec){
-        console.log("here!")
+    } else
+    {
         document.getElementById('plus').style.display = 'none';
         document.getElementById('minus').style.display = 'flex';
         document.getElementById('equal').style.display = 'none';
     }
-    else if (first == sec){
-        document.getElementById('plus').style.display = 'none';
-        document.getElementById('minus').style.display = 'none';
-        document.getElementById('equal').style.display = 'flex';
+}
+
+function CheckGameMode(type) {
+    if (type == "online"){
+        document.getElementById('online-ic').style.display = 'flex';
+        document.getElementById('online-txt').style.display = 'flex';
+    }
+
+    else if (type == "local"){
+        document.getElementById('local-ic').style.display = 'flex';
+        document.getElementById('local-txt').style.display = 'flex';
+    }
+
+    else if (type == "bot"){
+        document.getElementById('bot-ic').style.display = 'flex';
+        document.getElementById('bot-txt').style.display = 'flex';
     }
 }
 
-// function updateHistoryData(data) {
-//     Promise.all([
-//         fetch(`http://127.0.0.1:8000/matches-history/${username}/`, {
-//             method: 'GET'
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             first_username = data.username;
-//             first_result = data.user_result;
-//         }),
+function getAccuracy(scr1, scr2){
+    let total_score = scr1 + scr2;
 
-//         fetch('http://127.0.0.1:8000/f-user/Arthur/', {
-//             method: 'GET'
-//         })
-//         .then(response => response.json())
-//         .then(data => {
-//             second_username = data.username;
-//             second_result = data.user_result;
-//         })
-//     ])
-//     .then(() => {
+    let scr1Acc = ((scr1 / total_score) * 100).toFixed(0);
+    let scr2Acc = ((scr2 / total_score) * 100).toFixed(0);
 
-//         const fPlayerUser = document.getElementById('first-user-name');
-//         const sPlayerUser = document.getElementById('second-user-name');
-//         const fPlayerRes = document.getElementById('f-user-score')
-//         const sPlayerRes = document.getElementById('sec-user-score');
+    document.getElementById('firstAcc').innerHTML = scr1Acc + "%";
+    document.getElementById('secAcc').innerHTML = scr2Acc + "%";
+}
 
-//         fPlayerUser.innerHTML = '';
-//         sPlayerUser.innerHTML = '';
-//         fPlayerRes.innerHTML = '';
-//         sPlayerRes.innerHTML = '';
+function updateHistoryData(data) {
+    
+    document.querySelector('#first-user-name').innerHTML = data.player1;
+    document.querySelector('#second-user-name').innerHTML = data.player2;
+    document.querySelector('#f-user-score').innerHTML = data.score1;
+    document.querySelector('#sec-user-score').innerHTML = data.score2;
+    document.querySelector('#game-date').innerHTML = data.date;
+    
+    CheckGameMode(data.match_type);
+    getAccuracy(data.score1, data.score2);
+    CompareRes(data.score1, data.score2, "fbelahse", data.winner);
+}
 
-//         const fplayer_us = document.createElement('fplayer_us');
-//         const splayer_us = document.createElement('splayer_us');
-//         const fplayer_res = document.createElement('fplayer_res');
-//         const splayer_res = document.createElement('splayer_res');
+fetch('http://127.0.0.1:8000/matches/user/fbelahse/', {
+    method: 'GET',
+})
+.then(response => response.json())
+.then(data => {
+    const objectCount = data.length;
+    console.log('Number of objects:', objectCount);
 
-//         fplayer_us.textContent = first_username;
-//         splayer_us.textContent = second_username;
-//         fplayer_res.textContent = first_result;
-//         splayer_res.textContent = second_result;
-
-//         fPlayerUser.appendChild(fplayer_us);
-//         sPlayerUser.appendChild(splayer_us);
-//         fPlayerRes.appendChild(fplayer_res);
-//         sPlayerRes.appendChild(splayer_res);
-//         CompareRes(fplayer_res.textContent, splayer_res.textContent);
-//     })
-//     .catch(error => console.error('Error:', error));
-// }
-
-// fetch(`http://127.0.0.1:8000/matches-history/1/`, {
-//     method: 'GET',
-// })
-
-// .then(response => response.json())
-// .then(data => {
-//     document.getElementById('no-matches-container').style.display = 'none';
-//     document.getElementById('content-container').style.display = 'flex';
-//     updateHistoryData(data);
-// })
+    document.getElementById('no-matches-container').style.display = 'none';
+    document.getElementById('content-container').style.display = 'flex';
+    updateHistoryData(data[0]);
+})
+.catch(error => {
+    console.error('Error fetching data', error);
+})

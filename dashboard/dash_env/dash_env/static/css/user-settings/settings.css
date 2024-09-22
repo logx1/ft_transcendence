@@ -235,7 +235,7 @@
 
 /* /////////////////////// */
 
-.change-name-container > .update-cancel {
+.change-name-container > .update-delete {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -246,7 +246,7 @@
     gap: 5px;
 }
 
-.update-cancel > .enter {
+.update-delete > .enter {
     width: 90px;
     height: 50px;
     background-color: #bb8c08;
@@ -258,7 +258,7 @@
     cursor: pointer;
 }
 
-.update-cancel > .cancel {
+.update-delete > .delete {
     width: 80px;
     height: 40px;
     background-color: transparent;

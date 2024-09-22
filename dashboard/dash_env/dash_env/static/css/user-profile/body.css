@@ -20,7 +20,7 @@
     width: 650px;
     height: 40px;
     padding: 10px;
-    gap: 30px;
+    gap: 50px;
 }
 
 .column-container > .Games {
@@ -53,7 +53,7 @@
     border-radius: 25px;
     width: 650px;
     height: 80px;
-    gap: 5px
+    gap: 27px
 }
 
 .stats-container > .games-container {
@@ -154,7 +154,7 @@
 }
 
 .sec-user > .arrow_2 {
-    background-image: url('../icons/arrow2.svg');
+    background-image: url('../icons/arrow.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -247,6 +247,16 @@
 }
 
 .stats-container > .date-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgb(105, 105, 105);
+    font-size: small;
+    width: 80px;
+}
+
+mdate {
     display: flex;
     flex-direction: column;
     align-items: center;
