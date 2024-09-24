@@ -9,7 +9,7 @@ class User(models.Model):
     date_cr = models.DateField(auto_now_add=True)
     total_score = models.IntegerField(default=0)
     profile_picture = models.ImageField(upload_to="images/", default="images/dino.png")
-    status = models.CharField(max_length=30, default="Hello! I'm new here!")
+    status = models.CharField(max_length=30)
     user_result = models.IntegerField(default=0)
     # email = models.EmailField(default="")
 

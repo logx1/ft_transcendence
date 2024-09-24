@@ -1,4 +1,4 @@
-let username = "tst1"
+let username = "yaa"
 
 window.onload = function() {
     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -57,7 +57,7 @@ function updateStatus() {
     let txtarea = textarea.value;
 
     localStorage.setItem('status', txtarea);
-
+    
     const data = { status: txtarea }
     fetch(`http://127.0.0.1:8000/user-setting/${username}/`, {
         method: 'PUT',
@@ -123,7 +123,7 @@ function updateData(data){
     scr.textContent = data.total_score;
     img_.src = data.profile_picture;
 
-    console.log(img_.src)
+    console.log(stts.textContent)
 
     fullname_.appendChild(fname);
     username_.appendChild(uname);

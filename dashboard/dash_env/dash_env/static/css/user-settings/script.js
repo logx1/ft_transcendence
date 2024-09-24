@@ -1,5 +1,4 @@
-// let username = localStorage.getItem('username')
-// let username = "usr1"
+let ussrr = "yaa"
 
 window.onload = function() {
     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -170,14 +169,19 @@ function TriggerErrorUsername() {
     }, {once: true});
 }
 
-let ussrr = "tst1"
-
 function verify_info() {
     var formData = new FormData();
+
     formData.append('profile_picture', document.querySelector('input[type="file"]').files[0]);
     formData.append('full_name', document.getElementById('fullname_txt').value);
-    formData.append('username', document.getElementById('username_txt').value);
     formData.append('password', document.getElementById('old_pass').value);
+
+    const userInp = document.getElementById('username_txt').value;
+    const userStrd = localStorage.getItem('username');
+
+    if (userInp !== userStrd){
+        formData.append('username', userInp);
+    }
 
     fetch(`http://127.0.0.1:8000/user-setting/${ussrr}/`, {
         method: 'PUT',
@@ -192,6 +196,7 @@ function verify_info() {
         }
     })
     .catch((error) => {
+        console.log(error);
         TriggerErrorUsername();
     });
 }
@@ -213,9 +218,6 @@ function updateData(data){
     pass.textContent = data.password;
     img_.style.backgroundImage = 'url(' + data.profile_picture + ')';
     ol_pass = data.password;
-
-    console.log ("full_name:", fname.textContent)
-    console.log("username:", uname.textContent)
    
     fullname_.appendChild(fname);
     username_.appendChild(uname);
@@ -226,24 +228,13 @@ fetch(`http://127.0.0.1:8000/user-setting/${ussrr}/`, {
 })
     .then(response => response.json())
     .then(data => {
+        document.getElementById('fullname_txt').value = data.full_name;
+        document.getElementById('username_txt').value = data.username;
         updateData(data);
     })
     .catch(error => {
         console.error('Error fetching data', error);
 })
-
-window.addEventListener('load', function(){
-    document.getElementById('fullname_txt').value = localStorage.getItem('full_name');
-    document.getElementById('username_txt').value = localStorage.getItem('username');
-});
-
-document.getElementById('fullname_txt').addEventListener('change', function() {
-    localStorage.setItem('full_name', this.value);
-});
-
-document.getElementById('username_txt').addEventListener('change', function() {
-    localStorage.setItem('username', this.value);
-});
 
 document.getElementById('updatee').addEventListener('submit', function(event) {
     event.preventDefault();

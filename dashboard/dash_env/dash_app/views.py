@@ -21,39 +21,6 @@ def UserListView(request):
             return Response(serializer_class.data, status=status.HTTP_201_CREATED)
         return Response(serializer_class.data, status=status.HTTP_400_BAD_REQUEST)
 
-def check_username(username, user_id):
-    try:
-        User.objects.exclude(pk=user_id).get(username=username)
-    except User.DoesNotExist:
-        return username
-    raise forms.ValidationError("A user with this username already exists.")
-
-def check_full_name(full_name, user_id):
-    try:
-        User.objects.exclude(pk=user_id).get(full_name=full_name)
-    except User.DoesNotExist:
-        return full_name
-    raise forms.ValidationError("A user with this name already exists.")
-
-@api_view(['PUT', 'GET'])
-def UpdateUser(request, pk):
-    try:
-        user = User.objects.get(pk=pk)
-    except User.DoesNotExist:
-        return (Response({"message":"User Not Found"}, status=status.HTTP_404_NOT_FOUND))
-    
-    serializer_class = UserSerializer(user, data=request.data, partial=True)
-    if serializer_class.is_valid():
-        try:
-            check_username(serializer_class.validated_data.get('username'), user.id)
-            check_full_name(serializer_class.validated_data.get('full_name'), user.id)
-        except forms.ValidationError as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
-        serializer_class.save()
-        return(Response(serializer_class.data, status=status.HTTP_200_OK))
-    return (Response(serializer_class.data, status=status.HTTP_400_BAD_REQUEST))
-
 @api_view(['DELETE'])
 def delete_user(request, pk):
     try:
@@ -106,6 +73,7 @@ def ModifyUserData(request, username):
     if request.method == 'GET':
         serializer = UserSerializer(user)
         return JsonResponse(serializer.data, safe=False)
+
     elif request.method == 'PUT':
 
         if 'profile_picture' in request.FILES:
@@ -115,10 +83,11 @@ def ModifyUserData(request, username):
             user.full_name = request.data['full_name']
 
         if 'username' in request.data and request.data['username'].strip() != '':
-            if User.objects.filter(username=request.data['username']).exists():
-                return JsonResponse(data={'error': 'Username already exists'}, status=400)
-            else:
-                user.username = request.data['username']
+            if request.data['username'] != user.username:
+                if User.objects.filter(username=request.data['username']).exists():
+                    return JsonResponse(data={'error': 'Username already exists'}, status=400)
+                else:
+                    user.username = request.data['username']
 
         if 'password' in request.data and request.data['password'].strip() != '':
             user.password = request.data['password']
