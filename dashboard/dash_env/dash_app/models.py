@@ -15,14 +15,3 @@ class User(models.Model):
 
     def __str__(self):
         return self.username + ' ' + self.full_name + ' ' + self.status + ' ' + str(self.date_cr) + ' ' + str(self.user_result)
-
-# class Matches(models.Model):
-#     game_mode = models.CharField(max_length=200)
-#     f_person_user = models.CharField(max_length=200)
-#     sec_person_user = models.CharField(max_length=200)
-#     f_person_result = models.IntegerField(default=0)
-#     sec_person_result = models.IntegerField(default=0)
-#     match_date = models.TimeField(auto_now=True)
-
-#     def __str__(self):
-#         return str(self.id) + ' ' + str(self.first_p_id) + ' ' + str(self.second_p_id)

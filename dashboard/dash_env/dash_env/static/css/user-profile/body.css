@@ -9,7 +9,7 @@
     margin: 50px;
     padding: 5px;
     width: 700px;
-    height: 500px;
+    height: 800px;
 }
 
 .body-container > .column-container {
@@ -43,11 +43,33 @@
     flex-direction: column;
     width: 650px;
     height: 800px;
-    gap: 20px;
+    margin: 10px;
+    padding: 15px;
+    padding-right: 35px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    gap: 18px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f1e1c;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bb8b08ea;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5b491a;
 }
 
 .content-container > .stats-container {
-    display: flex;
+    display: none;
     flex-direction: row;
     border: 2px solid #624c0f;
     border-radius: 25px;
@@ -86,6 +108,12 @@
     background-image: url('../icons/local-hover.svg');
 }
 
+.games-icon > .games-text-local {
+    font-family: 'Alfa Slab One', sans-serif;
+    color: #bb8c08;
+    font-size: small;
+}
+
 .games-icon > .games-image-bot {
     background-image: url('../icons/bot.svg');
     background-position: center;
@@ -97,7 +125,13 @@
 
 .games-icon > .games-image-bot:hover {
     background-image: url('../icons/bot-hover.svg');
-} 
+}
+
+.games-icon > .games-text-bot {
+    font-family: 'Alfa Slab One', sans-serif;
+    color: #bb8c08;
+    font-size: small;
+}
 
 .games-icon > .games-image-online {
     background-image: url('../icons/online.svg');
@@ -112,7 +146,7 @@
     background-image: url('../icons/online-hover.svg');
 }
 
-.games-icon > .games-text {
+.games-icon > .games-text-online {
     font-family: 'Alfa Slab One', sans-serif;
     color: #bb8c08;
     font-size: small;
@@ -137,7 +171,7 @@
 }
 
 .f-user > .arrow_1 {
-    background-image: url('../icons/arrow.svg');
+    /* background-image: url('../icons/arrow.svg'); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -154,7 +188,7 @@
 }
 
 .sec-user > .arrow_2 {
-    background-image: url('../icons/arrow.svg');
+    /* background-image: url('../icons/arrow2.svg');  */
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -228,22 +262,14 @@
     width: 80px;
 }
 
-.Accuracy-container > .f-user-accuracy, .sec-user-accuracy {
+.Accuracy-container > .f-user-accuracy {
     color: rgb(105, 105, 105);
     font-size: small;
 }
 
-.stats-container > .goals-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    width: 90px;
-}
-
-.goals-container > .f-user-goal, .sec-user-goal {
-    color: #bb8c08;
+.Accuracy-container > .sec-user-accuracy  {
+    color: rgb(105, 105, 105);
+    font-size: small;
 }
 
 .stats-container > .date-container {

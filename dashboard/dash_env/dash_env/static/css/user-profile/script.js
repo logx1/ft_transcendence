@@ -1,4 +1,4 @@
-let username = "yaa"
+let username = "rr"
 
 window.onload = function() {
     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -19,15 +19,6 @@ window.onload = function() {
     window.addEventListener('resize', function() {
         box.classList.remove("active");
     });
-
-    var limit = 4;
-    var containers = document.querySelectorAll('.stats-container');
-
-    for (var i = 0; i < containers.length; i++) {
-        if (i >= limit) {
-            containers[i].style.display = 'none';
-        }
-    }
 }
 
 let textarea = document.getElementById('textarea');
@@ -53,20 +44,24 @@ window.addEventListener('load', function() {
 function updateStatus() {
     document.querySelector('.popup-container').style.display = 'none';
 
-    let textarea = document.getElementById('textarea');
-    let txtarea = textarea.value;
+    let txtarea = document.getElementById('textarea').value;
 
     localStorage.setItem('status', txtarea);
-    
+
     const data = { status: txtarea }
-    fetch(`http://127.0.0.1:8000/user-setting/${username}/`, {
+    fetch(`http://127.0.0.1:8000/user-info/${username}/`, {
         method: 'PUT',
         headers: {
             'Content-Type':'application/json',
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
         console.log('Status updated successfully:', data);
     })
@@ -123,13 +118,14 @@ function updateData(data){
     scr.textContent = data.total_score;
     img_.src = data.profile_picture;
 
-    console.log(stts.textContent)
-
     fullname_.appendChild(fname);
     username_.appendChild(uname);
     date_.appendChild(time);
     status_.appendChild(stts);
     score_.appendChild(scr);
+
+    console.log(localStorage.getItem('status'));
+
 }
 
 fetch(`http://127.0.0.1:8000/user-setting/${username}/`, {
@@ -159,62 +155,111 @@ fetch(`http://127.0.0.1:8000/user-setting/${username}/`, {
         }
 });
 
-function CompareRes(first, sec, user, winner){
+function CompareRes(first, sec, user, winner, container){
     if (first == sec){
-        document.getElementById('plus').style.display = 'none';
-        document.getElementById('minus').style.display = 'none';
-        document.getElementById('equal').style.display = 'flex';
-    }else if (winner === user)
-    {
-        document.getElementById('plus').style.display = 'flex';
-        document.getElementById('minus').style.display = 'none';
-        document.getElementById('equal').style.display = 'none';
-    } else
-    {
-        document.getElementById('plus').style.display = 'none';
-        document.getElementById('minus').style.display = 'flex';
-        document.getElementById('equal').style.display = 'none';
+        container.querySelector('.res-icon > .res-image-plus').style.display = 'none';
+        container.querySelector('.res-image-minus').style.display = 'none';
+        container.querySelector('.res-image-equal').style.display = 'flex';
+
+        container.querySelector('.f-user > .arrow_1').style.backgroundImage = "url('/icons/arrow2.svg')";
+        container.querySelector('.sec-user > .arrow_2').style.backgroundImage = "url('/icons/arrow2.svg')";
+    }
+    else if (winner === user){
+        container.querySelector('.res-icon > .res-image-plus').style.display = 'flex';
+        container.querySelector('.res-image-minus').style.display = 'none';
+        container.querySelector('.res-image-equal').style.display = 'none';
+
+        container.querySelector('.f-user > .arrow_1').style.backgroundImage = "url('/icons/arrow.svg')";
+        container.querySelector('.sec-user > .arrow_2').style.backgroundImage = "url('/icons/arrow2.svg')";
+    }
+    else{
+        container.querySelector('.res-icon > .res-image-plus').style.display = 'none';
+        container.querySelector('.res-image-minus').style.display = 'flex';
+        container.querySelector('.res-image-equal').style.display = 'none';
+
+        container.querySelector('.f-user > .arrow_1').style.backgroundImage = "url('/icons/arrow2.svg')";
+        container.querySelector('.sec-user > .arrow_2').style.backgroundImage = "url('/icons/arrow.svg')";
     }
 }
 
-function CheckGameMode(type) {
+function CheckGameMode(type, container) {
+    console.log("type: ", type);
     if (type == "online"){
-        document.getElementById('online-ic').style.display = 'flex';
-        document.getElementById('online-txt').style.display = 'flex';
+        console.log("HERE");
+        container.querySelector('.games-image-online').style.display = 'flex';
+        container.querySelector('.games-icon > .games-text-online').style.display = 'flex';
+
+        container.querySelector('.games-image-local').style.display = 'none';
+        container.querySelector('.games-icon > .games-text-local').style.display = 'none';
+
+        container.querySelector('.games-image-bot').style.display = 'none';
+        container.querySelector('.games-icon > .games-text-bot').style.display = 'none';
     }
 
     else if (type == "local"){
-        document.getElementById('local-ic').style.display = 'flex';
-        document.getElementById('local-txt').style.display = 'flex';
+        container.querySelector('.games-image-online').style.display = 'none';
+        container.querySelector('.games-icon > .games-text-online').style.display = 'none';
+    
+        container.querySelector('.games-image-local').style.display = 'flex';
+        container.querySelector('.games-icon > .games-text-local').style.display = 'flex';
+
+        container.querySelector('.games-image-bot').style.display = 'none';
+        container.querySelector('.games-icon > .games-text-bot').style.display = 'none';
     }
 
     else if (type == "bot"){
-        document.getElementById('bot-ic').style.display = 'flex';
-        document.getElementById('bot-txt').style.display = 'flex';
+        container.querySelector('.games-image-online').style.display = 'none';
+        container.querySelector('.games-icon > .games-text-online').style.display = 'none';
+
+        container.querySelector('.games-image-local').style.display = 'none';
+        container.querySelector('.games-icon > .games-text-local').style.display = 'none';
+
+        container.querySelector('.games-image-bot').style.display = 'flex';
+        container.querySelector('.games-icon > .games-text-bot').style.display = 'flex';
     }
 }
 
-function getAccuracy(scr1, scr2){
+function getAccuracy(scr1, scr2, container){
     let total_score = scr1 + scr2;
 
     let scr1Acc = ((scr1 / total_score) * 100).toFixed(0);
     let scr2Acc = ((scr2 / total_score) * 100).toFixed(0);
 
-    document.getElementById('firstAcc').innerHTML = scr1Acc + "%";
-    document.getElementById('secAcc').innerHTML = scr2Acc + "%";
+    container.querySelector('.Accuracy-container > .f-user-accuracy').innerHTML = scr1Acc + "%";
+    container.querySelector('.Accuracy-container > .sec-user-accuracy').innerHTML = scr2Acc + "%";
 }
 
-function updateHistoryData(data) {
+function updateHistoryData(data, container) {
+
+    container.querySelector('#first-user-name').innerHTML = data.player1;
+    container.querySelector('#second-user-name').innerHTML = data.player2;
+    container.querySelector('#f-user-score').innerHTML = data.score1;
+    container.querySelector('#sec-user-score').innerHTML = data.score2;
+    container.querySelector('#game-date').innerHTML = data.date;
     
-    document.querySelector('#first-user-name').innerHTML = data.player1;
-    document.querySelector('#second-user-name').innerHTML = data.player2;
-    document.querySelector('#f-user-score').innerHTML = data.score1;
-    document.querySelector('#sec-user-score').innerHTML = data.score2;
-    document.querySelector('#game-date').innerHTML = data.date;
-    
-    CheckGameMode(data.match_type);
-    getAccuracy(data.score1, data.score2);
-    CompareRes(data.score1, data.score2, "fbelahse", data.winner);
+    CheckGameMode(data.match_type, container);
+    getAccuracy(data.score1, data.score2, container);
+    CompareRes(data.score1, data.score2, "fbelahse", data.winner, container);
+}
+
+function addData(data) {
+    const objCount = data.length;
+    const contentContainer = document.getElementById('content-container');
+
+    for (let i = 0; i < 10; i++){
+        if (i >= objCount) {
+            break;
+        }
+
+        let newContainer = document.querySelector('.stats-container').cloneNode(true);
+        newContainer.style.display = 'flex';
+
+        updateHistoryData(data[i], newContainer);
+        console.log('Cloning and updating container for match:', data[i]);
+
+        contentContainer.appendChild(newContainer);
+    }
+    document.querySelector('.stats-container').style.display = 'none';
 }
 
 fetch('http://127.0.0.1:8000/matches/user/fbelahse/', {
@@ -222,12 +267,9 @@ fetch('http://127.0.0.1:8000/matches/user/fbelahse/', {
 })
 .then(response => response.json())
 .then(data => {
-    const objectCount = data.length;
-    console.log('Number of objects:', objectCount);
-
     document.getElementById('no-matches-container').style.display = 'none';
     document.getElementById('content-container').style.display = 'flex';
-    updateHistoryData(data[0]);
+    addData(data);
 })
 .catch(error => {
     console.error('Error fetching data', error);

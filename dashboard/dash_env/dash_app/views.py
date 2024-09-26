@@ -45,7 +45,8 @@ def GetUserData(request, username):
 
     elif request.method == 'PUT':
         data = json.loads(request.body)
-        user.status = data.get('status', user.status)
+        user.status = request.data.get('status', user.status)
+        print (data)
         user.save()
         return JsonResponse({'message': 'Updated!', 'status': user.status})
 
