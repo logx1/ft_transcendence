@@ -1,4 +1,4 @@
-let username = "iscreamm_014"
+let username = "test2"
 
 window.onload = function() {
     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -49,7 +49,7 @@ function updateStatus() {
     localStorage.setItem('status', txtarea);
 
     const data = { status: txtarea }
-    fetch(`http://127.0.0.1:8000/user-info/${username}/`, {
+    fetch(`http://10.11.4.1:8000/user-info/${username}/`, {
         method: 'PUT',
         headers: {
             'Content-Type':'application/json',
@@ -116,19 +116,16 @@ function updateData(data){
     time.textContent = formattedDate;
     stts.textContent = data.status;
     scr.textContent = data.total_score;
-    img_.src = data.profile_picture;
+    img_.src = "http://10.11.4.1:8000" + data.profile_picture;
 
     fullname_.appendChild(fname);
     username_.appendChild(uname);
     date_.appendChild(time);
     status_.appendChild(stts);
     score_.appendChild(scr);
-
-    console.log(localStorage.getItem('status'));
-
 }
 
-fetch(`http://127.0.0.1:8000/user-setting/${username}/`, {
+fetch(`http://10.11.4.1:8000/user-setting/${username}/`, {
     method: 'GET',
     })
 
@@ -262,7 +259,7 @@ function addData(data) {
     document.querySelector('.stats-container').style.display = 'none';
 }
 
-fetch('http://127.0.0.1:8000/matches/user/fbelahse/', {
+fetch('http://10.11.4.1:8000/matches/user/fbelahse/', {
     method: 'GET',
 })
 .then(response => response.json())
@@ -294,7 +291,3 @@ function ShowXOContainer() {
     document.querySelector('.pingBtn').classList.add('unactive-button');
     document.querySelector('.pingBtn').classList.remove('active-button');
 }
-
-fetch('http://127.0.0.1:8000/matches/user/fbelahse/', {
-    
-})
