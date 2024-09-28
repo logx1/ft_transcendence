@@ -1,7 +1,4 @@
 
-
-
-
 export function load_online_game()
 {
 class gameLocal extends HTMLElement{

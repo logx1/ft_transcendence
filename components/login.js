@@ -32,10 +32,11 @@ class login extends HTMLElement {
         </div>
     </div>
     `;
+    
     }
+    
 }
 
 customElements.define('login-elements', login);
 }
 
-load_login();

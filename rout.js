@@ -4,6 +4,8 @@ import { load_home } from './components/home.js';
 import { select_game } from './components/select_game.js';
 import { load_local_game } from './components/local_game.js';
 import { load_online_game } from './components/online_game.js';
+import { load_settings } from './components/settings.js';
+import { load_profile } from './components/Profile.js';
 
 
 
@@ -36,10 +38,20 @@ async function fetchProfile() {
         // document.body.innerHTML = `<register-elements></register-elements>`;
         // load_register();
 
-        console.log("logged in");
-        history.pushState(null, "title 1", "#home");
-        document.body.innerHTML = `<home-elements></home-elements>`;
-        load_home();
+        // console.log("logged in");
+        // history.pushState(null, "title 1", "#home");
+        // document.body.innerHTML = `<home-elements></home-elements>`;
+        // load_home();
+        // history.pushState(null, "title 1", "#sittings");
+        // document.body.innerHTML = `<settingss-elements></settingss-elements>`;
+        // load_settings();
+
+
+        history.pushState(null, "title 1", "#profile");
+        document.body.innerHTML = `<profile-elements></profile-elements>`;
+        load_profile();
+
+
     }
   }
   
