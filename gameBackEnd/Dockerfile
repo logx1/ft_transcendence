@@ -20,7 +20,7 @@ COPY . /gamebackend/
 RUN if [ ! -f /gamebackend/manage.py ]; then echo "manage.py not found"; exit 1; fi
 
 # Expose the port
-EXPOSE 8000
+EXPOSE 8001
 
 # Define command to start the app
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8001"]

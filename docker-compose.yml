@@ -17,6 +17,12 @@ services:
       - "8001:8001"
     volumes:
       - game-volume:/gamebackend
+  
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
 
 volumes:
   matches-volume:
