@@ -2,7 +2,7 @@ function start_game()
 {
 let gameSocket = new WebSocket(
     'ws://'
-    + '127.0.0.1:8000'
+    + '127.0.0.1:8001'
     + '/ws/game/'
 );
 
@@ -257,7 +257,7 @@ gameSocket.onmessage = function(e) {
             right_permision = true;
             setTimeout(() => {
 
-                fetch('http://127.0.0.1:8000/api/user/', { method: 'GET', credentials: 'include', })
+                fetch('http://127.0.0.1:8001/api/user/', { method: 'GET', credentials: 'include', })
                     .then(response => response.json()) // Convert the response data to a JSON object
                     .then(data => {
                         console.log(data.name);

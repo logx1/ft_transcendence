@@ -9,10 +9,24 @@ services:
       - "8000:8000"
     volumes:
       - matches-volume:/match_history
+  game_backend:
+    build: ./gamebackend
+    image: gamebackend
+    container_name: gamebackend
+    ports:
+      - "8001:8001"
+    volumes:
+      - game-volume:/gamebackend
 
 volumes:
   matches-volume:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/Users/abdel-ou/Desktop/lol/match_history"
+      device: "/Users/abdelmajid/Desktop/lol/match_history"
+  game-volume:
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/Users/abdelmajid/Desktop/lol/gamebackend"
+  

@@ -27,10 +27,6 @@ class CookieTokenAuthentication(TokenAuthentication):
         return token
 
 
-
-
-
-
 class RegisterViews(APIView):
     def post(self,request):
         serializer = UserSerializer(data=request.data)
@@ -91,7 +87,7 @@ class UserViews(APIView):
 
 class LogoutViews(APIView):
     # authentication_classes = [CookieTokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     def post(self,request):
         response = Response()
         response.delete_cookie('access')

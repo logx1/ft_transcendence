@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -151,3 +152,18 @@ CORS_ALLOW_CREDENTIALS = True
 #         'rest_framework.permissions.IsAuthenticated',
 #     ]
 # }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # 
+    ),
+    'SIMPLE_JWT': {
+        'ACCESS_TOKEN_LIFETIME': timedelta(minutes=50),
+        'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    }
+}

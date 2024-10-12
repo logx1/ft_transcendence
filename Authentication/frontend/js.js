@@ -3,7 +3,7 @@ function register() {
     let email = document.getElementById('re_mail').value;
     let password = document.getElementById('re_password').value;
 
-    fetch('http://127.0.0.1:8000/api/register/', {
+    fetch('http://127.0.0.1:8001/api/register/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ function login() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
 
-    fetch('http://127.0.0.1:8000/api/login/', {
+    fetch('http://127.0.0.1:8001/api/login/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ function login() {
 
 function getProfile() {
 
-    fetch('http://127.0.0.1:8000/api/user/', {
+    fetch('http://127.0.0.1:8001/api/user/', {
         method: 'GET',
         credentials: 'include',
     })
@@ -61,7 +61,7 @@ function getProfile() {
 }
 
 function logout() {
-    fetch('http://127.0.0.1:8000/api/logout/', {
+    fetch('http://127.0.0.1:8001/api/logout/', {
         method: 'POST',
         credentials: 'include',
         

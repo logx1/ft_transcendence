@@ -240,7 +240,7 @@ class Profile extends HTMLElement {
         time.textContent = formattedDate;
         stts.textContent = data.status;
         scr.textContent = data.total_score;
-        img_.src = "http://10.11.4.1:8080" + data.profile_picture;
+        img_.src = "http://127.0.0.1:8080" + data.profile_picture;
     
         fullname_.appendChild(fname);
         username_.appendChild(uname);
@@ -251,13 +251,13 @@ class Profile extends HTMLElement {
         console.log(localStorage.getItem('status'));
     
     }
-    fetch('http://127.0.0.1:8000/api/user/', {
+    fetch('http://127.0.0.1:8001/api/user/', {
         method: 'GET',
         credentials: 'include',
     })
     .then(response => response.json())
     .then(data => {
-        fetch(`http://10.11.4.1:8080/user-setting/${data.name}/`, {
+        fetch(`http://127.0.0.1:8080/user-setting/${data.name}/`, {
             method: 'GET',
             })
         
@@ -286,7 +286,7 @@ class Profile extends HTMLElement {
         
     })
    
-    fetch('http://10.11.4.1:8000/matches/user/logx/', {
+    fetch('http://127.0.0.1:8000/matches/user/logx/', {
     method: 'GET',
     })
     .then(response => response.json())
