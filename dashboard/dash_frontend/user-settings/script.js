@@ -15,7 +15,7 @@
  
 //         if (!isClickInside) {
 //             box.classList.remove("active");
-//         }
+//         } 
 //     });
 
 //     // Close the sidebar when the window is resized
