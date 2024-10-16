@@ -20,28 +20,6 @@ function register() {
 });
 }
 
-function login() {
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
-
-    fetch('http://127.0.0.1:8001/api/login/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.cookie = `access=${data.access}; path=/`;
-        console.log(data);
-    })
-    .catch(error => console.error('Error:', error));
-
-}
 
 
 

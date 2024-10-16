@@ -13,9 +13,6 @@ from rest_framework_simplejwt.state import token_backend
 
 # Create your views here.
 
-
-
-
 class RegisterViews(APIView):
     def post(self,request):
         serializer = UserSerializer(data=request.data)
