@@ -11,7 +11,28 @@ from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.tokens import UntypedToken
 from rest_framework_simplejwt.state import token_backend
 
-# Create your views here.
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.core.mail import send_mail
+from django.conf import settings
+
+@api_view(['GET', 'POST'])
+def email_send(request):
+    send_mail(
+        'Hello My Lol',
+        'Here is the message.',
+        'eloualy000@egmail.com',
+        ['eloualy000@gmail.com'],
+        fail_silently=False,
+    )
+
+    response = Response()
+    response.data = {
+        'message':'success'
+    }
+
+    return response
 
 class RegisterViews(APIView):
     def post(self,request):
