@@ -12,33 +12,43 @@ from rest_framework_simplejwt.tokens import UntypedToken
 from rest_framework_simplejwt.state import token_backend
 
 
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+
+
+from django.core.mail import send_mail
+from rest_framework.decorators import api_view
+from django.http import HttpRequest
 
 @api_view(['GET', 'POST'])
-def email_send(request):
-    send_mail(
-        'Hello My Lol',
-        'Here is the message.',
-        'eloualy000@egmail.com',
-        ['eloualy000@gmail.com'],
-        fail_silently=False,
-    )
+def email_send(request, email=None):
+    try:
+        # Ensure get_current_site receives a HttpRequest object
+        current_site = get_current_site(request._request if hasattr(request, '_request') else request)
+        encoded_site = urlsafe_base64_encode(force_bytes(current_site.domain))
+        
+        if email is not None:
+            send_mail(
+                'Hello My Lol from ' + current_site.domain,  # Subject
+                'Here is the message. Encoded site: ' + encoded_site,  # Message
+                'eloualy73@gmail.com',  # From email
+                [email],  # To email
+                fail_silently=False,
+            )
+        response_data = {'message': 'Email sent successfully'}
+    except Exception as e:
+        response_data = {'message': 'Failed to send email', 'error': str(e)}
 
-    response = Response()
-    response.data = {
-        'message':'success'
-    }
-
-    return response
-
+    return Response(response_data)
+    
 class RegisterViews(APIView):
     def post(self,request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        email_send(request._request, email=request.data['email'])
         return Response(serializer.data)
 
 
@@ -49,8 +59,11 @@ class LoginViews(APIView):
         password = request.data['password']
 
         user = User.objects.filter(email=email).first()
+        is_active = User.objects.filter(email=email).values('is_active')[0]['is_active']
         if user is None:
             raise AuthenticationFailed('User not found')
+        if not user.is_active==True:
+            raise AuthenticationFailed('User not active')
         
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password')
@@ -100,6 +113,5 @@ class LogoutViews(APIView):
         }
         return response
     
-# the function below is for the home page he needs to be authenticated to access it
 
 

@@ -24,6 +24,8 @@ async function getProfile() {
 
 
 
+
+
 async function fetchProfile() {
     let lol = await getProfile();
     // console.log(lol);
@@ -32,6 +34,7 @@ async function fetchProfile() {
         history.pushState(null, "title 1", "#login");
         document.body.innerHTML = `<login-elements></login-elements>`;
         load_login();
+        
     }else{
         // console.log("not logged in");
         // history.pushState(null, "title 1", "#register");
@@ -54,7 +57,6 @@ async function fetchProfile() {
 
     }
   }
-  
   fetchProfile();
    
 
@@ -126,6 +128,33 @@ window.play_online = function() {
     history.pushState(null, "title 1", "#online_game");
     document.body.innerHTML = `<game-online></game-online>`;
     load_online_game();
+}
+
+window.login = function() {
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+
+    fetch('http://127.0.0.1:8001/api/login/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.cookie = `access=${data.access}; path=/`;
+        console.log(data);
+    })
+    .then(() => {
+        history.pushState(null, "title 1", "#home");
+        document.body.innerHTML = `<home-elements></home-elements>`;
+        load_home();
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 
