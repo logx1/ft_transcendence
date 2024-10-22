@@ -16,6 +16,8 @@ from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_decode
+
 
 
 from django.core.mail import send_mail
@@ -23,16 +25,16 @@ from rest_framework.decorators import api_view
 from django.http import HttpRequest
 
 @api_view(['GET', 'POST'])
-def email_send(request, email=None):
+def email_send(request, email):
     try:
         # Ensure get_current_site receives a HttpRequest object
         current_site = get_current_site(request._request if hasattr(request, '_request') else request)
-        encoded_site = urlsafe_base64_encode(force_bytes(current_site.domain))
+        encoded_site = urlsafe_base64_encode(force_bytes(email))
         
         if email is not None:
             send_mail(
                 'Hello My Lol from ' + current_site.domain,  # Subject
-                'Here is the message. Encoded site: ' + encoded_site,  # Message
+                'Here is the message. Encoded site: '+ 'http://127.0.0.1:8000/api/email/activate/' + encoded_site,  # Message
                 'eloualy73@gmail.com',  # From email
                 [email],  # To email
                 fail_silently=False,
@@ -41,6 +43,18 @@ def email_send(request, email=None):
     except Exception as e:
         response_data = {'message': 'Failed to send email', 'error': str(e)}
 
+    return Response(response_data)
+
+@api_view(['GET', 'POST'])
+def email_activate(request, code):
+    the_code = code
+    the_email = urlsafe_base64_decode(code).decode('utf-8')
+    print("The decoded string is > " + the_email)
+    user = User.objects.filter(email=the_email).first()
+    if user is not None:
+        user.is_active = True
+        user.save()
+    response_data = {'message': 'Email activated successfully'}
     return Response(response_data)
     
 class RegisterViews(APIView):
