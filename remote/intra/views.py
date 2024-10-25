@@ -14,7 +14,8 @@ def home(request):
 
 def callback(request):
     code = request.GET.get('code')
-    # print(code)
+    print(code)
+
     token_url = 'https://api.intra.42.fr/oauth/token'
     data = {
         'grant_type': 'authorization_code',
@@ -27,6 +28,9 @@ def callback(request):
     response = requests.post(token_url, data=data)
     token_data = response.json()
     acc = token_data.get('access_token')
+    if acc is None:
+        return HttpResponse('Error')
+    print(acc)
     
     data = get_user_profile(acc)
     print(data.get('id'))
@@ -37,7 +41,6 @@ def callback(request):
 
 
     return HttpResponse('You are authenticated')
-
 
 def get_user_profile(access_token):
     url = 'https://api.intra.42.fr/v2/me'

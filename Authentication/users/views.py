@@ -98,8 +98,6 @@ class LoginViews(APIView):
 
 class UserViews(APIView):
     def get(self,request):
-        
-        
         token = request.COOKIES.get('access')
 
         # print(request.COOKIES)
