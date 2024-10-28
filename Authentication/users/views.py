@@ -102,7 +102,7 @@ class UserViews(APIView):
 
         # print(request.COOKIES)
         if not token:
-            raise AuthenticationFailed('Unauthenticated user')
+            raise AuthenticationFailed('Unauthenticated')
         
         try:
             UntypedToken(token)

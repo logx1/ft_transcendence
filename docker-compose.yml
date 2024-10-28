@@ -10,13 +10,13 @@ services:
     volumes:
       - matches-volume:/match_history
   game_backend:
-    build: ./gamebackend
-    image: gamebackend
-    container_name: gamebackend
+    build: ./authentication
+    image: authentication
+    container_name: authentication
     ports:
       - "8001:8001"
     volumes:
-      - game-volume:/gamebackend
+      - game-volume:/authentication
   
   redis:
     image: redis:7
@@ -34,5 +34,5 @@ volumes:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/Users/abdelmajid/Desktop/lol/gamebackend"
+      device: "/Users/abdelmajid/Desktop/lol/authentication"
   

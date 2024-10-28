@@ -29,11 +29,13 @@ async function getProfile() {
 async function fetchProfile() {
     let lol = await getProfile();
     // console.log(lol);
-    if (lol.detail == "Unauthenticated user") {
+    if (lol.detail == "Unauthenticated") {
+        console.log(lol.detail);
        console.log("logged in");
         history.pushState(null, "title 1", "#login");
         document.body.innerHTML = `<login-elements></login-elements>`;
         load_login();
+        console.log("not logged in");
         
     }else{
         // console.log("not logged in");
