@@ -1,8 +1,6 @@
 from django.shortcuts import render
 
 from django.http import HttpResponse
-from users.models import User
-from users.serializers import UserSerializer
 
 # Create your views here.
 

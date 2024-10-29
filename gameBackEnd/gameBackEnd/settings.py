@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'daphne',
     'game',
-    'users',
     'rest_framework',
     'rest_framework_simplejwt',  # Corrected here
     'django_extensions',
@@ -142,7 +141,7 @@ CHANNEL_LAYERS = {
 }
 
 
-AUTH_USER_MODEL = 'users.User'
+
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
@@ -153,17 +152,3 @@ CORS_ALLOW_CREDENTIALS = True
 #     ]
 # }
 
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # ),
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # 
-    ),
-    'SIMPLE_JWT': {
-        'ACCESS_TOKEN_LIFETIME': timedelta(minutes=50),
-        'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    }
-}

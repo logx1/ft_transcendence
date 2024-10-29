@@ -24,8 +24,6 @@ async function getProfile() {
 
 
 
-
-
 async function fetchProfile() {
     let lol = await getProfile();
     // console.log(lol);
