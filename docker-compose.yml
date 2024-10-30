@@ -9,20 +9,32 @@ services:
       - "8000:8000"
     volumes:
       - matches-volume:/match_history
-  game_backend:
+  authentication:
     build: ./authentication
     image: authentication
     container_name: authentication
     ports:
       - "8001:8001"
     volumes:
-      - game-volume:/authentication
+      - authentication-volume:/authentication
   
   redis:
     image: redis:7
     container_name: redis
     ports:
       - "6379:6379"
+  gamebackend:
+    build: ./gamebackend
+    image: gamebackend
+    container_name: gamebackend
+    ports:
+      - "8002:8002"
+    volumes:
+      - game:/gamebackend
+    depends_on:
+      - redis
+      - match_history
+      - authentication
 
 volumes:
   matches-volume:
@@ -30,9 +42,14 @@ volumes:
       type: "none"
       o: "bind"
       device: "/Users/abdelmajid/Desktop/lol/match_history"
-  game-volume:
+  authentication-volume:
     driver_opts:
       type: "none"
       o: "bind"
       device: "/Users/abdelmajid/Desktop/lol/authentication"
+  game:
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/Users/abdelmajid/Desktop/lol/gamebackend"
   

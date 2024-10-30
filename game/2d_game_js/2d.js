@@ -2,7 +2,7 @@ function start_game()
 {
 let gameSocket = new WebSocket(
     'ws://'
-    + '127.0.0.1:8001'
+    + '127.0.0.1:8002'
     + '/ws/game/'
 );
 

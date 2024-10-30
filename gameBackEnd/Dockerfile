@@ -23,4 +23,4 @@ RUN if [ ! -f /gamebackend/manage.py ]; then echo "manage.py not found"; exit 1;
 EXPOSE 8001
 
 # Define command to start the app
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8001"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8002"]
