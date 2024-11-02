@@ -42,17 +42,17 @@ async function fetchProfile() {
         // load_register();
 
         // console.log("logged in");
-        // history.pushState(null, "title 1", "#home");
-        // document.body.innerHTML = `<home-elements></home-elements>`;
-        // load_home();
+        history.pushState(null, "title 1", "#home");
+        document.body.innerHTML = `<home-elements></home-elements>`;
+        load_home();
         // history.pushState(null, "title 1", "#sittings");
         // document.body.innerHTML = `<settingss-elements></settingss-elements>`;
         // load_settings();
 
 
-        history.pushState(null, "title 1", "#profile");
-        document.body.innerHTML = `<profile-elements></profile-elements>`;
-        load_profile();
+        // history.pushState(null, "title 1", "#profile");
+        // document.body.innerHTML = `<profile-elements></profile-elements>`;
+        // load_profile();
 
 
     }
@@ -147,13 +147,15 @@ window.login = function() {
     .then(response => response.json())
     .then(data => {
         document.cookie = `access=${data.access}; path=/`;
-        console.log(data);
+        document.cookie = `refresh=${data.refresh}; path=/`;
+        document.cookie = `username=${data.username}; path=/`;
+        // console.log(document.cookie.split(';')[2].split('=')[1]);
     })
-    .then(() => {
-        history.pushState(null, "title 1", "#home");
-        document.body.innerHTML = `<home-elements></home-elements>`;
-        load_home();
-    })
+    // .then(() => {
+    //     history.pushState(null, "title 1", "#home");
+    //     document.body.innerHTML = `<home-elements></home-elements>`;
+    //     load_home();
+    // })
     .catch(error => console.error('Error:', error));
 }
 

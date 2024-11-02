@@ -1,9 +1,15 @@
+function get_cookie_value(name) {
+    let cookie_value = document.cookie.split(';').filter(cookie => cookie.includes(name))[0];
+    return cookie_value.split('=')[1];
+}
 function start_game()
 {
+console.log(document.cookie.split(';')[1].split('=')[0]);
 let gameSocket = new WebSocket(
     'ws://'
     + '127.0.0.1:8002'
     + '/ws/game/'
+    + '?username=' + get_cookie_value('username')
 );
 
 let table = document.getElementById('table');
@@ -27,6 +33,7 @@ let left_permision = false;
 let right_permision = false;
 
 gameSocket.onopen = function(event) {
+    console.log('connected ====>');
     gameSocket.send(JSON.stringify({
         table_width: table_width,
         table_height: table_height,

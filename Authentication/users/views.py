@@ -76,6 +76,8 @@ class LoginViews(APIView):
         is_active = User.objects.filter(email=email).values('is_active')[0]['is_active']
         if user is None:
             raise AuthenticationFailed('User not found')
+        username = user.username
+        print(username)
         if not user.is_active==True:
             raise AuthenticationFailed('User not active')
         
@@ -88,10 +90,12 @@ class LoginViews(APIView):
 
         response.set_cookie(key='refresh', value=str(refresh), httponly=True)
         response.set_cookie(key='access', value=str(refresh.access_token), httponly=True)
+        response.set_cookie(key='username', value=username, httponly=True)
 
         response.data = {
             'refresh': str(refresh),
             'access': str(refresh.access_token),
+            'username': str(username)
         }
         return response
 

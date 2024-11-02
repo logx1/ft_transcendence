@@ -22,7 +22,7 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
 
         query_string = self.scope['query_string'].decode()
         query_params = parse_qs(query_string)
-        token_value = query_params.get('token', [None])[0]
+        token_value = query_params.get('username', [None])[0]
         print(f"Token Value: {token_value}")
         
         
@@ -31,8 +31,9 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
             GameConsumer.groups.append("group" + str(len(GameConsumer.groups)))
             print(str(GameConsumer.groups))
         self.groups = GameConsumer.groups[len(GameConsumer.groups) - 1]
+        print(token_value)
         GameConsumer.clients += 1
-        self.groups = token_value
+        # self.groups = token_value
         
 
         await self.channel_layer.group_add(self.groups, self.channel_name)

@@ -17,24 +17,18 @@ services:
       - "8001:8001"
     volumes:
       - authentication-volume:/authentication
-  
-  redis:
-    image: redis:7
-    container_name: redis
+
+  gamebackend:
+    build: ./gamebackend
+    image: gamebackend
+    container_name: gamebackend
     ports:
-      - "6379:6379"
-  # gamebackend:
-  #   build: ./gamebackend
-  #   image: gamebackend
-  #   container_name: gamebackend
-  #   ports:
-  #     - "8002:8002"
-    # volumes:
-    #   - game:/gamebackend
-    # depends_on:
-    #   - redis
-    #   - match_history
-    #   - authentication
+      - "8002:8002"
+    volumes:
+      - game:/gamebackend
+    depends_on:
+      - match_history
+      - authentication
 
 volumes:
   matches-volume:

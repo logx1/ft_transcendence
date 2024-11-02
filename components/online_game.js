@@ -19,6 +19,7 @@ class gameLocal extends HTMLElement{
             this.innerHTML += data;
             setTimeout(() => {
                 start_game();
+                console.log('game started online');
             }, 100);
 
         })
