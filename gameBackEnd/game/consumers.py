@@ -1,4 +1,6 @@
 import asyncio
+from urllib.parse import parse_qs
+
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 
@@ -8,21 +10,29 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
 
     name11 = "game1"
     name22 = "game2"
-    
+     
     async def connect(self):
+        cookies = self.scope['cookies']
 
-        # cookies = self.scope['cookies']
+        token = cookies.get('access')
+        if not token:
+            await self.close()
+            return
+        print(cookies)
 
-        # token = cookies.get('access')
-        # if not token:
-        #     await self.close()
-        # print(cookies)
+        query_string = self.scope['query_string'].decode()
+        query_params = parse_qs(query_string)
+        token_value = query_params.get('token', [None])[0]
+        print(f"Token Value: {token_value}")
+        
+        
+
         if GameConsumer.clients == 0:
             GameConsumer.groups.append("group" + str(len(GameConsumer.groups)))
             print(str(GameConsumer.groups))
         self.groups = GameConsumer.groups[len(GameConsumer.groups) - 1]
         GameConsumer.clients += 1
-
+        self.groups = token_value
         
 
         await self.channel_layer.group_add(self.groups, self.channel_name)
@@ -63,7 +73,8 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
 
     async def disconnect(self, close_code):
         GameConsumer.clients -= 1
-        # awai//aofgkaiodg gergnaefg,t self.channel_layer.group_discard("game", self.channel_name)
+        print(self.groups)
+        # self.channel_layer.group_discard("game0", self.channel_name)
 # this commit for jga 
     async def receive_json(self, content):
         if "left_r" in content:
