@@ -11,12 +11,12 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
     
     async def connect(self):
 
-        cookies = self.scope['cookies']
+        # cookies = self.scope['cookies']
 
-        token = cookies.get('access')
-        if not token:
-            await self.close()
-        print(cookies)
+        # token = cookies.get('access')
+        # if not token:
+        #     await self.close()
+        # print(cookies)
         if GameConsumer.clients == 0:
             GameConsumer.groups.append("group" + str(len(GameConsumer.groups)))
             print(str(GameConsumer.groups))

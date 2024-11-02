@@ -238,16 +238,16 @@ gameSocket.onmessage = function(e) {
             left_permision = true;
 
             setTimeout(() => {
-                fetch('http://127.0.0.1:8000/api/user/', { method: 'GET', credentials: 'include', })
+                fetch('http://127.0.0.1:8001/api/user/', { method: 'GET', credentials: 'include', })
                     .then(response => response.json()) // Convert the response data to a JSON object
                     .then(data => {
-                        console.log(data.name);
+                        console.log(data.username);
 
                         gameSocket.send(JSON.stringify({
-                            'name1': data.name,
+                            'name1': data.username,
                         }));
                        
-                        document.querySelector('body > game-online > div > div > div.top > div.player_1 > span').innerHTML = data.name;
+                        document.querySelector('body > game-online > div > div > div.top > div.player_1 > span').innerHTML = data.username;
                     });
             }, 10);
 

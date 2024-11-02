@@ -10,8 +10,8 @@ class login extends HTMLElement {
     <div class="authentication">
     <div class="login">
             <img src="../../game/img/logo.svg" alt="" srcset="">
-            <input type="text" id="email" placeholder="email", value="logx@gmail.com">
-            <input type="text" id="password" placeholder="password" , value="eloualy">
+            <input type="text" id="email" placeholder="email", value="eloualy000@gmail.com">
+            <input type="text" id="password" placeholder="password" , value="newpassword">
             <div class="forget_password">
                 <a href="">Forgot password?</a>
             </div>

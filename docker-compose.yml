@@ -23,33 +23,33 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
-  gamebackend:
-    build: ./gamebackend
-    image: gamebackend
-    container_name: gamebackend
-    ports:
-      - "8002:8002"
-    volumes:
-      - game:/gamebackend
-    depends_on:
-      - redis
-      - match_history
-      - authentication
+  # gamebackend:
+  #   build: ./gamebackend
+  #   image: gamebackend
+  #   container_name: gamebackend
+  #   ports:
+  #     - "8002:8002"
+    # volumes:
+    #   - game:/gamebackend
+    # depends_on:
+    #   - redis
+    #   - match_history
+    #   - authentication
 
 volumes:
   matches-volume:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/Users/abdelmajid/Desktop/lol/match_history"
+      device: "/Users/abdel-ou/Desktop/ft_transcendence/match_history"
   authentication-volume:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/Users/abdelmajid/Desktop/lol/authentication"
+      device: "/Users/abdel-ou/Desktop/ft_transcendence/authentication"
   game:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/Users/abdelmajid/Desktop/lol/gamebackend"
+      device: "/Users/abdel-ou/Desktop/ft_transcendence/gamebackend"
   
