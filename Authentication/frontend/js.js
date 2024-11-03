@@ -16,11 +16,11 @@ function register() {
 }) .then(response => {
     if(response.status == 200) {
         console.log('Success');
-        document.body.querySelector('.error').innerHTML = `<span style="color: red;">Invalid email or password</span>`;
         return response.json();
     }
     else {
         console.log('Failed');
+        document.body.querySelector('.error').innerHTML = `<span style="color: red;">Invalid email or password</span>`;
         return response.json();
     }
 })

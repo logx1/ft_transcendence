@@ -25,7 +25,7 @@ def callback(request):
         'client_id': env.str('UID'),
         'client_secret': env.str('SECRET'),
         'code': code,
-        'redirect_uri': "http://127.0.0.1:8000/callback/",
+        'redirect_uri': "http://127.0.0.1:8001/callback/",
     }
 
     response = requests.post(token_url, data=data)

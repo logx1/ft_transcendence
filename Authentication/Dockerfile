@@ -23,4 +23,4 @@ RUN if [ ! -f /Authentication/manage.py ]; then echo "manage.py not found"; exit
 EXPOSE 8001
 
 # Define command to start the app
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8001"]
+CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8001"]
