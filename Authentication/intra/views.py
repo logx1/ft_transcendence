@@ -11,7 +11,7 @@ environ.Env.read_env()
 
 def intralogin(request):
     client_id = env.str('UID')
-    redirect_url = f"https://api.intra.42.fr/oauth/authorize?client_id={client_id}&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Fcallback%2F&response_type=code"
+    redirect_url = f"https://api.intra.42.fr/oauth/authorize?client_id={client_id}&redirect_uri=http%3A%2F%2F127.0.0.1%3A8001%2Fcallback%2F&response_type=code"
     return redirect(redirect_url)
 
 def callback(request):
@@ -38,7 +38,9 @@ def callback(request):
         return HttpResponse('Access token not found', status=400)
 
     user_data = get_user_profile(access_token)
-    login, email = user_data.get('login'), user_data.get('email')
+    login = user_data.get('login')
+    email = user_data.get('email')
+    print(login, email)
 
     user, created = User.objects.get_or_create(username=login, defaults={'email': email, 'is_active': False, 'is_intra': True})
     if not created:
@@ -49,11 +51,12 @@ def callback(request):
     response = JsonResponse({
         'refresh': str(refresh),
         'access': str(refresh.access_token),
+        'username': str(login)
     })
+    response = redirect('http://127.0.0.1:5501/#home?')
     response.set_cookie(key='refresh', value=str(refresh), httponly=True)
     response.set_cookie(key='access', value=str(refresh.access_token), httponly=True)
-    response = redirect('http://127.0.0.1:5500/')
-
+    response.set_cookie(key='username', value=str(login), httponly=True)
     return response
 
 def get_user_profile(access_token):
