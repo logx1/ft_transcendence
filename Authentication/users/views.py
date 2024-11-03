@@ -61,7 +61,7 @@ class RegisterViews(APIView):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        email_send(request._request, email=request.data['email'])
+        # email_send(request._request, email=request.data['email'])
         return Response(serializer.data)
 
 

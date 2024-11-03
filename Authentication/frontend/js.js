@@ -1,5 +1,5 @@
 function register() {
-    let name = document.getElementById('re_name').value;
+    let username = document.getElementById('re_name').value;
     let email = document.getElementById('re_mail').value;
     let password = document.getElementById('re_password').value;
 
@@ -9,11 +9,21 @@ function register() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            name: name,
+            username: username,
             email: email,
             password: password
         })
-}) .then(response => response.json())
+}) .then(response => {
+    if(response.status == 200) {
+        console.log('Success');
+        document.body.querySelector('.error').innerHTML = `<span style="color: red;">Invalid email or password</span>`;
+        return response.json();
+    }
+    else {
+        console.log('Failed');
+        return response.json();
+    }
+})
 .then(data => console.log(data))
 .catch((error) => {
     console.error('Error:', error);
