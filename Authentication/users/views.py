@@ -25,18 +25,17 @@ from rest_framework.decorators import api_view
 from django.http import HttpRequest
 
 @api_view(['GET', 'POST'])
-def email_send(request, email):
+def email_send(request):
     try:
-        # Ensure get_current_site receives a HttpRequest object
         current_site = get_current_site(request._request if hasattr(request, '_request') else request)
-        encoded_site = urlsafe_base64_encode(force_bytes(email))
+        encoded_site = urlsafe_base64_encode(force_bytes('lol'))
         
-        if email is not None:
+        if request is not None:
             send_mail(
                 'Hello My Lol from ' + current_site.domain,  # Subject
                 'Here is the message. Encoded site: '+ 'http://127.0.0.1:8000/api/email/activate/' + encoded_site,  # Message
                 'eloualy73@gmail.com',  # From email
-                [email],  # To email
+                ['eloualy000@gmail.com'],  # To email
                 fail_silently=False,
             )
         response_data = {'message': 'Email sent successfully'}
@@ -90,7 +89,7 @@ class LoginViews(APIView):
 
         response.set_cookie(key='refresh', value=str(refresh), httponly=True)
         response.set_cookie(key='access', value=str(refresh.access_token), httponly=True)
-        response.set_cookie(key='username', value=username, httponly=True)
+        response.set_cookie(key='username', value=str(username), httponly=True)
 
         response.data = {
             'refresh': str(refresh),

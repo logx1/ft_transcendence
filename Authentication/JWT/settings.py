@@ -87,8 +87,12 @@ WSGI_APPLICATION = 'JWT.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres_db',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -143,7 +147,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'eloualy73@gmail.com'
-EMAIL_HOST_PASSWORD = 'llkt ezud svov jtkw'
+EMAIL_HOST_PASSWORD = 'avwc qslj tpqc xbpo'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
