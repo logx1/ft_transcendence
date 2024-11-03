@@ -10,7 +10,7 @@ import os
 
 
 def home(request):
-    return redirect('https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-91f8778fa87936f38550f1c2e6d338313fce62728e36546968a03cd30838d17b&redirect_uri=http%3A%2F%2F127.0.0.1%3A8000%2Fcallback%2F&response_type=code')
+    return redirect('https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-91f8778fa87936f38550f1c2e6d338313fce62728e36546968a03cd30838d17b&redirect_uri=http%3A%2F%2F127.0.0.1%3A8001%2Fcallback%2F&response_type=code')
 
 def callback(request):
     code = request.GET.get('code')
@@ -22,7 +22,7 @@ def callback(request):
         'client_id': environ.Env().str('UID'),
         'client_secret': environ.Env().str('SECRET'),
         'code': code,
-        'redirect_uri': "http://127.0.0.1:8000/callback/",
+        'redirect_uri': "http://127.0.0.1:8001/callback/",
     }
 
     response = requests.post(token_url, data=data)

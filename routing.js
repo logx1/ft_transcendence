@@ -118,6 +118,17 @@ function hashChange() {
     }
 
 }
+
+window.go_to_register = function() {
+    history.pushState(null, "title 1", "#register");
+    document.body.innerHTML = `<register-elements></register-elements>`;
+    load_register();
+}
+window.go_to_login = function() {
+    history.pushState(null, "title 1", "#login");
+    document.body.innerHTML = `<login-elements></login-elements>`;
+    load_login();
+}
 window.play_local = function() {
     history.pushState(null, "title 1", "#local_game");
     document.body.innerHTML = `<game-local></game-local>`;
@@ -128,6 +139,9 @@ window.play_online = function() {
     history.pushState(null, "title 1", "#online_game");
     document.body.innerHTML = `<game-online></game-online>`;
     load_online_game();
+}
+window.intra = function() {
+    window.location.href = "http://127.0.0.1:8001";
 }
 
 window.login = function() {
@@ -144,7 +158,17 @@ window.login = function() {
             password: password
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        if (response.status == 200) {
+            console.log("logged in========>");
+        }else{
+            console.log("not logged in========>");
+            document.body.querySelector('.error').innerHTML = `<span style="color: red;">Invalid email or password</span>`;
+            throw new Error('not logged in');
+
+        }
+        return response.json()
+    })
     .then(data => {
         document.cookie = `access=${data.access}; path=/`;
         document.cookie = `refresh=${data.refresh}; path=/`;
