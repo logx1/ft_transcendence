@@ -5,7 +5,7 @@ class welcome extends HTMLElement {
         super();
     this.innerHTML = `
     <style>
-        @import './styles/welcome.css';
+        @import './styles/welcome/welcome.css';
     </style>
         <h1 class="welcome-txt">Welcome to PingPong!</h1>
         <h2 class="welcome-txt2">a simple platform where you can play ping-pong and chat with friends!</h2>
