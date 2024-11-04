@@ -11,7 +11,7 @@ import json
 @api_view(['GET', 'POST'])
 def UserListView(request):
     if request.method == 'GET':
-        users = User.objects.all()  # Fetch all users
+        users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
     
@@ -19,19 +19,9 @@ def UserListView(request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)  # Success response
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  # Error response
-
-
-@api_view(['DELETE'])
-def delete_user(request, pk):
-    try:
-        user = User.objects.get(pk=pk)
-    except User.DoesNotExist:
-        return Response({"error": "User Not Found"}, status=status.HTTP_404_NOT_FOUND)
-    user.delete()
-    return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # //////////////////////////////-/-/-/-/-/----->
 
@@ -66,7 +56,7 @@ def check_full_name(full_name):
         return full_name
     raise forms.ValidationError("A user with this name already exists.")
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def ModifyUserData(request, username):
     try:
         user = User.objects.get(username=username)
@@ -103,3 +93,8 @@ def ModifyUserData(request, username):
             'username': user.username,
             'password': user.password
         })
+
+    elif request.method == 'DELETE':
+        user = User.objects.get(username=username) 
+        user.delete()
+        return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)

@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+* {
+    background-color: rgba(31, 30, 28, 1);
+}
+
+.head-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* margin-left: 400px; */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    background: transparent;
+}
+
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #bb8c08; }
+}
+
+.head-container > .welcome-txt {
+    display: flex;
+    position: relative;
+    text-align: center;
+    background-color: transparent;
+    color: #bb8c08;
+    font-size: 40px;
+    font-family: 'Alfa Slab One', sans-serif;
+    z-index: 1;
+    overflow: hidden; /* Ensures the text is hidden until animated */
+    border-right: .15em solid #bb8c08; /* Creates the caret effect */
+    white-space: nowrap; /* Prevents text from wrapping */
+    margin: 0 auto; /* Centers the text */
+    letter-spacing: .15em; /* Adds some spacing between letters */
+    animation: 
+        typewriter 4s steps(40, end) 1, /* Typewriter effect, runs once */
+        blink-caret .75s step-end infinite; /* Blinking caret effect */
+}
+
+.head-container > .welcome-txt2 {
+    display: flex;
+    position: relative;
+    text-align: center;
+    color: #916c06;
+    background-color: transparent;
+    font-size: 14px;
+    font-family: 'Alfa Slab One', sans-serif;
+    z-index: 1;
+}
+
+
+.head-container > .start-playing {
+    width: 200px;
+    height: 90px;
+    background-color: #bb8c08;
+    font-family: 'Alfa Slab One', sans-serif;
+    font-size: 15px;
+    color: rgb(45, 44, 42);
+    border: none;
+    cursor: pointer;
+    margin-top: 50px;
+    z-index: 1;
+    border-bottom: #987107 7px solid;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 20px;
+    text-shadow: #ebad0170;
+}
+
+.head-container > .start-playing:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ping-image {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    /* margin-right: 5px; */
+    background-color: transparent;
+}
+
+.typewriter h1 {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+  }

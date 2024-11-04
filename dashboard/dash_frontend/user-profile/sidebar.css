@@ -13,7 +13,7 @@
     width: 17%;
     height: 100vh;
     left: 0;
-    transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+    transition: background-color 0.5s ease-in-out, width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
     opacity: 3;
 }
 

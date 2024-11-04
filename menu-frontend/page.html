@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="./css/page.css">
+    <link rel="stylesheet" type="text/css" href="./css/sidebar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap" rel="stylesheet">  
+    <link href="https://fonts.google.com/share?selection.family=Alfa+Slab+One|Londrina+Solid:wght@100;300;400;900" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+    <div class="sidebar-container">
+        <div class="small-sidebar-container">
+            <button class="small-sidebar-icon"></button>
+        </div>
+        <div class="logo-container"></div>
+        <div class="menu-container">
+            <div class="user-chat-container">
+                <button class="user-chat-icon"></button>
+                <button class="user-chat-text" id="user-chat-text">Chat</button>
+            </div>
+            <div class="user-settings-container">
+                <button class="user-settings-icon"></button>
+                <button class="user-settings-text" id="user-settings-text">Settings</button>
+            </div>
+            <div class="user-profile-container">
+                <button class="user-profile-icon"></button>
+                <button class="user-profile-text" id="user-profile-text">Profile</button>
+            </div>
+        </div>
+        <div class="logout-wrapper" onclick="logout_con()">
+            <div class="logout-container"> 
+                <button class="logout-icon"></button>
+                <button class="logout-text" id="logout-text">Log out</button>
+            </div> 
+        </div>
+    </div>
+    <div class="head-container">
+        <h1 class="welcome-txt">Welcome, username!</h1>
+        <button class="start-playing">
+            <img src="./icons/ping-pongg.svg" class="ping-image">
+            Start Playing</button>
+    </div>
+
+</body>
+</html>

@@ -9,6 +9,20 @@
     <title>user Settings</title>
 </head>
 <body>
+    <div class="lang-mode-container">
+        <div class="mode-container">
+            <div class="select-mode" onclick="mode_select()" id="select-mode"></div>
+        </div>
+        <div class="lang-container">
+            <div class="select-lang" onclick="lang_select()" id="select-lang"></div>
+            <div class="lang-option" style="display: none;" onclick="changeLang()" id="lang-option">
+                <div class="lng-img"></div>
+                <ul>
+                    <li><a href="?lang=fr"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="head-container">
         <input id="file" type="file" class="input" onchange="loadFile(event)"/>
         <div class="pfp-square" id="pfp">
@@ -21,8 +35,8 @@
                 <h3 id="first-last">First-name & last-name</h3>
             </div>
             <div class="Username" id="username">Username</div>
-            <div class="pfp-txt">please ensure that your image is in one of these formats: <br>
-                <strong>JPEG</strong>, <strong>PNG</strong> or <strong>JPG</strong></div>
+            <div class="pfp-txt" id="pfp-txt">please ensure that your image is in one of these formats: <br>
+                <b>JPEG</b>, <b>PNG</b> or <b>JPG</b></div>
         </div>
     </div>
     <div class="sidebar-container">
@@ -33,41 +47,41 @@
         <div class="menu-container">
             <div class="user-chat-container">
                 <button class="user-chat-icon"></button>
-                <button class="user-chat-text">Chat</button>
+                <button class="user-chat-text" id="user-chat-text">Chat</button>
             </div>
             <div class="user-settings-container">
                 <button class="user-settings-icon"></button>
-                <button class="user-settings-text">Settings</button>
+                <button class="user-settings-text" id="user-settings-text">Settings</button>
             </div>
             <div class="user-profile-container">
                 <button class="user-profile-icon"></button>
-                <button class="user-profile-text">Profile</button>
+                <button class="user-profile-text" id="user-profile-text">Profile</button>
             </div>
         </div>
-        <div class="logout-wrapper">
+        <div class="logout-wrapper" onclick="logout_con()">
             <div class="logout-container"> 
                 <button class="logout-icon"></button>
-                <button class="logout-text">Log out</button>
-            </div>
+                <button class="logout-text" id="logout-text">Log out</button>
+            </div> 
         </div>
     </div>
     <div class="body-container">
         <div class="column-container">
             <div class="edit-profile-container">
-                <button class="edit-profile" onclick="showEditProfile()">Edit Profile</button>
+                <button class="edit-profile" id="edit-profile" onclick="showEditProfile()">Edit Profile</button>
             </div>
             <div class="change-password-button-container">
-                <button class="change-password"onclick="showChangePassword()">Change Password</button>
+                <button class="change-password" id="change-password" onclick="showChangePassword()">Change Password</button>
             </div>
         </div>
         <div class="change-name-container">
-            <div class="first-name">Full Name:</div>
+            <div class="first-name" id="first-name">Full Name:</div>
             <div class="name-area-wrapper">
                 <img src="./icons/profile.svg" alt="icon" class="name-icon">
                 <textarea class="name-area" id="fullname_txt"></textarea>
             </div>
             <div class="username">
-                <p>Username:</p>
+                <p id="username-txt">Username:</p>
                 <p1 id="p1_user">Username aleady exists.</p1>
             </div>
             <div class="username-wrapper">
@@ -75,16 +89,16 @@
                 <textarea class="username-area" id="username_txt"></textarea>
             </div>
             <div class="name-status-container">
-                <p id="success-txt" class="stats-text" style="display: none;">Your info has been updated successfully!</p>
+                <p id="success-txt" class="stats-info-text" style="display: none;">Your info has been updated successfully!</p>
             </div>
             <div class="update-delete">
-                <button class="delete">Delete User</button>
+                <button class="delete" id="delete" onclick="delete_user()">Delete User</button>
                 <button class="enter" id="updatee_name" onclick="verify_info()">Submit</button>
             </div>
         </div>
         <div class="change-password-container" style="display: none;">
             <div class="old-password">
-                <p>Old Password:</p>
+                <p id="old-password">Old Password:</p>
                 <p1 id="p1_pass">Password doesn't match.</p1>
             </div>
             <div class="old-pass-wrapper">
@@ -93,14 +107,14 @@
                     <img src="./icons/eye.svg" alt="Show Password" class="toggle-icon">
                 </button>
             </div>
-            <div class="new-password">New Password:</div>
+            <div class="new-password" id="new-password">New Password:</div>
             <div class="new-pass-wrapper">
                 <input class="new-pass-area" type="password"></input>
                 <button type="button" class="toggle-password" onclick="togglePasswordVisibility('new-pass-area')">
                     <img src="./icons/eye.svg" alt="Show Password" class="toggle-icon">
                 </button>
             </div>
-            <div class="repeat-new-password">Repeat New Password:</div>
+            <div class="repeat-new-password" id="repeat-new-password">Repeat New Password:</div>
             <div class="repeat-new-password-wrapper">
                 <input class="repeat-new-password-area" type="password" id="rp_pass"></input>
                 <button type="button" class="toggle-password" onclick="togglePasswordVisibility('repeat-new-password-area')">
@@ -113,6 +127,25 @@
             <div class="update-cancel">
                 <button class="cancel">Cancel</button>
                 <button class="enter" id="updatee" onclick="verify()">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div class="logoutpop-container" style="display: none;">
+        <div class="logoutpop-box">
+                <p class="logoutpop-text" id="logoutpop-tex">are you sure you want to logout?</p>
+            <div class="update-cancel-logout">
+                <button class="cancel-log" id="cancel-log">No</button>
+                <button class="enter-log" id="enter-log">Yes</button>
+            </div>
+        </div>
+    </div>
+    <div class="deletepop-container" style="display: none;">
+        <div class="deletepop-box">
+                <p class="deletepop-text" id="deletepop-tex">are you sure you want to delete your account?</p>
+                <p class="deletepop2-text" id="deletepop2-text">This action will permanently delete this user.</p>
+            <div class="update-cancel-delete">
+                <button class="cancel-del" id="cancel-del">No</button>
+                <button class="enter-del" id="enter-del" onclick="delUserr()">Yes!</button>
             </div>
         </div>
     </div>

@@ -1,8 +1,10 @@
-let ussrr = "aaAAAAAAAAAAAA"
+let ussrr = "sndhelp"
 
-window.onload = function() {
+window.addEventListener('load', function(){
     let menu_icon_box = document.querySelector(".small-sidebar-container");
     let box = document.querySelector(".sidebar-container");
+    let transl = this.document.querySelector("#select-lang");
+    let mode = this.document.querySelector("#select-mode");
 
     menu_icon_box.onclick = function() {
         box.classList.toggle("active");
@@ -10,7 +12,7 @@ window.onload = function() {
 
     // Close the sidebar when clicking outside of it
     document.addEventListener('click', function(event) {
-        let isClickInside = box.contains(event.target) || menu_icon_box.contains(event.target);
+        let isClickInside = box.contains(event.target) || menu_icon_box.contains(event.target) || transl.contains(event.target) || mode.contains(event.target);
  
         if (!isClickInside) {
             box.classList.remove("active");
@@ -21,7 +23,193 @@ window.onload = function() {
     window.addEventListener('resize', function() {
         box.classList.remove("active");
     });
-};
+});
+
+////////////////
+
+var isOriginal = true;
+
+function mode_select(){
+    var modeOp = document.querySelector('#select-mode');
+
+    if(isOriginal) {
+        modeOp.style.backgroundImage = "url('icons/moon.svg')";
+        applyLightMode();
+        localStorage.setItem('mode', 'Lite');
+        isOriginal = false;
+    }
+    else {
+        modeOp.style.backgroundImage = "url('icons/light.svg')";
+        applyDarkMode();
+        localStorage.setItem('mode', 'Dark');
+        isOriginal = true;
+    }
+}
+
+function applyLightMode() {
+    document.querySelector('body').style.backgroundColor = "rgb(228, 222, 211)";
+    document.querySelector('.head-container').style.backgroundColor = "rgb(242, 237, 227)";
+    document.querySelector('.body-container').style.backgroundColor = "rgb(242, 237, 227)";
+    document.querySelector('.name-area').style.color = "rgba(38, 37, 34, 1)";
+    document.querySelector('.username-area').style.color = "rgba(38, 37, 34, 1)";
+    document.querySelector('.old-pass-wrapper > .old-pass-area').style.color = "rgba(38, 37, 34, 1)";
+    document.querySelector('.new-pass-area').style.color = "rgba(38, 37, 34, 1)";
+    document.querySelector('.repeat-new-password-area').style.color = "rgba(38, 37, 34, 1)";
+    document.querySelector('.sidebar-container').style.backgroundColor = "rgb(242, 237, 227)";
+    document.querySelector('fname').style.color = "rgba(31, 30, 28, 1)";
+}
+
+function applyDarkMode() {
+    document.querySelector('body').style.backgroundColor = "rgba(38, 37, 34, 1)";
+    document.querySelector('.head-container').style.backgroundColor = "rgba(31, 30, 28, 1)";
+    document.querySelector('.body-container').style.backgroundColor = "rgba(31, 30, 28, 1)";
+    document.querySelector('.name-area').style.color = "aliceblue";
+    document.querySelector('.username-area').style.color = "aliceblue";
+    document.querySelector('.old-pass-wrapper > .old-pass-area').style.color = "aliceblue";
+    document.querySelector('.new-pass-area').style.color = "aliceblue";
+    document.querySelector('.repeat-new-password-area').style.color = "aliceblue";
+    document.querySelector('.sidebar-container').style.backgroundColor = "rgba(31, 30, 28, 1)";
+    document.querySelector('fname').style.color = "#e4e4e4";
+}
+
+function applyMode() {
+    var mode = localStorage.getItem('mode');
+    var modeOp = document.querySelector('#select-mode');
+    // var fname = document.querySelector('fname');
+
+    if (mode === 'Lite'){
+        modeOp.style.backgroundImage = "url('icons/moon.svg')";
+        // fname.style.color = "rgba(31, 30, 28, 1)";
+        applyLightMode();
+        isOriginal = false;
+    }
+    else if (mode === 'Dark'){
+        modeOp.style.backgroundImage = "url('icons/light.svg')";
+        fname.style.color = "#e4e4e4";
+        applyDarkMode();
+        isOriginal = true;
+    }
+}
+
+window.addEventListener('load', function(){
+    applyMode();
+});
+
+////////////////
+
+function lang_select(){
+    var langOptions = document.querySelector('.lang-option');
+    if (langOptions.style.display === "none" || langOptions.style.display === "") {
+        langOptions.style.display = "block";
+        langOptions.classList.add('fade-in');
+        setTimeout(function() {
+            langOptions.classList.remove('fade-in');
+        }, 300);
+    } else {
+        langOptions.classList.add('fade-out');
+        setTimeout(function() {
+            langOptions.style.display = "none";
+            langOptions.classList.remove('fade-out');
+        }, 300);
+    }
+}
+
+window.addEventListener('load', function() {
+    var savedlang = localStorage.getItem('selecLang');
+    applyTransl(savedlang);
+})
+
+function changeLang() {
+    var selectLangImage = getComputedStyle(document.querySelector('.lang-container > .select-lang')).backgroundImage;
+    var langOptionImage = getComputedStyle(document.querySelector('.lang-container > .lang-option')).backgroundImage;
+
+    if (selectLangImage.includes("french")){
+        localStorage.setItem('selecLang', 'en')
+    }
+    else{
+        localStorage.setItem('selecLang', 'fr')
+    }
+
+    document.querySelector('.lang-container > .select-lang').style.backgroundImage = langOptionImage;
+    document.querySelector('.lang-container > .lang-option').style.backgroundImage = selectLangImage;
+
+    var savedlang = localStorage.getItem('selecLang');
+    applyTransl(savedlang);
+}
+
+function applyTransl(savedlang) {
+    if (savedlang === 'fr'){
+        document.getElementById('select-lang').style.backgroundImage = "url('icons/french.svg')";
+        document.getElementById('lang-option').style.backgroundImage = "url('icons/english.svg')";
+
+        document.getElementById('user-chat-text').innerHTML = "Conversations"
+        document.getElementById('user-settings-text').innerHTML = "Paramètres"
+        document.getElementById('user-profile-text').innerHTML = "Profil"
+        document.getElementById('logout-text').innerHTML = "Déconnecter"
+        document.getElementById('pfp-txt').innerHTML = "Veuillez vous assurer que votre image est dans l'un de ces formats: <br><strong>JPEG</strong>, <strong>PNG</strong> ou <strong>JPG</strong>";
+
+        document.getElementById('edit-profile').innerHTML = "Modifier le Profil"
+        document.getElementById('change-password').innerHTML = "Modifier le mot de passe"
+        document.getElementById('first-name').innerHTML = "Nom et Prénom:"
+        document.getElementById('username-txt').innerHTML = "Pseudo:"
+        document.getElementById('updatee_name').innerHTML = "Enregistrer"
+        document.getElementById('delete').innerHTML = "Supprimer l'utilisateur";
+        document.getElementById('p1_user').innerHTML = "Pseudo existe déjà."
+        document.getElementById('success-txt').innerHTML = "Vos informations ont été mises à jour avec succès !"
+
+        document.getElementById('old-password').innerHTML = "Ancien mot de passe:"
+        document.getElementById('new-password').innerHTML = "nouveau mot de passe:"
+        document.getElementById('repeat-new-password').innerHTML = "Répétez le mot de passe:"
+        document.getElementById('p1_pass').innerHTML = "Le mot de passe ne correspond pas."
+        document.getElementById('updatee').innerHTML = "Enregistrer";
+
+        document.getElementById('logoutpop-tex').innerHTML = "Êtes-vous sûr(e) de vouloir vous déconnecter ?"
+        document.getElementById('cancel-log').innerHTML = "Non"
+        document.getElementById('enter-log').innerHTML = "Oui"
+
+        document.getElementById('deletepop-tex').innerHTML = "Êtes-vous sûr de vouloir supprimer votre compte ?"
+        document.getElementById('deletepop2-text').innerHTML = "Cette action supprimera définitivement cet utilisateur."
+        document.getElementById('cancel-del').innerHTML = "Non"
+        document.getElementById('enter-del').innerHTML = "Oui!"
+
+    }
+    else{
+        document.getElementById('select-lang').style.backgroundImage = "url('icons/english.svg')";
+        document.getElementById('lang-option').style.backgroundImage = "url('icons/french.svg')";
+    
+        document.getElementById('user-chat-text').innerHTML = "Chat"
+        document.getElementById('user-settings-text').innerHTML = "Settings"
+        document.getElementById('user-profile-text').innerHTML = "Profile"
+        document.getElementById('logout-text').innerHTML = "Log out"
+        document.getElementById('pfp-txt').innerHTML = "please ensure that your image is in one of these formats: <br><strong>JPEG</strong>, <strong>PNG</strong> or <strong>JPG</strong>";
+
+        document.getElementById('edit-profile').innerHTML = "Edit Profile"
+        document.getElementById('change-password').innerHTML = "Change Password"
+        document.getElementById('first-name').innerHTML = "Full Name:"
+        document.getElementById('username-txt').innerHTML = "Username:"
+        document.getElementById('updatee_name').innerHTML = "Submit"
+        document.getElementById('delete').innerHTML = "Delete User";
+        document.getElementById('p1_user').innerHTML = "Username aleady exists."
+        document.getElementById('success-txt').innerHTML = "Your info has been updated successfully!"
+
+        document.getElementById('old-password').innerHTML = "Old Password:"
+        document.getElementById('new-password').innerHTML = "New Password:"
+        document.getElementById('repeat-new-password').innerHTML = "Repeat New Password:"
+        document.getElementById('p1_pass').innerHTML = "Le mot de passe ne correspond pas."
+        document.getElementById('updatee').innerHTML = "Submit";
+
+        document.getElementById('logoutpop-tex').innerHTML = "are you sure you want to logout?"
+        document.getElementById('cancel-log').innerHTML = "No"
+        document.getElementById('enter-log').innerHTML = "Yes"
+
+        document.getElementById('deletepop-tex').innerHTML = "are you sure you want to delete your account?"
+        document.getElementById('deletepop2-text').innerHTML = "This action will permanently delete this user."
+        document.getElementById('cancel-del').innerHTML = "No"
+        document.getElementById('enter-del').innerHTML = "Yes!"
+    }
+}
+
+//////////////
 
 function togglePasswordVisibility(inputClass) {
     const inputField = document.querySelector(`.${inputClass}`);
@@ -41,7 +229,7 @@ function togglePasswordVisibility(inputClass) {
 }
 
 function showEditProfile() {
-    document.querySelector('.change-name-container').style.display = 'flex';
+    document.querySelector('.change-name-container').style.display = 'flex'; 
     document.querySelector('.change-password-container').style.display = 'none';
 
     document.querySelector('.edit-profile').classList.add('active-button');
@@ -186,6 +374,17 @@ function TriggerErrorUsername() {
     }, {once: true});
 }
 
+function UpdateSuccess() {
+    document.querySelector('.name-status-container').style.display = 'flex';
+    const up = document.querySelector('.name-status-container > .stats-info-text');
+
+    if (document.querySelector('.name-status-container > .stats-info-text').style.display = 'none'){
+        document.querySelector('.name-status-container > .stats-info-text').style.display = 'flex';
+    }
+
+    up.style.animation = "slide-up ease-out 0.10s 1";
+}
+
 function verify_info() {
     var formData = new FormData();
 
@@ -200,7 +399,7 @@ function verify_info() {
         formData.append('username', userInp);
     }
 
-    fetch(`http://10.11.4.1:8000/user-setting/${ussrr}/`, {
+    fetch(`http://127.0.0.1:8000/user-setting/${ussrr}/`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -210,6 +409,9 @@ function verify_info() {
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        else{
+            UpdateSuccess();
         }
     })
     .catch((error) => {
@@ -227,20 +429,29 @@ function updateData(data){
     username_.innerHTML = '';
 
     const fname = document.createElement('fname');
+
+    var mode = localStorage.getItem('mode');
+    if (mode === 'Lite') {
+        fname.style.color = "rgba(31, 30, 28, 1)";
+    }
+    else if (mode === 'Dark'){
+        fname.style.color = "#e4e4e4";
+    }
+
     const uname = document.createElement('uname');
     const pass = document.createElement('pass');
     
     fname.textContent = data.full_name;
     uname.textContent = data.username;
     pass.textContent = data.password;
-    img_.style.backgroundImage = 'url(' + "http://10.11.4.1:8000" + data.profile_picture + ')';
+    img_.style.backgroundImage = 'url(' + "http://127.0.0.1:8000" + data.profile_picture + ')';
     ol_pass = data.password;
-   
+
     fullname_.appendChild(fname);
     username_.appendChild(uname);
 }
 
-fetch(`http://10.11.4.1:8000/user-setting/${ussrr}/`, {
+fetch(`http://127.0.0.1:8000/user-setting/${ussrr}/`, {
     method:'GET',
 })
     .then(response => response.json())
@@ -257,3 +468,46 @@ document.getElementById('updatee').addEventListener('submit', function(event) {
     event.preventDefault();
     verify();
 });
+
+function logout_con(){
+    document.querySelector('.logoutpop-container > .logoutpop-box').classList.add('logoutpop-box-animate-up');
+    document.querySelector('.logoutpop-container').style.display = 'flex';
+}
+
+function closeLogOutBox() {
+    document.querySelector('.logoutpop-container').style.display = 'none';
+}
+
+document.querySelector('.update-cancel-logout > .cancel-log').addEventListener('click', closeLogOutBox);
+
+function delete_user(){
+    document.querySelector('.deletepop-container > .deletepop-box').classList.add('deletepop-box-animate-up');
+    document.querySelector('.deletepop-container').style.display = 'flex';
+}
+
+function closeDelUser() {
+    document.querySelector('.deletepop-container').style.display = 'none';
+}
+
+document.querySelector('.update-cancel-delete > .cancel-del').addEventListener('click', closeDelUser);
+
+/////////////////////////
+
+// Assuming you have a button with the id 'deleteButton'
+document.getElementById('enter-del').addEventListener('click', delUserr);
+
+function delUserr(){
+    fetch(`http://127.0.0.1:8000/user-setting/${ussrr}/`, {
+        method:'DELETE',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        // Handle the response here. You might want to get the JSON data by calling response.json()
+    })
+    .catch(error => {
+        // Handle the error here
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+}

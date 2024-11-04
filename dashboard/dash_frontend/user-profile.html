@@ -9,6 +9,20 @@
         <title>User Profile</title>
     </head>
 <body>
+    <div class="lang-mode-container">
+        <div class="mode-container">
+            <div class="select-mode" onclick="mode_select()" id="select-mode"></div>
+        </div>
+        <div class="lang-container">
+            <div class="select-lang" onclick="lang_select()" id="select-lang"></div>
+            <div class="lang-option" style="display: none;" onclick="changeLang()" id="lang-option">
+                <div class="lng-img"></div>
+                <ul>
+                    <li><a href="?lang=fr"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="head-container">
             <div class="pfp-square">
                 <img src="/icons/profile_photo.svg" id="pfp" class="profile-picture">
@@ -51,9 +65,8 @@
                         </div>
                         <div class="score-container">
                             <div class="score-image"></div>
-                            <div class="score-status" id="score">10</div>
+                            <div class="score-status" id="score">0</div>
                         </div>
-                    
                     </div>
                 </div>
     </div>
@@ -67,14 +80,14 @@
     </div>
     <div class="body-container">
             <div class="column-container">
-                <div class="Games">Games</div>
-                <div class="Results">Results</div>
-                <div class="Accuracy">Accuracy</div>
-                <div class="Date">Date</div>
+                <div class="Games" id="Games">Games</div>
+                <div class="Results" id="Results">Results</div>
+                <div class="Accuracy" id="Accuracy">Accuracy</div>
+                <div class="Date" id="Date">Date</div>
             </div>
-            <div class="no-matches-container" style="display: flex;" id="no-matches-container">no matches yet.</div>
-            <div class="ping-content-container" id="content-container" style="display: none;">
-                <div class="stats-container" style="display: none;">
+            <div class="ping-content-container" id="ping-content-container" style="display: none;">
+                <div class="no-matches-container" style="display: flex;" id="no-matches-container">no matches yet.</div>
+                <div class="ping-stats-container" style="display: none;">
                     <div class="games-container">
                         <div class="games-icon">
 
@@ -121,50 +134,49 @@
                 </div>
             </div>
             <div class="xo-content-container" style="display: none;" id="xo-content-container">
+                <div class="xo-no-matches-container" style="display: flex;" id="xo-no-matches-container">no matches yet.</div>
                 <div class="xo-stats-container" style="display: none;">
-                    <div class="games-container">
-                        <div class="games-icon">
+                    <div class="xo-games-container">
+                        <div class="xo-games-icon">
 
-                            <div id="local-ic" class="games-image-local" style="display: none;"></div>
-                            <div id="local-txt" class="games-text-local" style="display: none;">LOCAL</div>
+                            <div id="xo-local-ic" class="xo-games-image-local" style="display: none;"></div>
+                            <div id="xo-local-txt" class="xo-games-text-local" style="display: none;">LOCAL</div>
 
-                            <div id="bot-ic" class="games-image-bot" style="display: none;"></div>
-                            <div id="bot-txt" class="games-text-bot" style="display: none;">BOT</div>
+                            <div id="xo-bot-ic" class="xo-games-image-bot" style="display: none;"></div>
+                            <div id="xo-bot-txt" class="xo-games-text-bot" style="display: none;">BOT</div>
 
-                            <div id="online-ic" class="games-image-online" style="display: none;"></div>
-                            <div id="online-txt" class="games-text-online" style="display: none;">ONLINE</div>
+                            <div id="xo-online-ic" class="xo-games-image-online" style="display: none;"></div>
+                            <div id="xo-online-txt" class="xo-games-text-online" style="display: none;">ONLINE</div>
 
                         </div>
-                        <div class="games-users">
-                            <div class="f-user">
-                                <div class="arrow_1"></div>
-                                <div class="first-user-text" id="first-user-name">Username_1</div>
+                        <div class="xo-games-users">
+                            <div class="xo-f-user">
+                                <div class="xo-arrow_1"></div>
+                                <div class="xo-first-user-text" id="xo-first-user-name">Username_1</div>
                             </div>
-                            <div class="sec-user">
-                                <div class="arrow_2"></div>
-                                <div class="second-user-text" id="second-user-name">Username_2</div>
+                            <div class="xo-sec-user">
+                                <div class="xo-arrow_2"></div>
+                                <div class="xo-second-user-text" id="xo-second-user-name">Username_2</div>
                             </div>
-
-
                         </div>
                     </div>
-                    <div class="Results-container">
-                        <div class="res-num">
-                            <div class="f-user-score" id="f-user-score">1</div>
-                            <div class="sec-user-score" id="sec-user-score">1</div>
+                    <div class="xo-Results-container">
+                        <div class="xo-res-num">
+                            <div class="xo-f-user-score" id="xo-f-user-score">1</div>
+                            <div class="xo-sec-user-score" id="xo-sec-user-score">1</div>
                         </div>
-                        <div class="res-icon">
-                            <div class="res-image-minus" style="display: none;" id="minus"></div>
-                            <div class="res-image-plus" style="display: none;" id="plus"></div>
-                            <div class="res-image-equal" style="display: none;" id="equal"></div>
+                        <div class="xo-res-icon">
+                            <div class="xo-res-image-minus" style="display: none;" id="xo-minus"></div>
+                            <div class="xo-res-image-plus" style="display: none;" id="xo-plus"></div>
+                            <div class="xo-res-image-equal" style="display: none;" id="xo-equal"></div>
                         </div>
                     </div>
 
-                    <div class="Accuracy-container">
-                        <div class="f-user-accuracy" id="firstAcc">50%</div>
-                        <div class="sec-user-accuracy" id="secAcc">50%</div>
+                    <div class="xo-Accuracy-container">
+                        <div class="xo-f-user-accuracy" id="xo-firstAcc">50%</div>
+                        <div class="xo-sec-user-accuracy" id="xo-secAcc">50%</div>
                     </div>
-                    <div class="date-container" id="game-date">01/01/2024</div>
+                    <div class="xo-date-container" id="xo-game-date">01/01/2024</div>
                 </div>
             </div>
     </div>
@@ -176,34 +188,43 @@
         <div class="menu-container">
             <div class="user-chat-container">
                 <button class="user-chat-icon"></button>
-                <button class="user-chat-text">Chat</button>
+                <button class="user-chat-text" id="user-chat-text">Chat</button>
             </div>
             <div class="user-settings-container">
                 <button class="user-settings-icon"></button>
-                <button class="user-settings-text">Settings</button>
+                <button class="user-settings-text" id="user-settings-text">Settings</button>
             </div>
             <div class="user-profile-container">
                 <button class="user-profile-icon"></button>
-                <button class="user-profile-text">Profile</button>
+                <button class="user-profile-text" id="user-profile-text">Profile</button>
             </div>
         </div>
-        <div class="logout-wrapper">
+        <div class="logout-wrapper" onclick="logout_con()">
             <div class="logout-container">
                 <button class="logout-icon"></button>
-                <button class="logout-text">Log out</button>
+                <button class="logout-text" id="logout-text">Log out</button>
             </div>
         </div>
     </div>
     <div class="popup-container" style="display: none;">
         <div class="popup-box">
-                <p class="enter">Enter your status:</p>
+                <p class="enter" id="enter">Enter your status:</p>
                 <textarea class="input-text" id="textarea" maxlength="30"></textarea>
                 <div class="counter">
                     <p class="counter_characters">0</p><p>/</p><p>30</p>
                 </div>
             <div class="update-cancel">
-                <button class="cancel">Cancel</button>
-                <button class="enter">Submit</button>
+                <button class="cancel" id="Cancel">Cancel</button>
+                <button class="enter" id="Submit">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div class="logoutpop-container" style="display: none;">
+        <div class="logoutpop-box">
+                <p class="logoutpop-text" id="logoutpop-tex">are you sure you want to logout?</p>
+            <div class="update-cancel-logout">
+                <button class="cancel-log" id="cancel-log">No</button>
+                <button class="enter-log" id="enter-log">Yes</button>
             </div>
         </div>
     </div>

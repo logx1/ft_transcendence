@@ -11,6 +11,7 @@ class User(models.Model):
     profile_picture = models.ImageField(upload_to="images/", default="images/dino.png")
     status = models.CharField(max_length=30, default="Hi, I'm new here")
     user_result = models.IntegerField(default=0)
+    # score = models.IntegerField(default=0)
     # email = models.EmailField(default="")
 
     def __str__(self):

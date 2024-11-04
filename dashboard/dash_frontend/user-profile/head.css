@@ -5,9 +5,105 @@
     padding: 0;
 }
 
+/* //////////// */
+.lang-mode-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    align-self: flex-end;
+}
+
+.lang-mode-container > .lang-container {
+    position: relative;
+    display: flex;
+    align-self: flex-end;
+    margin: 17px;
+    width: 32px;
+}
+
+.lang-container > .select-lang {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    background-image: url('../icons/english.svg');
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+}
+
+.lang-container > .lang-option {
+    display: none;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 40px;
+    right: 0px;
+    background-color: rgba(20, 20, 19, 0.656);
+    padding: 10px;
+    border-radius: 14px;
+    background-image: url('../icons/french.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40%;
+    cursor: pointer;
+}
+
+.fade-in {
+    animation: fade-in 0.2s linear 1 forwards;
+}
+
+.fade-out {
+    animation: fade-out 0.2s linear 1 forwards;
+}
+
+#select-mode {
+    transition: background-image 0.8s ease-in-out;
+}
+
+@keyframes fade-in {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fade-out {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.lang-option ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lang-option li {
+    margin: 5px 0;
+}
+
+.lang-mode-container > .mode-container {
+    position: relative;
+    display: flex;
+    align-self: flex-end;
+    margin: 17px;
+    width: 32px;
+}
+
+.mode-container > .select-mode {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    background-image: url('../icons/light.svg');
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+}
+
+/* /////////// */
+
 body {
     background-color: rgba(38, 37, 34, 1);
     font-family: 'Alfa Slab One', sans-serif;
+    transition: background-color 0.5s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,10 +112,11 @@ body {
 
 .head-container{
     background: rgba(31, 30, 28, 1);
+    transition: background-color 0.5s ease-in-out;
     border-radius: 25px;
     width: 650px;
     height: 240px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -38,6 +135,11 @@ body {
 }
 
 .pfp-square >  .profile-picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
+    position: relative;
     border-radius: 9px;
     width: 200px;
     height: 200px;
@@ -70,6 +172,7 @@ fname {
     font-family: 'Alfa Slab One', sans-serif;
     font-size: large;
     color: #e4e4e4;
+    transition: color 0.5s ease-in-out;
     margin-top: 30px;
     width: 100%;
     height: 20%;;
@@ -312,7 +415,21 @@ time {
     border: none;
 }
 
-scr {
+#score {
+    font-family: 'Alfa Slab One', sans-serif;
+    color: #bb8c08;
+    font-size: 13px;
+    border: none;
+}
+
+.status-container > .score-container > .score-status {
+    font-family: 'Alfa Slab One', sans-serif;
+    color: #bb8c08;
+    font-size: 13px;
+    border: none;
+}
+
+score {
     font-family: 'Alfa Slab One', sans-serif;
     color: #bb8c08;
     font-size: 14px;
