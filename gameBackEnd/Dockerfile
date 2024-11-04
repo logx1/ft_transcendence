@@ -25,4 +25,5 @@ RUN if [ ! -f /gamebackend/manage.py ]; then echo "manage.py not found"; exit 1;
 EXPOSE 8001 6379
 
 # Define command to start both Redis and the app
-CMD service redis-server start && python manage.py runserver 0.0.0.0:8002
+# CMD service redis-server start && python manage.py runserver 0.0.0.0:8002
+CMD python manage.py runserver 0.0.0.0:8002

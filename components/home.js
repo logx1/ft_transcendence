@@ -12,6 +12,10 @@ class home extends HTMLElement {
     </div>
     `;
     }
+    // connectedCallback() {
+    connectedCallback() {
+        console.log("connected");
+    }
 }
 customElements.define('home-elements', home);
 }

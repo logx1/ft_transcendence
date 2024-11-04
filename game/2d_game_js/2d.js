@@ -4,12 +4,11 @@ function get_cookie_value(name) {
 }
 function start_game()
 {
-console.log(document.cookie.split(';')[1].split('=')[0]);
+console.log("pritnt cookie" + document.cookie);
 let gameSocket = new WebSocket(
     'ws://'
     + '127.0.0.1:8002'
     + '/ws/game/'
-    + '?username=' + get_cookie_value('username')
 );
 
 let table = document.getElementById('table');

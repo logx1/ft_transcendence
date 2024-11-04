@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 import requests
 import environ
 from users.models import User
+from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
 # Initialize environment variables
@@ -48,15 +49,19 @@ def callback(request):
         user.save()
 
     refresh = RefreshToken.for_user(user)
-    response = JsonResponse({
-        'refresh': str(refresh),
-        'access': str(refresh.access_token),
-        'username': str(login)
-    })
+    response = Response()
+
+
+
+    response.data = {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+            'username': str(login)
+        }
     response = redirect('http://127.0.0.1:5501/#home?')
-    response.set_cookie(key='refresh', value=str(refresh), httponly=True)
-    response.set_cookie(key='access', value=str(refresh.access_token), httponly=True)
-    response.set_cookie(key='username', value=str(login), httponly=True)
+    response.set_cookie(key='refresh', value=str(refresh), httponly=True, samesite=None)
+    response.set_cookie(key='access', value=str(refresh.access_token), httponly=True, samesite=None)
+    response.set_cookie(key='username', value=str(login), httponly=True, samesite=None)
     return response
 
 def get_user_profile(access_token):

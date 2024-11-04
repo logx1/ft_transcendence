@@ -87,9 +87,9 @@ class LoginViews(APIView):
         
         response = Response()
 
-        response.set_cookie(key='refresh', value=str(refresh), httponly=True)
-        response.set_cookie(key='access', value=str(refresh.access_token), httponly=True)
-        response.set_cookie(key='username', value=str(username), httponly=True)
+        response.set_cookie(key='refresh', value=str(refresh), httponly=False)
+        response.set_cookie(key='access', value=str(refresh.access_token), httponly=False)
+        response.set_cookie(key='username', value=str(username), httponly=False)
 
         response.data = {
             'refresh': str(refresh),

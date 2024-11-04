@@ -15,6 +15,7 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
         cookies = self.scope['cookies']
 
         token = cookies.get('access')
+        print(token)
         if not token:
             await self.close()
             return
