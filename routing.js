@@ -7,6 +7,7 @@ import { load_online_game } from './components/online_game.js';
 import { load_settings } from './components/settings.js';
 import { load_profile } from './components/Profile.js';
 import { load_welcome } from './components/welcome.js';
+import { load_chat } from './components/chat.js';
 
 
 
@@ -46,9 +47,9 @@ async function fetchProfile() {
         // load_register();
 
         // console.log("logged in");
-        history.pushState(null, "title 1", "#home");
-        document.body.innerHTML = `<home-elements></home-elements>`;
-        load_home();
+        // history.pushState(null, "title 1", "#home");
+        // document.body.innerHTML = `<home-elements></home-elements>`;
+        // load_home();
         // history.pushState(null, "title 1", "#sittings");
         // document.body.innerHTML = `<settingss-elements></settingss-elements>`;
         // load_settings();
@@ -57,6 +58,11 @@ async function fetchProfile() {
         // history.pushState(null, "title 1", "#profile");
         // document.body.innerHTML = `<profile-elements></profile-elements>`;
         // load_profile();
+
+
+        history.pushState(null, "title 1", "#chat");
+        document.body.innerHTML = `<chat-elements></chat-elements>`;
+        load_chat();
 
 
     }
