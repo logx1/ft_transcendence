@@ -8,10 +8,9 @@ export function select_game() {
         this.shadow = this.attachShadow({mode: 'open'});
         this.shadow.innerHTML = `
                 <style>
-                @import '../game/css/style.css';
-                @import '../game/css/game_style.css';
+                @import './styles/select_game/style.css';
+                // @import '../game/css/game_style.css';
                 </style>
-                <div class="conatainer">
                 <div class="menu">
                 <div class="selectgame">
                     <div class="card b_local">
@@ -28,9 +27,7 @@ export function select_game() {
                     </div>
                 </div>
             </div>
-            </div>
-        `;
-        
+        `;  
     }
     }
     customElements.define('select-game', MYcounter);

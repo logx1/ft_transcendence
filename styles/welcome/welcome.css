@@ -24,7 +24,7 @@ welcome-elements::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("https://raw.githubusercontent.com/logx1/ft_transcendence/refs/heads/master/start-frontend/css/piingg.gif?token=GHSAT0AAAAAACZ4BUGJ7UOMTJFACHUHY6WGZZI6XDA");
+    background-image: url("./piingg.gif");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
