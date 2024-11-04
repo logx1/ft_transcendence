@@ -10,6 +10,13 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
 
     name11 = "game1"
     name22 = "game2"
+
+    def get_cookie(self, key):
+        cookies = self.scope.get('cookies')
+        if not cookies:
+            return None
+        value = cookies.get(key)
+        return value
      
     async def connect(self):
         cookies = self.scope['cookies']
@@ -19,7 +26,11 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
         if not token:
             await self.close()
             return
-        print(cookies)
+        try:
+            username = self.get_cookie('username')
+            print("extract the user name : " + str(username))
+        except AttributeError:
+            print("Error: 'self' object has no attribute 'get_cookie'")
 
         query_string = self.scope['query_string'].decode()
         query_params = parse_qs(query_string)
