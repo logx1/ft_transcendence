@@ -8,6 +8,8 @@ import { load_settings } from './components/settings.js';
 import { load_profile } from './components/Profile.js';
 import { load_welcome } from './components/welcome.js';
 import { load_chat } from './components/chat.js';
+import { load_newhome } from './components/new_home.js';
+import { load_sidebar } from './components/sidebar.js';
 
 
 
@@ -60,9 +62,15 @@ async function fetchProfile() {
         // load_profile();
 
 
-        history.pushState(null, "title 1", "#chat");
-        document.body.innerHTML = `<chat-elements></chat-elements>`;
-        load_chat();
+        // history.pushState(null, "title 1", "#chat");
+        // document.body.innerHTML = `<chat-elements></chat-elements>`;
+        // load_chat();
+        // history.pushState(null, "title 1", "#sidebar");
+        document.body.innerHTML = `<sidebar-elements></sidebar-elements>`;
+        load_sidebar();
+        history.pushState(null, "title 1", "#newhome");
+        document.body.innerHTML = `<newhome-elements></newhome-elements>`;
+        load_newhome();
 
 
     }
