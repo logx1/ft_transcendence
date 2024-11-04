@@ -6,6 +6,7 @@ import { load_local_game } from './components/local_game.js';
 import { load_online_game } from './components/online_game.js';
 import { load_settings } from './components/settings.js';
 import { load_profile } from './components/Profile.js';
+import { load_welcome } from './components/welcome.js';
 
 
 
@@ -29,10 +30,13 @@ async function fetchProfile() {
     // console.log(lol);
     if (lol.detail == "Unauthenticated") {
         console.log(lol.detail);
-       console.log("logged in");
-        history.pushState(null, "title 1", "#login");
-        document.body.innerHTML = `<login-elements></login-elements>`;
-        load_login();
+        console.log("logged in");
+        // history.pushState(null, "title 1", "#login");
+        // document.body.innerHTML = `<login-elements></login-elements>`;
+        // load_login();
+        history.pushState(null, "title 1", "#welcome");
+        document.body.innerHTML = `<welcome-elements></welcome-elements>`;
+        load_welcome();
         console.log("not logged in");
         
     }else{
