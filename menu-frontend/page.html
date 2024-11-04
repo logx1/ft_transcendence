@@ -10,6 +10,23 @@
     <title>Menu</title>
 </head>
 <body>
+    <div class="head-container">
+        <div class="lang-mode-container">
+            <div class="lang-container">
+                <div class="select-lang" onclick="lang_select()" id="select-lang"></div>
+                <div class="lang-option" style="display: none;" onclick="changeLang()" id="lang-option">
+                    <div class="lng-img"></div>
+                    <ul>
+                        <li><a href="?lang=fr"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h1 class="welcome-txt" id="welcome-txt">Welcome!👋</h1>
+        <button class="start-playing" id="start-playing">
+            <img src="./icons/ping-pongg.svg" class="ping-image">
+            </button>
+    </div>
     <div class="sidebar-container">
         <div class="small-sidebar-container">
             <button class="small-sidebar-icon"></button>
@@ -36,12 +53,15 @@
             </div> 
         </div>
     </div>
-    <div class="head-container">
-        <h1 class="welcome-txt">Welcome, username!</h1>
-        <button class="start-playing">
-            <img src="./icons/ping-pongg.svg" class="ping-image">
-            Start Playing</button>
+    <div class="logoutpop-container" style="display: none;">
+        <div class="logoutpop-box">
+                <p class="logoutpop-text" id="logoutpop-tex">are you sure you want to logout?</p>
+            <div class="update-cancel-logout">
+                <button class="cancel-log" id="cancel-log">No</button>
+                <button class="enter-log" id="enter-log">Yes</button>
+            </div>
+        </div>
     </div>
-
 </body>
+<script src="./css/script.js"></script>
 </html>

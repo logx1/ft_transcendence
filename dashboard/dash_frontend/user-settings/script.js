@@ -493,7 +493,6 @@ document.querySelector('.update-cancel-delete > .cancel-del').addEventListener('
 
 /////////////////////////
 
-// Assuming you have a button with the id 'deleteButton'
 document.getElementById('enter-del').addEventListener('click', delUserr);
 
 function delUserr(){
@@ -504,10 +503,8 @@ function delUserr(){
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        // Handle the response here. You might want to get the JSON data by calling response.json()
     })
     .catch(error => {
-        // Handle the error here
         console.error('There has been a problem with your fetch operation:', error);
     });
 }
