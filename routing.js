@@ -1,6 +1,6 @@
 import { load_register } from './components/register.js';
 import { load_login } from './components/login.js';
-import { load_home } from './components/home.js';
+// import { load_home } from './components/home.js';
 import { select_game } from './components/select_game.js';
 import { load_local_game } from './components/local_game.js';
 import { load_online_game } from './components/online_game.js';
@@ -52,9 +52,9 @@ async function fetchProfile() {
         // history.pushState(null, "title 1", "#home");
         // document.body.innerHTML = `<home-elements></home-elements>`;
         // load_home();
-        // history.pushState(null, "title 1", "#sittings");
-        // document.body.innerHTML = `<settingss-elements></settingss-elements>`;
-        // load_settings();
+        history.pushState(null, "title 1", "#sittings");
+        document.body.innerHTML = `<settingss-elements></settingss-elements>`;
+        load_settings();
 
 
         // history.pushState(null, "title 1", "#profile");
@@ -65,9 +65,6 @@ async function fetchProfile() {
         // history.pushState(null, "title 1", "#chat");
         // document.body.innerHTML = `<chat-elements></chat-elements>`;
         // load_chat();
-        // history.pushState(null, "title 1", "#sidebar");
-        document.body.innerHTML = `<sidebar-elements></sidebar-elements>`;
-        load_sidebar();
         history.pushState(null, "title 1", "#newhome");
         document.body.innerHTML = `<newhome-elements></newhome-elements>`;
         load_newhome();
@@ -84,10 +81,6 @@ async function fetchProfile() {
 //     // document.body.innerHTML = `<login-elements></login-elements>`;
 //     // load_login();
     
-
-    
-
-
 
 window.select_games = function() {
     console.log("select games");
@@ -110,9 +103,9 @@ function hashChange() {
         document.body.innerHTML = `<login-elements></login-elements>`;
         load_login();
     }
-    if(window.location.hash == "#home"){
-        history.pushState(null, "title 1", "#home");
-        document.body.innerHTML = `<home-elements></home-elements>`;
+    if(window.location.hash == "#newhome"){
+        history.pushState(null, "title 1", "#newhome");
+        document.body.innerHTML = `<newhome-elements></newhome-elements>`;
         load_home();
     }
 
@@ -134,7 +127,24 @@ function hashChange() {
         document.body.innerHTML = `<game-online></game-online>`;
         load_online_game();
     }
+    if(window.location.hash == "#sittings"){
+        history.pushState(null, "title 1", "#sittings");
+        document.body.innerHTML = `<settingss-elements></settingss-elements>`;
+        load_settings();
+    }
+    if(window.location.hash == "#chat"){
+        history.pushState(null, "title 1", "#chat");
+        document.body.innerHTML = `<chat-elements></chat-elements>`;
+        load_chat();
+    }
 
+}
+
+window.go_to_select_game = function()
+{
+    history.pushState(null, "title 1", "#select_game");
+    document.body.innerHTML = `<select-game></select-game>`;
+    select_game();
 }
 
 window.go_to_register = function() {
@@ -146,6 +156,21 @@ window.go_to_login = function() {
     history.pushState(null, "title 1", "#login");
     document.body.innerHTML = `<login-elements></login-elements>`;
     load_login();
+}
+window.go_to_settings = function() {
+    history.pushState(null, "title 1", "#sittings");
+    document.body.innerHTML = `<settingss-elements></settingss-elements>`;
+    load_settings();
+}
+window.go_to_profile = function() {
+    history.pushState(null, "title 1", "#profile");
+    document.body.innerHTML = `<profile-elements></profile-elements>`;
+    load_profile();
+}
+window.go_to_chat = function() {
+    history.pushState(null, "title 1", "#chat");
+    document.body.innerHTML = `<chat-elements></chat-elements>`;
+    load_chat();
 }
 window.play_local = function() {
     history.pushState(null, "title 1", "#local_game");
