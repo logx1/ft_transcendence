@@ -23,27 +23,19 @@ from django.utils.http import urlsafe_base64_decode
 from django.core.mail import send_mail
 from rest_framework.decorators import api_view
 from django.http import HttpRequest
+import random
 
-@api_view(['GET', 'POST'])
-def email_send(request):
-    try:
-        current_site = get_current_site(request._request if hasattr(request, '_request') else request)
-        encoded_site = urlsafe_base64_encode(force_bytes('lol'))
-        
-        if request is not None:
-            send_mail(
-                'Hello My Lol from ' + current_site.domain,  # Subject
-                'Here is the message. Encoded site: '+ 'http://127.0.0.1:8000/api/email/activate/' + encoded_site,  # Message
-                'eloualy73@gmail.com',  # From email
-                ['abdel-ou@student.1337.ma'],  # To email
-                fail_silently=False,
-            )
-        response_data = {'message': 'Email sent successfully'}
-    except Exception as e:
-        response_data = {'message': 'Failed to send email', 'error': str(e)}
+def generate_verification_code():
+    return str(random.randint(100000, 999999))
 
-    return Response(response_data)
-
+def email_send(email, virefication_code, username):
+    send_mail(
+        subject='Hello My Lol from ',
+        message='the virefication_code is : ' + str(virefication_code) + ' for the user ' + str(username),
+        from_email='eloualy73@gmail.com',  # From email
+        recipient_list=[email],  # To email
+        fail_silently=False,
+    )
 @api_view(['GET', 'POST'])
 def email_activate(request, code):
     the_code = code
@@ -83,6 +75,17 @@ class LoginViews(APIView):
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password')
         
+        # i whant to send email to the user using the email_send function
+        # virefication_code = 123456
+        # i whant to genarate a virefication_code and send it to the user email compose from 6 digits random number
+
+        if user.two_factor_auth == False:
+            virefication_code = generate_verification_code()
+            user.two_factor_auth_code = virefication_code
+            user.save()
+            email_send(user.email, virefication_code, user.username)
+        
+
         refresh = RefreshToken.for_user(user)
         
         response = Response()

@@ -9,5 +9,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_intra = models.BooleanField(default=False)
+    two_factor_auth = models.BooleanField(default=False)
+    two_factor_auth_code = models.CharField(max_length=6, blank=True)
 
     REQUIRED_FIELDS = []
