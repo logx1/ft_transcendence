@@ -1,306 +1,314 @@
-*{
-    margin: 0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+* {
+    background-color: rgba(31, 30, 28, 1);
 }
 
-html {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-body
-{
-    font-family: Arial, sans-serif;
-    width: auto;
-    height: 100%;
-    background-image: url("./img/backround.svg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    backdrop-filter: blur(15px);
-}
-select-game
-{
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-.menu
-{
+body {
     display: flex;
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-	/* display: none; */
-}
-
-.selectgame
-{
-    margin: 0;
-    padding: 0;
-    max-width: 1200px;
-    display: flex;
     align-items: center;
-    justify-content: space-around;
-    flex-wrap: nowrap;
+    height: 100vh;
 
-}
-
-
-.selectgame > .card
-{
-    padding: 10px;
-    margin: 10px;
-
+    margin: 0;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5%;
-
-    backdrop-filter: blur(100px);
-    background-size: cover;
+    
 }
 
-.b_bot
-{
-    background-image: url("./img/bot_blor.jpg");
-   
-}
-.b_online
-{
-    background-image: url("./img/online_blor.png");
-}
-.b_local
-{
-    background-image: url("./img/local_blor.png");
-}
-.selectgame > .card > p
-{
-    font-size: 20px;
-    font-weight: bold;
-    margin: 10px;
-    color: rgb(226, 222, 222);
+.choose {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
     text-align: center;
-    background-color: #00000071;
-    border-radius: 10px;
-    padding: 10px;
+    color: #bb8c08;
+    background-color: transparent;
+    font-size: 30px;
+    font-family: 'Alfa Slab One', sans-serif;
+    font-weight: lighter;
 }
-.selectgame > .card > button
-{
-    width: 90%;
-    height: 50px;
-    background-color: #FFB71A;
-    border: solid 1px black;
-    border-radius: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    color: black;
+
+.quit {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: url("../sidebar/icons/cross.svg");
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    margin-right: 30px;
+    margin-top: 20px;
     cursor: pointer;
 }
-.selectgame > .card > button:hover
-{
-    background-color: #FFD700;
-}
 
-/* select player style start */
-.select_player
-{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	gap: 50px;
-	height: 100%;
-	width: 100%;
-	max-width: 1200px;
+.body-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
     position: relative;
-
+    border: #bb8b089d 2px solid;
+    border-radius: 20px;
 }
 
-.select_player > .player 
-{
-	width: 40%;
-	height: 40%;
-	/* background-color: #ff1a1a; */
-	border-radius: 10px;
+.body-container > .local-container {
     position: relative;
-    margin: 0;
-    padding: 0;
-    /* overflow: hidden; */
-}
-.select_player > .player > .player_1
-{
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-}
-.select_player > .player > .player_2
-{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+    display: flex;
+    width: 20%;
+    height: 60%;
+    margin: 2%;
+    border-radius: 20px;
+    border: #bb8b089d 3px solid;
+    box-shadow: 0px 4px 15px #705508;
+    border-bottom: #614905 10px solid;
     overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.select_player > .player > .player_2 > .img1
-{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
+.body-container > .local-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px #b58604;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ping-image {
     position: absolute;
-    left: 0;
-    top: -100%;
-    animation: player_animation_img1 0.25s ease 4;
+    filter: blur(4px);
     top: 0;
-    
-}
-.select_player > .player > .player_2 > .img2
-{
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
-    position: absolute;
-    left: 0;
-    top: -200%;
-    animation: player_animation_img2 0.25s ease 4;
-    top: 0%;
-    
-}
-
-
-.select_player > .player > .threangl
-{
-    border-radius: 10px;
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -125%) rotate(0deg);
-    animation: threanglanimation 1s ease infinite;
-}
-
-.select_player > .player > h3
-{
-    font-size: xx-large;
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-    color: rgb(226, 222, 222);
-    text-align: center;
-    background-color: #d89d1d;
-    border-radius: 0px 0px 10px 10px;
-    position: absolute;
-    width: 100%;
-    height: 20%;
-    top: 85%;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.select_player > .vs
-{
-    border-radius: 10px;
-    width: 25%;
-    height: 25%;
-    /* background-color: aqua; */
-    position: absolute;
     z-index: 1;
+}
+
+.local-container > .online-txt {
     display: flex;
+    position: absolute;
     align-items: center;
     justify-content: center;
-    animation: vsanimation 1s ease infinite;
+    top: 0;
+    left: 50%;
+    color: #bb8c08;
+    transform: translateX(-50%);
+    font-family: 'Alfa Slab One', sans-serif;
+    background-color: transparent;
+    font-size: 45px;
+    z-index: 1;
+    text-shadow: 1px 1px 0 #614905,
+                 2px 2px 0 #614905,
+                 3px 3px 0 #614905,
+                 4px 4px 0 #614905,
+                 5px 5px 0 #614905,
+                 6px 6px 0 #614905,
+                 7px 7px 0 #614905;
 }
 
-@keyframes vsanimation {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.07);
-    }
-    100% {
-        transform: scale(1);
-    }
+.local-container > .shape {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    z-index: -100;
 }
 
-
-@keyframes threanglanimation {
-    0% {
-        transform: translate(-50%, -125%);
-    }
-    50% {
-        transform: translate(-50%, -100%);
-    }
-
-    100% {
-        transform: translate(-50%, -125%);
-    }
+.local-hover {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    background-color: transparent;
+    filter: contrast(100%);
 }
 
-
-@keyframes player_animation_img1 {
-    0% {
-        top : -100%;
-        content: url("./img/player_1.svg");
-    }
-    25% {
-        top : 0%;
-        content: url("./img/player_2.svg");
-    }
-    50% {
-        top : 100%;
-        content: url("./img/player_3.svg");
-    }
-    75% {
-        top : 200%;
-        content: url("./img/player_4.svg");
-    }
-    100% {
-        top : 100%;
-        content: url("./img/player_5.svg");
-    }
-    
+.local-container > .online-par {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 12%;
+    left: 50%;
+    color: #252522;
+    transform: translateX(-50%);
+    font-family: 'Alfa Slab One', sans-serif;
+    background-color: transparent;
+    font-size: 14px;
+    z-index: 1;
 }
 
-@keyframes player_animation_img2 {
-    0% {
-        top : -100%;
-        content: url("./img/player_5.svg");
-    }
-    25% {
-        top : -200%;
-        content: url("./img/player_4.svg");
-    }
-    50% {
-        top : -100%;
-        content: url("./img/player_3.svg");
-    }
-    75% {
-        top : 0%;
-        content: url("./img/player_2.svg");
-    }
-    100% {
-        top : 0%;
-        content: url("./img/player_3.svg");
-    }
+/* //////////////// */
+
+.body-container > .online-container {
+    position: relative;
+    display: flex;
+    width: 20%;
+    height: 60%;
+    margin: 2%;
+    border-radius: 20px;
+    border: #bb8b089d 3px solid;
+    box-shadow: 0px 4px 15px #705508;
+    border-bottom: #614905 10px solid;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.body-container > .online-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px #b58604;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ping-image {
+    position: absolute;
+    filter: blur(4px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.online-container > .online-txt {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 50%;
+    color: #bb8c08;
+    transform: translateX(-50%);
+    font-family: 'Alfa Slab One', sans-serif;
+    background-color: transparent;
+    font-size: 45px;
+    z-index: 1;
+
+    text-shadow: 1px 1px 0 #614905,
+    2px 2px 0 #614905,
+    3px 3px 0 #614905,
+    4px 4px 0 #614905,
+    5px 5px 0 #614905,
+    6px 6px 0 #614905,
+    7px 7px 0 #614905;
+}
+
+.online-container > .shape {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    z-index: -100;
+}
+
+.online-hover {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    background-color: transparent;
+    filter: contrast(400%);
+}
+
+.online-container > .online-par {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 12%;
+    left: 50%;
+    color: #252522;
+    transform: translateX(-50%);
+    font-family: 'Alfa Slab One', sans-serif;
+    background-color: transparent;
+    font-size: 14px;
+    z-index: 1;
+}
+
+/* //////////////// */
+
+.body-container > .bot-container {
+    position: relative;
+    display: flex;
+    width: 20%;
+    height: 60%;
+    margin: 2%;
+    border-radius: 20px;
+    border: #bb8b089d 3px solid;
+    box-shadow: 0px 4px 15px #705508;
+    border-bottom: #614905 10px solid;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.body-container > .bot-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px #b58604;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ping-image {
+    position: absolute;
+    filter: blur(4px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.bot-container > .online-txt {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 50%;
+    color: #bb8c08;
+    transform: translateX(-50%);
+    font-family: 'Alfa Slab One', sans-serif;
+    background-color: transparent;
+    font-size: 45px;
+    z-index: 1;
+
+    text-shadow: 1px 1px 0 #614905,
+        2px 2px 0 #614905,
+        3px 3px 0 #614905,
+        4px 4px 0 #614905,
+        5px 5px 0 #614905,
+        6px 6px 0 #614905,
+        7px 7px 0 #614905;
+}
+
+.bot-container > .shape {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    z-index: -100;
+}
+
+.online-hover {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    background-color: transparent;
+    filter: contrast(400%);
+}
+
+.bot-container > .online-par {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 12%;
+    left: 50%;
+    color: #252522;
+    transform: translateX(-50%);
+    font-family: 'Alfa Slab One', sans-serif;
+    background-color: transparent;
+    font-size: 14px;
+    z-index: 1;
 }

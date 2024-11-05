@@ -52,9 +52,11 @@ async function fetchProfile() {
         // history.pushState(null, "title 1", "#home");
         // document.body.innerHTML = `<home-elements></home-elements>`;
         // load_home();
-        history.pushState(null, "title 1", "#sittings");
-        document.body.innerHTML = `<settingss-elements></settingss-elements>`;
+        history.pushState(null, "title 1", "#select_game");
+        document.body.innerHTML = `<select_game-elements></settingss-elements>`;
         load_settings();
+
+
 
 
         // history.pushState(null, "title 1", "#profile");
