@@ -6,7 +6,7 @@ class Profile extends HTMLElement {
     this.innerHTML = `
     <style>
     @import './dashboard/dash_frontend/user-profile/head.css';
-    @import './dashboard/dash_frontend/user-profile/sidebar.css';
+    @import '../styles/sidebar/sidebar.css';
     @import './dashboard/dash_frontend/user-profile/body.css';
 </style>
     <div class="head-container">
@@ -72,17 +72,25 @@ class Profile extends HTMLElement {
 </div>
 <div class="logo-container"></div>
 <div class="menu-container">
+<div class="user-home-container">
+            <button class="user-home-icon" onclick="go_to_newhome();"></button>
+            <button class="user-home-text" id="user-chat-text" onclick="go_to_newhome();">Home</button>
+        </div>
     <div class="user-chat-container">
-        <button class="user-chat-icon"></button>
-        <button class="user-chat-text">Chat</button>
+        <button class="user-chat-icon" onclick="go_to_chat();"></button>
+        <button class="user-chat-text" onclick="go_to_chat();">Chat</button>
     </div>
+    <div class="user-tr-container">
+            <button class="user-tr-icon" onclick="go_to_chat();"></button>
+            <button class="user-tr-text" id="user-chat-text" onclick="go_to_chat();">Tournament</button>
+        </div>
     <div class="user-settings-container">
-        <button class="user-settings-icon"></button>
-        <button class="user-settings-text">Settings</button>
+        <button class="user-settings-icon" onclick="go_to_settings();"></button>
+        <button class="user-settings-text" onclick="go_to_settings();">Settings</button>
     </div>
     <div class="user-profile-container">
-        <button class="user-profile-icon"></button>
-        <button class="user-profile-text">Profile</button>
+        <button class="user-profile-icon" onclick="go_to_profile();"></button>
+        <button class="user-profile-text" onclick="go_to_profile();">Profile</button>
     </div>
 </div>
 <div class="logout-wrapper">

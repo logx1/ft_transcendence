@@ -32,9 +32,17 @@ class newhome extends HTMLElement {
     </div>
     <div class="logo-container"></div>
     <div class="menu-container">
+    <div class="user-home-container">
+            <button class="user-home-icon" onclick="go_to_newhome();"></button>
+            <button class="user-home-text" id="user-chat-text" onclick="go_to_newhome();">Home</button>
+        </div>
         <div class="user-chat-container">
             <button class="user-chat-icon" onclick="go_to_chat();"></button>
             <button class="user-chat-text" id="user-chat-text" onclick="go_to_chat();">Chat</button>
+        </div>
+        <div class="user-tr-container">
+            <button class="user-tr-icon" onclick="go_to_chat();"></button>
+            <button class="user-tr-text" id="user-chat-text" onclick="go_to_chat();">Tournament</button>
         </div>
         <div class="user-settings-container">
             <button class="user-settings-icon" onclick="go_to_settings();"></button>

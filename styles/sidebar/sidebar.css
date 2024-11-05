@@ -91,6 +91,102 @@
         border-radius: 5%;
     }
 
+
+
+    /* --------------------------------------- */
+
+    .menu-container > .user-home-container {
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s ease;
+        height: 50px;
+        width: 90%;
+        padding: 9px;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .user-home-container > .user-home-icon {
+        background-image: url("./icons/home.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-size: contain;
+        cursor: pointer;
+        border: none;
+        width: 40px;
+        height: 30px;
+    }
+
+    .user-home-container > .user-home-text {
+        display: flex;
+        color: #696969;
+        font-family: 'Alfa Slab One', sans-serif;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        width: 45px;
+        height: 30px;
+    }
+
+    .menu-container > .user-home-container:hover {
+        background-color: #141212;
+        border-radius: 5%;
+    }
+
+    /* --------------------------------------- */
+
+
+
+
+      /* --------------------------------------- */
+
+      .menu-container > .user-tr-container {
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s ease;
+        height: 50px;
+        width: 90%;
+        padding: 9px;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .user-tr-container > .user-tr-icon {
+        background-image: url("./icons/tr.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-size: contain;
+        cursor: pointer;
+        border: none;
+        width: 40px;
+        height: 30px;
+    }
+
+    .user-tr-container > .user-tr-text {
+        display: flex;
+        color: #696969;
+        font-family: 'Alfa Slab One', sans-serif;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        width: 45px;
+        height: 30px;
+    }
+
+    .menu-container > .user-tr-container:hover {
+        background-color: #141212;
+        border-radius: 5%;
+    }
+
+    /* --------------------------------------- */
+
+
     .menu-container > .user-settings-container {
         display: flex;
         align-items: center;
@@ -291,6 +387,94 @@
         background-color: #141212;
         border-radius: 5%;
     }
+      /* --------------------------------------- */
+
+      .menu-container > .user-home-container {
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s ease;
+        height: 50px;
+        width: 90%;
+        padding: 9px;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .user-home-container > .user-home-icon {
+        background-image: url("./icons/home.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-size: contain;
+        cursor: pointer;
+        border: none;
+        width: 40px;
+        height: 30px;
+    }
+
+    .user-home-container > .user-home-text {
+        display: none;
+        color: #696969;
+        font-family: 'Alfa Slab One', sans-serif;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        width: 45px;
+        height: 30px;
+    }
+
+    .menu-container > .user-home-container:hover {
+        background-color: #141212;
+        border-radius: 5%;
+    }
+
+    /* --------------------------------------- */
+     /* --------------------------------------- */
+
+     .menu-container > .user-tr-container {
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s ease;
+        height: 50px;
+        width: 90%;
+        padding: 9px;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .user-tr-container > .user-tr-icon {
+        background-image: url("./icons/tr.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        background-size: contain;
+        cursor: pointer;
+        border: none;
+        width: 40px;
+        height: 30px;
+    }
+
+    .user-tr-container > .user-tr-text {
+        display: none;
+        color: #696969;
+        font-family: 'Alfa Slab One', sans-serif;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        width: 45px;
+        height: 30px;
+    }
+
+    .menu-container > .user-tr-container:hover {
+        background-color: #141212;
+        border-radius: 5%;
+    }
+
+    /* --------------------------------------- */
 
     .menu-container > .user-settings-container {
         display: flex;

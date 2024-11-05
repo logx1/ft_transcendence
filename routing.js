@@ -137,6 +137,11 @@ function hashChange() {
         document.body.innerHTML = `<chat-elements></chat-elements>`;
         load_chat();
     }
+    if(window.location.hash == "#profile"){
+        history.pushState(null, "title 1", "#profile");
+        document.body.innerHTML = `<profile-elements></profile-elements>`;
+        load_profile();
+    }
 
 }
 
@@ -185,6 +190,11 @@ window.play_online = function() {
 }
 window.intra = function() {
     window.location.href = "http://127.0.0.1:8001";
+}
+window.go_to_newhome = function() {
+    history.pushState(null, "title 1", "#newhome");
+    document.body.innerHTML = `<newhome-elements></newhome-elements>`;
+    load_newhome();
 }
 
 window.login = function() {
