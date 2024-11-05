@@ -33,15 +33,15 @@ class newhome extends HTMLElement {
     <div class="logo-container"></div>
     <div class="menu-container">
         <div class="user-chat-container">
-            <button class="user-chat-icon"></button>
+            <button class="user-chat-icon" onclick="go_to_chat();"></button>
             <button class="user-chat-text" id="user-chat-text" onclick="go_to_chat();">Chat</button>
         </div>
         <div class="user-settings-container">
-            <button class="user-settings-icon"></button>
+            <button class="user-settings-icon" onclick="go_to_settings();"></button>
             <button class="user-settings-text" id="user-settings-text" onclick="go_to_settings();">Settings</button>
         </div>
         <div class="user-profile-container">
-            <button class="user-profile-icon"></button>
+            <button class="user-profile-icon" onclick="go_to_profile();"></button>
             <button class="user-profile-text" id="user-profile-text" onclick="go_to_profile();">Profile</button>
         </div>
     </div>
