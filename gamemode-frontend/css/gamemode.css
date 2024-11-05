@@ -89,12 +89,19 @@ body {
     justify-content: center;
     top: 0;
     left: 50%;
-    color: #252522;
+    color: #bb8c08;
     transform: translateX(-50%);
     font-family: 'Alfa Slab One', sans-serif;
     background-color: transparent;
     font-size: 45px;
     z-index: 1;
+    text-shadow: 1px 1px 0 #614905,
+                 2px 2px 0 #614905,
+                 3px 3px 0 #614905,
+                 4px 4px 0 #614905,
+                 5px 5px 0 #614905,
+                 6px 6px 0 #614905,
+                 7px 7px 0 #614905;
 }
 
 .local-container > .shape {
@@ -110,7 +117,7 @@ body {
     height: 24px;
     margin-right: 8px;
     background-color: transparent;
-    filter: contrast(400%);
+    filter: contrast(100%);
 }
 
 .local-container > .online-par {
@@ -169,12 +176,20 @@ body {
     justify-content: center;
     top: 0;
     left: 50%;
-    color: #252522;
+    color: #bb8c08;
     transform: translateX(-50%);
     font-family: 'Alfa Slab One', sans-serif;
     background-color: transparent;
     font-size: 45px;
     z-index: 1;
+
+    text-shadow: 1px 1px 0 #614905,
+    2px 2px 0 #614905,
+    3px 3px 0 #614905,
+    4px 4px 0 #614905,
+    5px 5px 0 #614905,
+    6px 6px 0 #614905,
+    7px 7px 0 #614905;
 }
 
 .online-container > .shape {
@@ -249,12 +264,20 @@ body {
     justify-content: center;
     top: 0;
     left: 50%;
-    color: #252522;
+    color: #bb8c08;
     transform: translateX(-50%);
     font-family: 'Alfa Slab One', sans-serif;
     background-color: transparent;
     font-size: 45px;
     z-index: 1;
+
+    text-shadow: 1px 1px 0 #614905,
+        2px 2px 0 #614905,
+        3px 3px 0 #614905,
+        4px 4px 0 #614905,
+        5px 5px 0 #614905,
+        6px 6px 0 #614905,
+        7px 7px 0 #614905;
 }
 
 .bot-container > .shape {
