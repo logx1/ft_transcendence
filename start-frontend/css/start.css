@@ -72,8 +72,8 @@
 }
 
 .head-container > .start-playing:hover {
-    transform: translateY(-5px); /* Slightly lift the button */
-    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
 }
 
 .ping-image {
@@ -82,4 +82,3 @@
     vertical-align: middle;
     background-color: transparent;
 }
-
