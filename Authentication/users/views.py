@@ -35,7 +35,7 @@ def email_send(request):
                 'Hello My Lol from ' + current_site.domain,  # Subject
                 'Here is the message. Encoded site: '+ 'http://127.0.0.1:8000/api/email/activate/' + encoded_site,  # Message
                 'eloualy73@gmail.com',  # From email
-                ['eloualy000@gmail.com'],  # To email
+                ['abdel-ou@student.1337.ma'],  # To email
                 fail_silently=False,
             )
         response_data = {'message': 'Email sent successfully'}
@@ -103,7 +103,7 @@ class UserViews(APIView):
     def get(self,request):
         token = request.COOKIES.get('access')
 
-        # print(request.COOKIES)
+        print(request.COOKIES)
         if not token:
             raise AuthenticationFailed('Unauthenticated')
         

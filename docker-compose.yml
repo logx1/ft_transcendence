@@ -16,37 +16,37 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres_db
-  match_history:
-    build: ./match_history
-    image: match_history
-    container_name: match_history
-    ports:
-      - "8000:8000"
-    volumes:
-      - matches-volume:/match_history
-  authentication:
-    build: ./authentication
-    image: authentication
-    container_name: authentication
-    ports:
-      - "8001:8001"
-    volumes:
-      - authentication-volume:/authentication
-    depends_on:
-      - match_history
-      - db
-
-  # gamebackend:
-  #   build: ./gamebackend
-  #   image: gamebackend
-  #   container_name: gamebackend
+  # match_history:
+  #   build: ./match_history
+  #   image: match_history
+  #   container_name: match_history
   #   ports:
-  #     - "8002:8002"
+  #     - "8000:8000"
   #   volumes:
-  #     - game:/gamebackend
+  #     - matches-volume:/match_history
+  # authentication:
+  #   build: ./authentication
+  #   image: authentication
+  #   container_name: authentication
+  #   ports:
+  #     - "8001:8001"
+  #   volumes:
+  #     - authentication-volume:/authentication
   #   depends_on:
   #     - match_history
-  #     - authentication
+  #     - db
+
+  gamebackend:
+    build: ./gamebackend
+    image: gamebackend
+    container_name: gamebackend
+    ports:
+      - "8002:8002"
+    volumes:
+      - game:/gamebackend
+    depends_on:
+      - match_history
+      - authentication
 
 volumes:
   matches-volume:
