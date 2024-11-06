@@ -4,17 +4,6 @@
     background-color: rgba(31, 30, 28, 1);
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-
-    margin: 0;
-    position: relative;
-    
-}
-
 .choose {
     position: absolute;
     top: 20px;
@@ -42,11 +31,19 @@ body {
     cursor: pointer;
 }
 
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
 .body-container {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    height: 100vh;
+    width: 80%;
+    height: 80vh;
     position: relative;
     border: #bb8b089d 2px solid;
     border-radius: 20px;
@@ -55,8 +52,8 @@ body {
 .body-container > .local-container {
     position: relative;
     display: flex;
-    width: 20%;
-    height: 60%;
+    width: 30%;
+    height: 90%;
     margin: 2%;
     border-radius: 20px;
     border: #bb8b089d 3px solid;
@@ -142,8 +139,8 @@ body {
 .body-container > .online-container {
     position: relative;
     display: flex;
-    width: 20%;
-    height: 60%;
+    width: 30%;
+    height: 90%;
     margin: 2%;
     border-radius: 20px;
     border: #bb8b089d 3px solid;
@@ -230,8 +227,8 @@ body {
 .body-container > .bot-container {
     position: relative;
     display: flex;
-    width: 20%;
-    height: 60%;
+    width: 30%;
+    height: 90%;
     margin: 2%;
     border-radius: 20px;
     border: #bb8b089d 3px solid;
