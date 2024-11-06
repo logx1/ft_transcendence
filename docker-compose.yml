@@ -16,14 +16,14 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres_db
-  match_history:
-    build: ./match_history
-    image: match_history
-    container_name: match_history
-    ports:
-      - "8000:8000"
-    volumes:
-      - matches-volume:/match_history
+  # match_history:
+  #   build: ./match_history
+  #   image: match_history
+  #   container_name: match_history
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - matches-volume:/match_history
   authentication:
     build: ./authentication
     image: authentication

@@ -12,7 +12,7 @@ export function select_game() {
         @import './styles/select_game/style.css';
         // @import '../game/css/game_style.css';
         </style>
-        <div class="quit"></div>
+        <div class="quit" onclick="go_to_newhome();"></div>
         <h1 class="choose">Game Modes</h1>
         <div class="wrapper">
             <div class="body-container">

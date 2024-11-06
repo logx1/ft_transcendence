@@ -49,7 +49,7 @@ function updateStatus() {
     localStorage.setItem('status', txtarea);
 
     const data = { status: txtarea }
-    fetch(`http://127.0.0.1:8080/user-info/${username}/`, {
+    fetch(`http://127.0.0.1:8004/user-info/${username}/`, {
         method: 'PUT',
         headers: {
             'Content-Type':'application/json',

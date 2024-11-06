@@ -132,7 +132,7 @@ class settings extends HTMLElement {
     `;
 }
 connectedCallback() {
-    fetch(`http://10.11.4.1:8000/user-setting/${ussrr}/`, {
+    fetch(`http://127.0.0.1:8004/user-setting/iscreamm_014/`, {
         method:'GET',
     })
     
