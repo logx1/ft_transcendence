@@ -265,11 +265,23 @@ class Profile extends HTMLElement {
     })
     .then(response => response.json())
     .then(data => {
-        fetch(`http://127.0.0.1:8004/user-setting/iscreamm_014/`, {
+        fetch(`http://127.0.0.1:8000/matches/user/${data.username}/`, {
+    method: 'GET',
+    credentials: 'include',
+    })
+    .then(response => response.json())
+    .then(data => {
+    document.getElementById('no-matches-container').style.display = 'none';
+    document.getElementById('content-container').style.display = 'flex';
+    addData(data);
+})
+.catch(error => {
+    console.error('Error fetching data', error);
+})
+        fetch(`http://127.0.0.1:8004/user-setting/${data.username}/`, {
             method: 'GET',
             // credentials: 'include',
             })
-        
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Server is offline');
@@ -295,19 +307,7 @@ class Profile extends HTMLElement {
         
     })
    
-    fetch('http://127.0.0.1:8000/matches/user/logx/', {
-    method: 'GET',
-    credentials: 'include',
-    })
-    .then(response => response.json())
-    .then(data => {
-    document.getElementById('no-matches-container').style.display = 'none';
-    document.getElementById('content-container').style.display = 'flex';
-    addData(data);
-})
-.catch(error => {
-    console.error('Error fetching data', error);
-})
+    
 }
 }
 

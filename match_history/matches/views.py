@@ -11,9 +11,11 @@ import requests
 
 @api_view(['GET'])
 def getData(request,username):
-    print(username)
+    # print(username)
     token = request.COOKIES.get('access')
-    url = 'http://127.0.0.1:8001/api/user/'
+    # i have this in docker-compose environment HOST_MACHINE_IP: ${HOST_MACHINE_IP}
+    # url = 'http://127.0.0.1:8001/api/user/'
+    url = 'http://authentication:8001/api/user/'
     #i whant to include the token in the header as cookie
     cookies = {
         'access': token
@@ -25,7 +27,7 @@ def getData(request,username):
     if response.status_code != 200:
         return Response({'error': 'Invalid token'}, status=400)
     # print(response.json())
-    print(response.json())
+    # print(response.json())
     data = Match.objects.filter(Q(player1=username) | Q(player2=username)).order_by('-id')
     serializer = MatchSerializer(data, many=True)
     return Response(serializer.data)

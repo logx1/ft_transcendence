@@ -13,17 +13,19 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: postgres_db
-  # match_history:
-  #   build: ./match_history
-  #   image: match_history
-  #   container_name: match_history
-  #   ports:
-  #     - "8000:8000"
-  #   volumes:
-  #     - matches-volume:/match_history
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+  match_history:
+    build: ./match_history
+    image: match_history
+    container_name: match_history
+    ports:
+      - "8000:8000"
+    volumes:
+      - matches-volume:/match_history
+    environment:
+      HOST_MACHINE_IP: ${HOST_MACHINE_IP}
   authentication:
     build: ./authentication
     image: authentication
@@ -35,6 +37,8 @@ services:
     depends_on:
       - match_history
       - db
+    environment:
+      HOST_MACHINE_IP: ${HOST_MACHINE_IP}
 
   gamebackend:
     build: ./gamebackend
@@ -47,6 +51,8 @@ services:
     depends_on:
       - match_history
       - authentication
+    environment:
+      HOST_MACHINE_IP: ${HOST_MACHINE_IP}
 
 volumes:
   matches-volume:

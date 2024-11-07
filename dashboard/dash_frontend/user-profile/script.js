@@ -262,7 +262,7 @@ function addData(data) {
     document.querySelector('.stats-container').style.display = 'none';
 }
 
-// fetch('http://10.11.4.1:8000/matches/user/fbelahse/', {
+// fetch('http://10.12.3.5:8000/matches/user/fbelahse/', {
 //     method: 'GET',
 // })
 // .then(response => response.json())

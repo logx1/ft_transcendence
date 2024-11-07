@@ -14,6 +14,8 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+import os
+HOST_MACHINE_IP = os.getenv('HOST_MACHINE_IP')
 
 
 import environ
@@ -92,7 +94,7 @@ DATABASES = {
         'NAME': 'postgres_db',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '10.11.4.1',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }

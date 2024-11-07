@@ -126,7 +126,7 @@ function verify() {
         formData.append('password', document.getElementById('rp_pass').value);
     }
 
-    fetch(`http://10.11.4.1:8000/user-setting/${username}/`, {
+    fetch(`http://10.12.3.5:8000/user-setting/${username}/`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -206,7 +206,7 @@ function verify_info() {
         formData.append('username', userInp);
     }
 
-    fetch(`http://10.11.4.1:8000/user-setting/${ussrr}/`, {
+    fetch(`http://10.12.3.5:8000/user-setting/${ussrr}/`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -239,14 +239,14 @@ function updateData(data){
     fname.textContent = data.full_name;
     uname.textContent = data.username;
     pass.textContent = data.password;
-    img_.style.backgroundImage = 'url('+ "http://10.11.4.1:8000" + data.profile_picture + ')';
+    img_.style.backgroundImage = 'url('+ "http://10.12.3.5:8000" + data.profile_picture + ')';
     ol_pass = data.password;
    
     fullname_.appendChild(fname);
     username_.appendChild(uname);
 }
 
-// fetch(`http://10.11.4.1:8000/user-setting/${ussrr}/`, {
+// fetch(`http://10.12.3.5:8000/user-setting/${ussrr}/`, {
 //     method:'GET',
 // })
 //     .then(response => response.json())
