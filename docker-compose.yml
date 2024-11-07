@@ -53,6 +53,20 @@ services:
       - authentication
     environment:
       HOST_MACHINE_IP: ${HOST_MACHINE_IP}
+  
+  dashboard:
+    build: ./dashboard/dash_env
+    image: dashboard
+    container_name: dashboard
+    ports:
+      - "8004:8004"
+    volumes:
+      - dashboard-volume:/dashboard/dash_env
+    depends_on:
+      - match_history
+      - db
+    environment:
+      HOST_MACHINE_IP: ${HOST_MACHINE_IP}
 
 volumes:
   matches-volume:
@@ -70,4 +84,9 @@ volumes:
       type: "none"
       o: "bind"
       device: "/Users/abdel-ou/Desktop/ft_transcendence/gamebackend"
+  dashboard-volume:
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/Users/abdel-ou/Desktop/ft_transcendence/dashboard/dash_env"
   
