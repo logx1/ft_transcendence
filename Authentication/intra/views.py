@@ -62,6 +62,14 @@ def callback(request):
     response.set_cookie(key='refresh', value=str(refresh), httponly=True, samesite=None)
     response.set_cookie(key='access', value=str(refresh.access_token), httponly=True, samesite=None)
     response.set_cookie(key='username', value=str(login), httponly=True, samesite=None)
+
+    url = 'http://dashboard:8004/api/users/'
+    datax = {
+        'username': login,
+        'full_name': login
+    }
+    responsex = requests.post(url, data=datax)
+    print(responsex.json())
     return response
 
 def get_user_profile(access_token):

@@ -65,6 +65,7 @@ services:
     depends_on:
       - match_history
       - db
+    restart: always
     environment:
       HOST_MACHINE_IP: ${HOST_MACHINE_IP}
 

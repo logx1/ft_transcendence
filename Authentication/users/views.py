@@ -24,6 +24,7 @@ from django.core.mail import send_mail
 from rest_framework.decorators import api_view
 from django.http import HttpRequest
 import random
+import requests
 
 def generate_verification_code():
     return str(random.randint(100000, 999999))
@@ -75,9 +76,15 @@ class LoginViews(APIView):
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password')
         
-        # i whant to send email to the user using the email_send function
-        # virefication_code = 123456
-        # i whant to genarate a virefication_code and send it to the user email compose from 6 digits random number
+        # create user info by sending post request to the user service including {"username": "fbelahse","full_name": "fbelahse el-fbelahse"}
+        url = 'http://dashboard:8004/api/users/'
+        data = {
+            'username': username,
+            'full_name': username
+        }
+        response = requests.post(url, data=data)
+        print(response.json())
+
 
         if user.two_factor_auth == False:
             virefication_code = generate_verification_code()

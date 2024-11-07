@@ -132,19 +132,27 @@ class settings extends HTMLElement {
     `;
 }
 connectedCallback() {
-    fetch(`http://127.0.0.1:8004/user-setting/iscreamm_014/`, {
-        method:'GET',
+    fetch('http://127.0.0.1:8001/api/user/', {
+        method: 'GET',
+        credentials: 'include',
     })
-    
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('fullname_txt').value = data.full_name;
-            document.getElementById('username_txt').value = data.username;
-            updateData(data);
+    .then(response => response.json())
+    .then(data => {
+        fetch(`http://127.0.0.1:8004/user-setting/${data.username}/`, {
+            method:'GET',
         })
-        .catch(error => {
-            console.error('Error fetching data', error);
-    });
+        
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('fullname_txt').value = data.full_name;
+                document.getElementById('username_txt').value = data.username;
+                updateData(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data', error);
+        });
+    })
+   
 }
 
 }

@@ -83,6 +83,7 @@ settingss-elements {
 
 span {
     display: inline-flex;
+    background-color: transparent;
     padding: .2em;
     height: 2em;
 }
