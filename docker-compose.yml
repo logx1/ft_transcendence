@@ -54,19 +54,19 @@ services:
     environment:
       HOST_MACHINE_IP: ${HOST_MACHINE_IP}
   
-  dashboard:
-    build: ./dashboard/dash_env
-    image: dashboard
-    container_name: dashboard
-    ports:
-      - "8004:8004"
-    volumes:
-      - dashboard-volume:/dashboard/dash_env
-    depends_on:
-      - match_history
-      - db
-    environment:
-      HOST_MACHINE_IP: ${HOST_MACHINE_IP}
+  # dashboard:
+  #   build: ./dashboard/dash_env
+  #   image: dashboard
+  #   container_name: dashboard
+  #   ports:
+  #     - "8004:8004"
+  #   volumes:
+  #     - dashboard-volume:/dashboard/dash_env
+  #   depends_on:
+  #     - match_history
+  #     - db
+  #   environment:
+  #     HOST_MACHINE_IP: ${HOST_MACHINE_IP}
 
 volumes:
   matches-volume:
