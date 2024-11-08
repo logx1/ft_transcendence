@@ -70,14 +70,13 @@ class settings extends HTMLElement {
         </div>
     </div>
     <div class="change-name-container">
-        <div class="first-name">Full Name:</div>
+        <div class="first-name">First Name:</div>
         <div class="name-area-wrapper">
             <img src="./dashboard/dash_frontend/icons/profile.svg" alt="icon" class="name-icon">
             <textarea class="name-area" id="fullname_txt"></textarea>
         </div>
         <div class="username">
-            <p>Username:</p>
-            <p1 id="p1_user">Username aleady exists.</p1>
+            <p>Last Name:</p>
         </div>
         <div class="username-wrapper">
             <img src="./dashboard/dash_frontend/icons/online-hover.svg" alt="icon" class="name-icon">
@@ -144,8 +143,12 @@ connectedCallback() {
         
             .then(response => response.json())
             .then(data => {
-                document.getElementById('fullname_txt').value = data.full_name;
-                document.getElementById('username_txt').value = data.username;
+                let full_name = data.full_name.split(' ');
+                let first_name = full_name[0];
+                let last_name = full_name[1];
+
+                document.getElementById('fullname_txt').value = first_name;
+                document.getElementById('username_txt').value = last_name;
                 updateData(data);
             })
             .catch(error => {

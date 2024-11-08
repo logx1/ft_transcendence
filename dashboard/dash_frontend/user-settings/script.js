@@ -1,5 +1,5 @@
 
-    let ussrr = "logx"
+    let ussrr = "fbelahse"
 
 // window.onload = function() {
 //     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -174,24 +174,6 @@ function loadFile(event) {
     }
 }
 
-function TriggerErrorUsername() {
-    const usr = document.querySelector('.change-name-container > .username');
-    const usr_wrap = document.querySelector('.username-wrapper');
-    document.querySelector('p1').style.display = 'inline';
-    document.querySelector('p').style.color = 'rgba(152, 0, 0, 0.773)';
-
-    usr.style.animation = "glitch ease-out 0.20s 3";
-    usr_wrap.style.animation = "glitch ease-out 0.20s 3";
-
-    usr.addEventListener('animationend', function() {
-        usr.style.animation = 'none';
-        document.querySelector('p').style.color = '#bb8c08';
-    }, {once: true});
-    usr_wrap.addEventListener('animationend', function() {
-        usr_wrap.style.animation = 'none';
-    }, {once: true});
-}
-
 function verify_info() {
     var formData = new FormData();
 
@@ -199,12 +181,11 @@ function verify_info() {
     formData.append('full_name', document.getElementById('fullname_txt').value);
     formData.append('password', document.getElementById('old_pass').value);
 
-    const userInp = document.getElementById('username_txt').value;
-    const userStrd = localStorage.getItem('username');
-
-    if (userInp !== userStrd){
-        formData.append('username', userInp);
-    }
+    const firstName = document.getElementById('fullname_txt').value;
+    const lastName = document.getElementById('username_txt').value;
+    
+    const fullName = `${firstName} ${lastName}`
+    formData.append('full_name', fullName)
 
     fetch(`http://127.0.0.1:8004/user-setting/${ussrr}/`, {
         method: 'PUT',
@@ -220,7 +201,6 @@ function verify_info() {
     })
     .catch((error) => {
         console.log(error);
-        TriggerErrorUsername();
     });
 }
 
