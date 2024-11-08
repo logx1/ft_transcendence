@@ -184,7 +184,7 @@
 /* //////////LOGOUT_MODAL///////// */
 
 .logoutpop-container {
-    display: none;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;

@@ -53,7 +53,7 @@ class settings extends HTMLElement {
             <button class="user-profile-text" onclick="go_to_profile();">Profile</button>
         </div>
     </div>
-    <div class="logout-wrapper">
+    <div class="logout-wrapper" onclick="logout_con()">
         <div class="logout-container"> 
             <button class="logout-icon"></button>
             <button class="logout-text">Log out</button>
@@ -124,10 +124,15 @@ class settings extends HTMLElement {
         </div>
     </div>
 </div>
-<script>
-
-</script>
-
+<div class="logoutpop-container" style="display: none;">
+        <div class="logoutpop-box">
+                <p class="logoutpop-text" id="logoutpop-tex">are you sure you want to logout?</p>
+            <div class="update-cancel-logout">
+                <button class="cancel-log" id="cancel-log" onclick="closeLogOutBox()">No</button>
+                <button class="enter-log" id="enter-log" onclick="logout()">Yes</button>
+            </div>
+        </div>
+    </div>
     `;
 }
 connectedCallback() {

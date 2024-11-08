@@ -1,5 +1,5 @@
 
-    let ussrr = "fbelahse"
+    let ussrr = "abdel-ou"
 
 // window.onload = function() {
 //     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -126,6 +126,8 @@ function verify() {
         formData.append('password', document.getElementById('rp_pass').value);
     }
 
+  
+
     fetch(`http://10.12.3.5:8000/user-setting/${username}/`, {
         method: 'PUT',
         headers: {
@@ -187,7 +189,11 @@ function verify_info() {
     const fullName = `${firstName} ${lastName}`
     formData.append('full_name', fullName)
 
-    fetch(`http://127.0.0.1:8004/user-setting/${ussrr}/`, {
+    fetch('http://127.0.0.1:8001/api/user/', {method: 'get', credentials: 'include'})
+    .then(response => response.json())
+    .then(data => {
+        
+        fetch(`http://127.0.0.1:8004/user-setting/${data.username}/`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -202,6 +208,11 @@ function verify_info() {
     .catch((error) => {
         console.log(error);
     });
+
+
+    })
+
+    
 }
 
 function updateData(data){
@@ -245,5 +256,25 @@ function updateData(data){
 // });
 
 
-    
+function logout_con(){
+    document.querySelector('.logoutpop-container > .logoutpop-box').classList.add('logoutpop-box-animate-up');
+    document.querySelector('.logoutpop-container').style.display = 'flex';
+}
 
+
+function closeLogOutBox() {
+    document.querySelector('.logoutpop-container').style.display = 'none';
+}
+
+function logout() {
+    fetch('http://127.0.0.1:8001/api/logout/', {method: 'post', credentials: 'include'})
+    .then(response => {
+        
+        // delete cookies
+        document.cookie = 'access=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'refresh=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        console.log('logged out');
+        go_welcome();
+    })
+}

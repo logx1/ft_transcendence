@@ -1,4 +1,4 @@
-let username = "iscreamm_014"
+
 
 window.onload = function() {
     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -41,6 +41,10 @@ window.addEventListener('load', function() {
     document.getElementById('textarea').value = localStorage.getItem('status');
 });
 
+function closeStatus() {
+    document.querySelector('.popup-container').style.display = 'none';
+}
+
 function updateStatus() {
     document.querySelector('.popup-container').style.display = 'none';
 
@@ -48,13 +52,18 @@ function updateStatus() {
 
     localStorage.setItem('status', txtarea);
 
-    const data = { status: txtarea }
-    fetch(`http://127.0.0.1:8004/user-info/${username}/`, {
+    let datax = { status: txtarea }
+
+    fetch('http://127.0.0.1:8001/api/user/', {method: 'GET',credentials: 'include',})
+    .then(response => response.json())
+    .then(data => {
+
+        fetch(`http://127.0.0.1:8004/user-info/${data.username}/`, {
         method: 'PUT',
         headers: {
             'Content-Type':'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(datax)
     })
     .then(response => {
         if (!response.ok) {
@@ -67,7 +76,9 @@ function updateStatus() {
     })
     .catch((error) => {
         console.error('Error updating status:', error);
-    });
+    });  
+    })
+ 
 }
 
 document.addEventListener('click', function(event) {
@@ -239,7 +250,7 @@ function updateHistoryData(data, container) {
     
     CheckGameMode(data.match_type, container);
     getAccuracy(data.score1, data.score2, container);
-    CompareRes(data.score1, data.score2, "fbelahse", data.winner, container);
+    CompareRes(data.score1, data.score2, "abdel-ou", data.winner, container);
 }
 
 function addData(data) {
@@ -262,7 +273,7 @@ function addData(data) {
     document.querySelector('.stats-container').style.display = 'none';
 }
 
-// fetch('http://10.12.3.5:8000/matches/user/fbelahse/', {
+// fetch('http://10.12.3.5:8000/matches/user/abdel-ou/', {
 //     method: 'GET',
 // })
 // .then(response => response.json())

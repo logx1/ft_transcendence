@@ -16,7 +16,7 @@ class Profile extends HTMLElement {
         <div class="content-container">
             <div class="first-last">
                 
-                <button class="edit"></button>
+                <button class="edit" onclick="go_to_settings()"></button>
 
                 <h3 id="first-last">First-name & last-name</h3>
             </div>
@@ -93,7 +93,7 @@ class Profile extends HTMLElement {
         <button class="user-profile-text" onclick="go_to_profile();">Profile</button>
     </div>
 </div>
-<div class="logout-wrapper">
+<div class="logout-wrapper" onclick="logout_con()">
     <div class="logout-container">
         <button class="logout-icon"></button>
         <button class="logout-text">Log out</button>
@@ -203,6 +203,15 @@ class Profile extends HTMLElement {
         </div>
     </div>
 </div>
+<div class="logoutpop-container" style="display: none;">
+        <div class="logoutpop-box">
+                <p class="logoutpop-text" id="logoutpop-tex">are you sure you want to logout?</p>
+            <div class="update-cancel-logout">
+                <button class="cancel-log" id="cancel-log" onclick="closeLogOutBox()">No</button>
+                <button class="enter-log" id="enter-log" onclick="logout()">Yes</button>
+            </div>
+        </div>
+    </div>
 <div class="popup-container" style="display: none;">
 <div class="popup-box">
         <p class="enter">Enter your status:</p>
@@ -211,8 +220,8 @@ class Profile extends HTMLElement {
             <p class="counter_characters">0</p><p>/</p><p>30</p>
         </div>
     <div class="update-cancel">
-        <button class="cancel">Cancel</button>
-        <button class="enter">Submit</button>
+        <button class="cancel" onclick= "closeStatus()">Cancel</button>
+        <button class="enter" onclick= "updateStatus()">Submit</button>
     </div>
 </div>
 </div>

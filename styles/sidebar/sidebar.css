@@ -829,3 +829,117 @@
         font-size: small;
     }
 } */
+
+
+/* //////////LOGOUT_MODAL///////// */
+
+.logoutpop-container {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.logoutpop-container.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logoutpop-container > .logoutpop-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    width: 500px;
+    height: 165px;
+    margin-top: 20px;
+    gap: 5px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px #7c5c03;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.logoutpop-box-animate-up {
+    animation: popup 0.35s ease-in-out;
+}
+
+.logoutpop-box-animate-down {
+    animation: popout 0.25s ease-in-out;
+}
+
+.logoutpop-box > .enter {
+    font-family: 'Alfa Slab One', sans-serif;
+    font-size: 11px;
+    color: #bb8c08;
+}
+
+.logoutpop-box > .logoutpop-text{
+    font-family: 'Alfa Slab One', sans-serif;
+    padding-bottom: 20px;
+    font-size: 14px;
+    color: #bb8c08;
+    text-align: center;
+    background-color: transparent;
+}
+
+.logoutpop-box > .update-cancel-logout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    width: 400px;
+    height: 50px;
+    gap: 5px;
+}
+
+.update-cancel-logout > .enter-log {
+    width: 80px;
+    height: 40px;
+    background-color: #bb8c08;
+    font-family: 'Alfa Slab One', sans-serif;
+    font-size: 12px;
+    color: #2a2929;
+    border: none;
+    border-radius: 28px;
+    cursor: pointer;
+}
+
+.update-cancel-logout > .cancel-log {
+    width: 80px;
+    height: 40px;
+    background-color: transparent;
+    font-family: 'Alfa Slab One', sans-serif;
+    font-size: 11px;
+    color: #bb8c08;
+    border: 3px #0d0c0c;
+    cursor: pointer;
+}
+
+.popup-box > .counter{
+    float: right;
+    display: flex;
+    font-family: 'Alfa Slab One', sans-serif;
+    color: #bb8c08;
+    margin-left: 440px;
+}
+
+.popup-box > .counter p{
+    font-size: 12px !important;
+}
+
+@keyframes popup {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+}

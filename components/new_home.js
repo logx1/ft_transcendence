@@ -60,6 +60,15 @@ class newhome extends HTMLElement {
         </div> 
     </div>
 </div>
+<div class="logoutpop-container" style="display: none;">
+        <div class="logoutpop-box">
+                <p class="logoutpop-text" id="logoutpop-tex">are you sure you want to logout?</p>
+            <div class="update-cancel-logout">
+                <button class="cancel-log" id="cancel-log" onclick="closeLogOutBox()">No</button>
+                <button class="enter-log" id="enter-log" onclick="logout()">Yes</button>
+            </div>
+        </div>
+    </div>
     `;
     }
     // connectedCallback() {

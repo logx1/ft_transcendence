@@ -199,6 +199,11 @@ window.go_to_newhome = function() {
     load_newhome();
 }
 
+window.go_welcome = function() {
+    history.pushState(null, "title 1", "#welcome");
+    document.body.innerHTML = `<welcome-elements></welcome-elements>`;
+    load_welcome();
+}
 window.login = function() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
