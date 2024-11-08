@@ -145,7 +145,7 @@ connectedCallback() {
             .then(data => {
                 let full_name = data.full_name.split(' ');
                 let first_name = full_name[0];
-                let last_name = full_name[1];
+                let last_name = full_name.slice(1).join(' ');
 
                 document.getElementById('fullname_txt').value = first_name;
                 document.getElementById('username_txt').value = last_name;
