@@ -64,7 +64,7 @@ def check_full_name(full_name):
         return full_name
     raise forms.ValidationError("A user with this name already exists.")
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def ModifyUserData(request, username):
     try:
         user = User.objects.get(username=username)
@@ -101,3 +101,8 @@ def ModifyUserData(request, username):
             'username': user.username,
             'password': user.password
         })
+
+    elif request.method == 'DELETE':
+        user = User.objects.get(username=username) 
+        user.delete()
+        return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)

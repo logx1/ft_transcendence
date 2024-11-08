@@ -1,5 +1,5 @@
 
-    let ussrr = "abdel-ou"
+    // let ussrr = "abdel-ou"
 
 // window.onload = function() {
 //     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -277,4 +277,52 @@ function logout() {
         console.log('logged out');
         go_welcome();
     })
+}
+
+function delete_user(){
+    document.querySelector('.deletepop-container > .deletepop-box').classList.add('deletepop-box-animate-up');
+    document.querySelector('.deletepop-container').style.display = 'flex';
+}
+
+function closeDelUser() {
+    document.querySelector('.deletepop-container').style.display = 'none';
+}
+
+function delUserr(){
+
+
+    console.log("user delete function called");
+    fetch('http://127.0.0.1:8001/api/user/', {method: 'GET',credentials: 'include',})
+    .then(response => response.json())
+    .then(data => {
+        fetch(`http://127.0.0.1:8004/user-setting/${data.username}/`, {
+        method:'DELETE',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+
+
+    fetch(`http://127.0.0.1:8001/api/delete/${data.username}/`, {
+        method:'GET',
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    })
+
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+
+    logout();
+
+    })
+    
 }

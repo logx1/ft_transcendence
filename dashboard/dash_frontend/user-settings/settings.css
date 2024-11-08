@@ -494,3 +494,113 @@ p1{
         opacity: 1;
     }
 }
+
+
+.deletepop-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.deletepop-container.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.deletepop-container > .deletepop-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    width: 500px;
+    height: 155px;
+    margin-top: 20px;
+    gap: 5px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px #7c5c03;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.deletepop-box-animate-up {
+    animation: popup 0.35s ease-in-out;
+}
+
+.deletepop-box-animate-down {
+    animation: popout 0.25s ease-in-out;
+}
+
+.deletepop-box > .enter {
+    font-family: 'Alfa Slab One', sans-serif;
+    font-size: 11px;
+    color: #bb8c08;
+}
+
+.deletepop-box > .deletepop-tex{
+    font-family: 'Alfa Slab One', sans-serif;
+    padding-bottom: 20px;
+    font-size: 14px;
+    color: #bb8c08;
+    text-align: center;
+}
+
+.deletepop-box > .deletepop2-text {
+    font-family: 'Alfa Slab One', sans-serif;
+    padding-bottom: 20px;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 100;
+    /* font-style: italic; */
+    color: #81610a;
+    text-align: center;
+}
+
+.deletepop-box > .update-cancel-delete {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 50px;
+    gap: 5px;
+}
+
+.update-cancel-delete > .enter-del {
+    width: 80px;
+    height: 40px;
+    background-color: #bb8c08;
+    font-family: 'Alfa Slab One', sans-serif;
+    font-size: 12px;
+    color: #2a2929;
+    border: none;
+    border-radius: 28px;
+    cursor: pointer;
+}
+
+.update-cancel-delete > .cancel-del {
+    width: 80px;
+    height: 40px;
+    background-color: transparent;
+    font-family: 'Alfa Slab One', sans-serif;
+    font-size: 11px;
+    color: #bb8c08;
+    border: 3px #0d0c0c;
+    cursor: pointer;
+}
+
+@keyframes popup {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+}

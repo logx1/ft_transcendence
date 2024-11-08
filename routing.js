@@ -207,6 +207,9 @@ window.go_welcome = function() {
 window.login = function() {
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
+    let button = document.querySelector('.loginx');
+    button.innerHTML = 'wait...';
+    button.disabled = true;
 
     fetch('http://127.0.0.1:8001/api/login/', {
         method: 'POST',
@@ -219,8 +222,12 @@ window.login = function() {
         })
     })
     .then(response => {
+        button.innerHTML = 'login';
+        button.disabled = false;
         if (response.status == 200) {
+
             console.log("logged in========>");
+            go_to_newhome();
         }else{
             console.log("not logged in========>");
             document.body.querySelector('.error').innerHTML = `<span style="color: red;">Invalid email or password</span>`;

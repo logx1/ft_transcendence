@@ -86,7 +86,7 @@ class settings extends HTMLElement {
             <p id="success-txt" class="stats-text" style="display: none;">Your info has been updated successfully!</p>
         </div>
         <div class="update-delete">
-            <button class="delete">Delete User</button>
+            <button class="delete" onclick="delete_user()">Delete User</button>
             <button class="enter" id="updatee_name" onclick="verify_info()">Submit</button>
         </div>
     </div>
@@ -130,6 +130,16 @@ class settings extends HTMLElement {
             <div class="update-cancel-logout">
                 <button class="cancel-log" id="cancel-log" onclick="closeLogOutBox()">No</button>
                 <button class="enter-log" id="enter-log" onclick="logout()">Yes</button>
+            </div>
+        </div>
+    </div>
+    <div class="deletepop-container" style="display: none;">
+        <div class="deletepop-box">
+                <p class="deletepop-text" id="deletepop-tex">are you sure you want to delete your account?</p>
+                <p class="deletepop2-text" id="deletepop2-text">This action will permanently delete this user.</p>
+            <div class="update-cancel-delete">
+                <button class="cancel-del" id="cancel-del" onclick = "closeDelUser()">No</button>
+                <button class="enter-del" id="enter-del" onclick="delUserr()">Yes!</button>
             </div>
         </div>
     </div>

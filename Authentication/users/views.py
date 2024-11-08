@@ -48,6 +48,17 @@ def email_activate(request, code):
         user.save()
     response_data = {'message': 'Email activated successfully'}
     return Response(response_data)
+
+@api_view(['GET'])
+def delete_user(request, usernamex):
+    user = User.objects.filter(username=usernamex).first()
+    if user is None:
+        response_data = {'message': 'User not found'}
+        return Response(response_data, status=404)
+    
+    user.delete()
+    response_data = {'message': 'User deleted successfully'}
+    return Response(response_data)
     
 class RegisterViews(APIView):
     def post(self,request):

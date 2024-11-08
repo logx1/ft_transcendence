@@ -6,6 +6,7 @@ from .views import UserViews
 from .views import LogoutViews
 from .views import email_send
 from .views import email_activate
+from .views import delete_user
 
 urlpatterns = [
     path('register/',RegisterViews.as_view()),
@@ -14,5 +15,6 @@ urlpatterns = [
     path('logout/',LogoutViews.as_view()),
     path('email/', email_send, name='email'),
     path('email/activate/<str:code>/', email_activate, name='email'),
+    path('delete/<str:usernamex>/',delete_user, name='delete_user'),
 
 ]
