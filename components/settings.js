@@ -93,7 +93,7 @@ class settings extends HTMLElement {
     <div class="change-password-container" style="display: none;">
         <div class="old-password">
             <p>Old Password:</p>
-            <p1 id="p1_pass">Password doesn't match.</p1>
+            <p1 id="p1_pass">Enter a different password.</p1>
         </div>
         <div class="old-pass-wrapper">
             <input class="old-pass-area" type="password" id="old_pass"></input>
@@ -101,14 +101,19 @@ class settings extends HTMLElement {
                 <img src="./dashboard/dash_frontend/icons/eye.svg" alt="Show Password" class="toggle-icon">
             </button>
         </div>
-        <div class="new-password">New Password:</div>
-        <div class="new-pass-wrapper">
-            <input class="new-pass-area" type="password"></input>
-            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('new-pass-area')">
-                <img src="./dashboard/dash_frontend/icons/eye.svg" alt="Show Password" class="toggle-icon">
-            </button>
+        <div class="new-password">
+            <p>New Password:</p>
+            <p3 id="p1_pass">Password too long</p3>
+            <p4 id="p1_pass">Password too short</p4></div>
+            <div class="new-pass-wrapper">
+                <input class="new-pass-area" type="password"></input>            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('new-pass-area')">
+                    <img src="./dashboard/dash_frontend/icons/eye.svg" alt="Show Password" class="toggle-icon">
+                </button>
         </div>
-        <div class="repeat-new-password">Repeat New Password:</div>
+        <div class="repeat-new-password">
+            <p>Repeat New Password:</p>
+            <p2 id="p1_pass">Passwords don't match.</p2>
+        </div>
         <div class="repeat-new-password-wrapper">
             <input class="repeat-new-password-area" type="password" id="rp_pass"></input>
             <button type="button" class="toggle-password" onclick="togglePasswordVisibility('repeat-new-password-area')">
