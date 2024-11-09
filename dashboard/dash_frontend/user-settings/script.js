@@ -64,26 +64,88 @@ function showChangePassword() {
 }
 
 function verify() {
+    const oldpasswordElement_inp = document.querySelector('.old-pass-wrapper');
+    const newPasswordElement_inp = document.querySelector('.new-pass-wrapper');
+    const newPasswordElement_rep = document.querySelector('.repeat-new-password-wrapper');
+    const inputs = [newPasswordElement_inp, newPasswordElement_rep, oldpasswordElement_inp];
+
     const oldpass = document.querySelector('.old-pass-area');
     const newpassone = document.querySelector('.new-pass-area');
-    const newpasstwo = document.querySelector('.new-pass-area');
+    const newpasstwo = document.querySelector('.repeat-new-password-area');
 
-    // check the length of the password
-    // if (newpassone.value.length < 8) {
-    //     console.log('password is too short');
-    // }
+    if (!oldpass.value && !newpassone.value && !newpasstwo.value) {
+        inputs.forEach(input => {
+            input.style.animation = "glitch ease-out 0.20s 3";
+            input.addEventListener('animationend', function() {
+                input.style.animation = 'none';
+            }, { once: true });
+        });
+    } else if (oldpass.value == newpassone.value) {
+        document.querySelector('p1').style.display = 'inline';
+        document.querySelector('p2').style.display = 'none';
+        document.querySelector('p3').style.display = 'none';
+        document.querySelector('p4').style.display = 'none';
 
-    if (newpassone.value != newpasstwo.value || oldpass.value != newpassone.value) {
-        console.log('passwords do not match');
-    }else
-    {
+        newPasswordElement_inp.style.animation = "glitch ease-out 0.20s 3";
+        oldpasswordElement_inp.style.animation = "glitch ease-out 0.20s 3";
+
+        newPasswordElement_inp.addEventListener('animationend', function() {
+            newPasswordElement_inp.style.animation = 'none';
+        }, { once: true });
+
+        oldpasswordElement_inp.addEventListener('animationend', function() {
+            oldpasswordElement_inp.style.animation = 'none';
+        }, { once: true });
+
+        if (document.querySelector('.password-status-container > .stats-text').style.display == 'block') {
+            document.querySelector('.password-status-container > .stats-text').style.display = 'none';
+        }
+    } else if (newpassone.value != newpasstwo.value) {
+        document.querySelector('p1').style.display = 'none';
+        document.querySelector('p2').style.display = 'inline';
+        document.querySelector('p3').style.display = 'none';
+        document.querySelector('p4').style.display = 'none';
+
+        newPasswordElement_inp.style.animation = "glitch ease-out 0.20s 3";
+        newPasswordElement_rep.style.animation = "glitch ease-out 0.20s 3";
+
+        newPasswordElement_inp.addEventListener('animationend', function() {
+            newPasswordElement_inp.style.animation = 'none';
+        }, { once: true });
+
+        newPasswordElement_rep.addEventListener('animationend', function() {
+            newPasswordElement_rep.style.animation = 'none';
+        }, { once: true });
+    } else if (newpassone.value.length >= 21){
+        document.querySelector('p1').style.display = 'none';
+        document.querySelector('p2').style.display = 'none';
+        document.querySelector('p3').style.display = 'inline';
+        document.querySelector('p4').style.display = 'none';
+
+
+        newPasswordElement_inp.style.animation = "glitch ease-out 0.20s 3";
+        newPasswordElement_inp.addEventListener('animationend', function() {
+            newPasswordElement_inp.style.animation = 'none';
+        }, { once: true });
+    } else if (newpasstwo.value.length <= 3){
+        document.querySelector('p1').style.display = 'none';
+        document.querySelector('p2').style.display = 'none';
+        document.querySelector('p3').style.display = 'none';
+        document.querySelector('p4').style.display = 'inline';
+
+        newPasswordElement_inp.style.animation = "glitch ease-out 0.20s 3";
+        newPasswordElement_inp.addEventListener('animationend', function() {
+            newPasswordElement_inp.style.animation = 'none';
+        }, { once: true });
+    }
+    else {
+        document.querySelector('p1').style.display = 'none';
+        document.querySelector('p2').style.display = 'none';
+        document.querySelector('p3').style.display = 'none';
+        document.querySelector('p4').style.display = 'none';
+        console.log ("valid password")
 
     }
-
-    // console.log(oldpass.value);
-    // console.log(newpassone.value);
-    // console.log(newpasstwo.value);
-
 }
 
 ///////////

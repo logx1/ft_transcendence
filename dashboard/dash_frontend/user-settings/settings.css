@@ -330,6 +330,27 @@ p1{
     font-style: italic;
 }
 
+p2{
+    display: none;
+    font-size: 10px;
+    color: rgba(152, 0, 0, 0.773);
+    font-style: italic;
+}
+
+p3{
+    display: none;
+    font-size: 10px;
+    color: rgba(152, 0, 0, 0.773);
+    font-style: italic;
+}
+
+p4{
+    display: none;
+    font-size: 10px;
+    color: rgba(152, 0, 0, 0.773);
+    font-style: italic;
+}
+
 /* /////////////////////// */
 
 .change-password-container > .new-password {

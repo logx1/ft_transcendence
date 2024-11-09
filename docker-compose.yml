@@ -74,20 +74,20 @@ volumes:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/Users/abdel-ou/Desktop/ft_transcendencex/match_history"
+      device: "/Users/fbelahse/Desktop/ft_transcendencex/match_history"
   authentication-volume:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/Users/abdel-ou/Desktop/ft_transcendencex/authentication"
+      device: "/Users/fbelahse/Desktop/ft_transcendencex/authentication"
   game:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/Users/abdel-ou/Desktop/ft_transcendencex/gamebackend"
+      device: "/Users/fbelahse/Desktop/ft_transcendencex/gamebackend"
   dashboard-volume:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/Users/abdel-ou/Desktop/ft_transcendencex/dashboard/dash_env"
+      device: "/Users/fbelahse/Desktop/ft_transcendencex/dashboard/dash_env"
   
