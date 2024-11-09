@@ -9,7 +9,7 @@ import { load_profile } from './components/Profile.js';
 import { load_welcome } from './components/welcome.js';
 import { load_chat } from './components/chat.js';
 import { load_newhome } from './components/new_home.js';
-import { load_sidebar } from './components/sidebar.js';
+import { load_tournament} from './components/tournament.js';
 
 
 
@@ -144,6 +144,11 @@ function hashChange() {
         document.body.innerHTML = `<profile-elements></profile-elements>`;
         load_profile();
     }
+    if(window.location.hash == "#tournament"){
+        history.pushState(null, "title 1", "#tournament");
+        document.body.innerHTML = `<tournament-elements></tournament-elements>`;
+        load_tournament();
+    }
 
 }
 
@@ -152,6 +157,13 @@ window.go_to_select_game = function()
     history.pushState(null, "title 1", "#select_game");
     document.body.innerHTML = `<select-game></select-game>`;
     select_game();
+}
+
+window.go_to_tournament = function()
+{
+    history.pushState(null, "title 1", "#tournament");
+    document.body.innerHTML = `<tournament-elements></tournament-elements>`;
+    load_tournament();
 }
 
 window.go_to_register = function() {
@@ -252,6 +264,30 @@ window.login = function() {
 
 
 window.addEventListener('hashchange', hashChange);
+
+window.create = function() {
+    let id = document.getElementById('create');
+    let username = document.getElementById('usename').value;
+    if (id && username != "" && username != "username") {
+        console.log(id.value);
+        // Increment the id value by 1 in DOM
+        id.value = parseInt(id.value) + 1;
+
+        fetch('http://127.0.0.1:8080/api/lol/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: username })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+    } else {
+        console.error('Element with ID "create" not found.');
+        document.getElementById('error').innerHTML = "Please enter a valid username.";
+    }
+}
 
 
 

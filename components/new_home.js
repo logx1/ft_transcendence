@@ -41,8 +41,8 @@ class newhome extends HTMLElement {
             <button class="user-chat-text" id="user-chat-text" onclick="go_to_chat();">Chat</button>
         </div>
         <div class="user-tr-container">
-            <button class="user-tr-icon" onclick="go_to_chat();"></button>
-            <button class="user-tr-text" id="user-chat-text" onclick="go_to_chat();">Tournament</button>
+            <button class="user-tr-icon" onclick="go_to_tournament();"></button>
+            <button class="user-tr-text" id="user-chat-text" onclick="go_to_tournament();">Tournament</button>
         </div>
         <div class="user-settings-container">
             <button class="user-settings-icon" onclick="go_to_settings();"></button>

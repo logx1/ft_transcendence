@@ -1,0 +1,102 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #302E2B;
+}
+
+.create {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 50%;
+    max-width: 500px;
+    background-color: rgb(27, 25, 23);
+    border-radius: 10px;
+}
+
+.create .head {
+    height: 20%;
+    /* background-color: aqua; */
+    border-bottom: solid 1px rgb(234, 193, 31);
+}
+.create .head h1 {
+    color: rgb(234, 193, 31);
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.create .body {
+    height: 50%;
+    width: 100%;
+    /* background-color: aquamarine; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding-top: 20px;
+    gap: 10px;
+    align-items: center;
+}
+.create .body .playerimg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55%;
+    /* background-color: blueviolet; */
+    border: solid 10px rgb(234, 193, 31);
+    border: none;
+    padding: 5px;
+}
+
+.create .body .playerimg img {
+    height: 100%;
+    border-radius: 50%;
+    border: solid 10px rgb(234, 193, 31);
+}
+
+.create .body .playername {
+    height: 25%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.create .body .playername input {
+    width: 50%;
+    height: 35%;
+    background-color: rgb(54, 53, 51);
+}
+.create .buttom {
+    height: 10%;
+    width: 100%;
+    /* background-color: blueviolet; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(220, 203, 135);
+}
+
+.create .buttom button {
+    width: 50%;
+    height: 50%;
+    background-color: rgb(234, 193, 31);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    /* color: blueviolet; */
+    cursor: pointer;
+    background-color: rgb(54, 53, 51);
+    color: rgb(234, 193, 31);
+}
+.create .buttom button:hover {
+    background-color: rgb(234, 193, 31);
+    color: rgb(54, 53, 51);
+}/Users/abdel-ou/Desktop/trnamnt/img

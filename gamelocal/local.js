@@ -169,12 +169,6 @@ function keys_tracker()
 
    requestAnimationFrame(keys_tracker);
 }
-
 keys_tracker();
 
-
-
-
 }
-
-
