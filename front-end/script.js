@@ -13,9 +13,11 @@ let room_name;
 let chatSocket;
 let socketReady = false;
 
-  
+
+
 
 const createMessageElement = (message) => {
+    console.log("GG");
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', message.sender === authenticated_user.name ? 'sent' : 'received');
     messageElement.innerHTML = `
@@ -47,7 +49,9 @@ function create_web_socket(contact){
 
   chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
+    console.log(data);
     const message = data.message;
+    console.log(message);
     const messageElement = createMessageElement(message);
     if (chatMessages)
     {
@@ -82,6 +86,7 @@ const displayChatHistory = (messages) => {
 
 const selectContact = (contact) => {
   if (!contact) return;
+  chatMessages.innerHTML = '';
 
   create_web_socket(contact);
   chatInputForm.reset();
@@ -121,7 +126,7 @@ const sendMessage = (e) => {
   if (socketReady && chatSocket.readyState === WebSocket.OPEN) {
       const timestamp = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
       const message = {
-          sender: authenticated_user.name,
+          sender: authenticated_user.username,
           content: chatInput.value,
           timestamp,
       };
