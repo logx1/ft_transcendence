@@ -40,7 +40,7 @@ class ChatConsumer(WebsocketConsumer):
             {
                 'type': 'chat_message',
                 'message': message,
-                'sender': "test1"
+                'user': user.username if user.is_authenticated else 'Anonymous'
             }
         )
 
@@ -49,7 +49,7 @@ class ChatConsumer(WebsocketConsumer):
         user = event['user']
 
         self.send(text_data=json.dumps({
-            'sender': "test2",
+            'user': user,
             'message': message
         }))
 

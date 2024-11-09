@@ -17,8 +17,7 @@ let socketReady = false;
 
 const createMessageElement = (message) => {
     const messageElement = document.createElement('div');
-    console.log(message.sender);
-    messageElement.classList.add('message', message.sender === authenticated_user.username ? 'sent' : 'received');
+    messageElement.classList.add('message', message.sender === authenticated_user.name ? 'sent' : 'received');
     messageElement.innerHTML = `
         <div class="message-sender">${message.sender}</div>
         <div class="message-text">${message.content}</div>
@@ -30,10 +29,10 @@ const createMessageElement = (message) => {
 
 
 function create_web_socket(contact){
-  room_name = contact.id + authenticated_user.id;
-  console.log(authenticated_user.id);
-  console.log(contact.id);
-  
+  let contact_id = contact.id.toString();
+  let authenticated_user_id = authenticated_user.id.toString();
+  let sorted_ids = [contact_id, authenticated_user_id].sort();
+  room_name = sorted_ids.join('');
 
   chatSocket = new WebSocket(
       'ws://'
