@@ -1,5 +1,5 @@
 
-    let ussrr = "abdel-ou"
+let ussrr = "selkhadr"
 
 // window.onload = function() {
 //     let menu_icon_box = document.querySelector(".small-sidebar-container");
@@ -128,7 +128,7 @@ function verify() {
 
   
 
-    fetch(`http://10.12.3.5:8000/user-setting/${username}/`, {
+    fetch(`http://10.11.7.7:8000/user-setting/${username}/`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -237,7 +237,7 @@ function updateData(data){
     username_.appendChild(uname);
 }
 
-// fetch(`http://10.12.3.5:8000/user-setting/${ussrr}/`, {
+// fetch(`http://10.11.7.7:8000/user-setting/${ussrr}/`, {
 //     method:'GET',
 // })
 //     .then(response => response.json())

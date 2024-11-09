@@ -250,7 +250,7 @@ function updateHistoryData(data, container) {
     
     CheckGameMode(data.match_type, container);
     getAccuracy(data.score1, data.score2, container);
-    CompareRes(data.score1, data.score2, "abdel-ou", data.winner, container);
+    CompareRes(data.score1, data.score2, "selkhadr", data.winner, container);
 }
 
 function addData(data) {
@@ -273,7 +273,7 @@ function addData(data) {
     document.querySelector('.stats-container').style.display = 'none';
 }
 
-// fetch('http://10.12.3.5:8000/matches/user/abdel-ou/', {
+// fetch('http://10.11.7.7:8000/matches/user/selkhadr/', {
 //     method: 'GET',
 // })
 // .then(response => response.json())
