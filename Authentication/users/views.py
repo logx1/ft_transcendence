@@ -76,7 +76,7 @@ class LoginViews(APIView):
         if not user.check_password(password):
             raise AuthenticationFailed('Incorrect password')
         
-        # create user info by sending post request to the user service including {"username": "abdel-ou","full_name": "abdel-ou el-abdel-ou"}
+        # create user info by sending post request to the user service including {"username": "selkhadr","full_name": "selkhadr el-selkhadr"}
         url = 'http://dashboard:8004/api/users/'
         data = {
             'username': username,
