@@ -59,7 +59,28 @@ def delete_user(request, usernamex):
     user.delete()
     response_data = {'message': 'User deleted successfully'}
     return Response(response_data)
+
+@api_view(['POST'])
+def change_password(request):
+    email = request.data['email']
+    oldpassword = request.data['oldpassword']
+    newpassword = request.data['newpassword']
+
+    user = User.objects.filter(email=email).first()
+    if user is None:
+        response_data = {'message': 'User not found'}
+        return Response(response_data, status=404)
     
+    if not user.check_password(oldpassword):
+        response_data = {'message': 'Incorrect password'}
+        return Response(response_data, status=404)
+    
+    user.set_password(newpassword)
+    user.save()
+    response_data = {'message': 'Password changed successfully'}
+    return Response(response_data, status=200)
+    
+
 class RegisterViews(APIView):
     def post(self,request):
         serializer = UserSerializer(data=request.data)
