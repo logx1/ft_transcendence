@@ -64,84 +64,26 @@ function showChangePassword() {
 }
 
 function verify() {
-    const newPasswordElement_inp = document.querySelector('.new-pass-wrapper');
-    const newPasswordElement_rep = document.querySelector('.repeat-new-password-wrapper');
+    const oldpass = document.querySelector('.old-pass-area');
+    const newpassone = document.querySelector('.new-pass-area');
+    const newpasstwo = document.querySelector('.new-pass-area');
 
-    const inputField = document.querySelector('body > div.body-container > div.change-password-container > div.new-pass-wrapper > input');
+    // check the length of the password
+    // if (newpassone.value.length < 8) {
+    //     console.log('password is too short');
+    // }
 
-    const val1 = inputField.value;
-    const val2 = document.querySelector('body > div.body-container > div.change-password-container > div.repeat-new-password-wrapper > input').value;
+    if (newpassone.value != newpasstwo.value || oldpass.value != newpassone.value) {
+        console.log('passwords do not match');
+    }else
+    {
 
-    if (val1 != val2 || !val1 || !val2) {       
-        newPasswordElement_inp.style.animation = "glitch ease-out 0.20s 3";
-        newPasswordElement_rep.style.animation = "glitch ease-out 0.20s 3";
-
-        newPasswordElement_inp.addEventListener('animationend', function() {
-            newPasswordElement_inp.style.animation = 'none';
-        }, { once: true });
-
-        newPasswordElement_rep.addEventListener('animationend', function() {
-            newPasswordElement_rep.style.animation = 'none';
-        }, {once: true});
-
-        if (document.querySelector('.password-status-container > .stats-text').style.display = 'block'){
-            document.querySelector('.password-status-container > .stats-text').style.display = 'none';
-        }
     }
 
-    else {
-        document.querySelector('.password-status-container').style.display = 'flex';
-        const up = document.querySelector('.password-status-container > .stats-text');
+    // console.log(oldpass.value);
+    // console.log(newpassone.value);
+    // console.log(newpasstwo.value);
 
-        if (document.querySelector('.password-status-container > .stats-text').style.display = 'none'){
-            document.querySelector('.password-status-container > .stats-text').style.display = 'block';
-        }
-
-        up.style.animation = "slide-up ease-out 0.10s 1";
-
-        up.addEventListener('animationend', function() {
-            up.style.animation = 'none';
-        }, { once: true });
-    }
-
-    ////////fetch area
-
-    if (document.getElementById('old_pass').value != ol_pass){
-        document.querySelector('p1').style.display = 'inline';
-        const oldPasswordEl = document.querySelector('.old-pass-wrapper');
-        oldPasswordEl.style.animation = "glitch ease-out 0.20s 3";
-
-        oldPasswordEl.addEventListener('animationend', function() {
-            oldPasswordEl.style.animation = 'none';
-        }, { once: true });
-
-        if (document.querySelector('.password-status-container > .stats-text').style.display = 'block'){
-            document.querySelector('.password-status-container > .stats-text').style.display = 'none';
-        }
-    }
-    else{
-        document.querySelector('p1').style.display = 'none';
-
-        var formData = new FormData();
-        formData.append('password', document.getElementById('rp_pass').value);
-    }
-
-  
-
-    fetch(`http://10.12.3.5:8000/user-setting/${username}/`, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-        },
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
 }
 
 ///////////
