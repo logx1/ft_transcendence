@@ -36,12 +36,12 @@ function togglePasswordVisibility(inputClass) {
 
     if (inputField.type === "password") {
         inputField.type = "text";
-        icon.src = "./icons/crossed-eye.svg";
+        icon.src = "./dashboard/dash_frontend/icons/crossed-eye.svg";
         icon.alt = "Hide Password";
     }
     else {
         inputField.type = "password";
-        icon.src = "./icons/eye.svg";
+        icon.src = "./dashboard/dash_frontend/icons/eye.svg";
         icon.alt = "Show Password";
     }
 }
