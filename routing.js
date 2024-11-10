@@ -10,6 +10,7 @@ import { load_welcome } from './components/welcome.js';
 import { load_chat } from './components/chat.js';
 import { load_newhome } from './components/new_home.js';
 import { load_tournament} from './components/tournament.js';
+import { load_tournament_game} from './components/tournament_game.js';
 
 
 
@@ -281,15 +282,32 @@ window.create = function() {
             body: JSON.stringify({ name: username })
         })
         .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+        .then(data => {
+            console.log(data)
+            let id = document.getElementById('create').value;
+            if (id == 3) {
+                document.body.innerHTML = `<game-local></game-local>`;
+                load_tournament_game();
+                setTimeout(() => {
+                   initializeGame('player_1111', 'player_2222'); 
+                }, 300);
+                
+            }
+        })
+            
+        .catch(error => console.error('Error:', error));    
     } else {
         console.error('Element with ID "create" not found.');
         document.getElementById('error').innerHTML = "Please enter a valid username.";
     }
 }
 
-
+window.luanch_tournament = function() {
+    console.log("luanch tournament");
+    pushState(null, "title 1", "#tournament");
+    
+    load_local_game();
+}
 
 
 

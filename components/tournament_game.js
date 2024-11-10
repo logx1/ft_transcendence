@@ -1,4 +1,4 @@
-export function load_local_game()
+export function load_tournament_game()
 {
 class gameLocal extends HTMLElement{
     constructor(){
@@ -61,9 +61,6 @@ class gameLocal extends HTMLElement{
     `;
     }
     connectedCallback() {
-        setTimeout(() => {
-             initializeGame('player_1111', 'player_2222');
-        }, 300);
        
     }
 }
