@@ -1,4 +1,10 @@
-function tournament_game_logic() {
+function tournament_game_logic(name11, name22) {
+
+    name1 = document.querySelector('body > game-local > div > div > div.top > div.player_1 > span');
+    name2 = document.querySelector('body > game-local > div > div > div.top > div.player_2 > span');
+    // name1.innerHTML = name11;
+    // name2.innerHTML = name22;
+
     let table = document.getElementById('table');
     let context = table.getContext('2d');
     context.imageSmoothingEnabled = true;
@@ -79,8 +85,38 @@ function tournament_game_logic() {
                 this.y = left_rockit.y + rockit_height/2;
                 this.status = false;
                 left_rockit_score++;
-                if (left_rockit_score == 5) {
-                    alert("Player 1 wins!");
+                if (left_rockit_score == 2) {
+                    // luanch_tournament('dddd', 'dddd');
+                    let name1 = document.querySelector('body > game-local > div > div > div.top > div.player_1 > span').innerHTML;
+                    let name2 = document.querySelector('body > game-local > div > div > div.top > div.player_2 > span').innerHTML;
+                    console.log("====================================");
+                    console.log(name1, name2);
+                    console.log("====================================");
+                    fetch('http://127.0.0.1:8080/api/lol/', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: name1, level1: 5 })
+                    })
+                    .then(response => response.json())
+                    .then(() => {
+                        return fetch('http://127.0.0.1:8080/api/lol/', {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name: name2, level1: -1 })
+                        });
+                    })
+                    .then(response => response.json())
+                    .then(() => {
+                        luanch_tournament('dddd', 'dddd');
+                        console.log('disconnected');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            setTimeout(() => {
+                 console.log('disconnected');
+            }, 300);
+                    
                 }
                 left_score_element.innerHTML = left_rockit_score;
             }
@@ -91,8 +127,38 @@ function tournament_game_logic() {
                 this.y = right_rockit.y + rockit_height/2;
                 this.status = false;
                 right_rockit_score++;
-                if (right_rockit_score == 5) {
-                    alert("Player 2 wins!");
+                
+                if (right_rockit_score == 2) {
+                    let name1 = document.querySelector('body > game-local > div > div > div.top > div.player_1 > span').innerHTML;
+                    let name2 = document.querySelector('body > game-local > div > div > div.top > div.player_2 > span').innerHTML;
+                    console.log("====================================");
+                    console.log(name1, name2);
+                    console.log("====================================");
+                    fetch('http://127.0.0.1:8080/api/lol/', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: name1, level1: -1 })
+                    })
+                    .then(response => response.json())
+                    .then(() => {
+                        return fetch('http://127.0.0.1:8080/api/lol/', {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name: name2, level1: 5 })
+                        });
+                    })
+                    .then(response => response.json())
+                    .then(() => {
+                        luanch_tournament('dddd', 'dddd');
+                        console.log('disconnected');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            setTimeout(() => {
+                 console.log('disconnected');
+            }, 300);
+                    
                 }
                 right_score_element.innerHTML = right_rockit_score;
             }

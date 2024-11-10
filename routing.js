@@ -285,15 +285,10 @@ window.create = function() {
         .then(data => {
             console.log(data)
             let id = document.getElementById('create').value;
-            if (id == 3) {
-                document.body.innerHTML = `<game-local></game-local>`;
-                load_tournament_game();
-                setTimeout(() => {
-                    tournament_game_logic('player_1111', 'player_2222'); 
-                }, 300); 
+            if (id == 9) {
+                luanch_tournament('1player1', '2player2');
             }
-        })
-            
+        }) 
         .catch(error => console.error('Error:', error));    
     } else {
         console.error('Element with ID "create" not found.');
@@ -301,18 +296,11 @@ window.create = function() {
     }
 }
 
-window.luanch_tournament = function() {
+window.luanch_tournament = function(player1, player2) {
     console.log("luanch tournament");
-    pushState(null, "title 1", "#tournament");
-    
-    load_local_game();
+    document.body.innerHTML = `<game-local></game-local>`;
+    load_tournament_game();
+    // setTimeout(() => {
+    //     tournament_game_logic(player1, player2); 
+    // }, 300); 
 }
-
-
-
-
-
-
-
-
-
