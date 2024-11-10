@@ -79,6 +79,9 @@ class ball
             this.y = left_rockit.y + rockit_height/2;
             this.status = false;
             left_rockit_score++;
+            if (left_rockit_score == 5) {
+                alert("Player 1 wins!");
+            }
             left_score_element.innerHTML = left_rockit_score;
         }
 
@@ -88,6 +91,9 @@ class ball
             this.y = right_rockit.y + rockit_height/2;
             this.status = false;
             right_rockit_score++;
+            if (right_rockit_score == 5) {
+                alert("Player 2 wins!");
+            }
             right_score_element.innerHTML = right_rockit_score;
         }
         if((this.y + this.radius > table_height) || (this.y - this.radius < 0))

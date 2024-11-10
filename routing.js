@@ -289,9 +289,8 @@ window.create = function() {
                 document.body.innerHTML = `<game-local></game-local>`;
                 load_tournament_game();
                 setTimeout(() => {
-                   initializeGame('player_1111', 'player_2222'); 
-                }, 300);
-                
+                    tournament_game_logic('player_1111', 'player_2222'); 
+                }, 300); 
             }
         })
             
