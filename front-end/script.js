@@ -88,14 +88,6 @@ const selectContact = (contact) => {
     create_web_socket(contact);
     chatInputForm.reset();
 
-    if (currentContact) {
-        const prevContactElement = document.querySelector(`.contact[data-id="${currentContact.id}"]`);
-        if (prevContactElement) prevContactElement.classList.remove('active');
-    }
-
-    currentContact = contact;
-    const currentContactElement = document.querySelector(`.contact[data-id="${contact.id}"]`);
-    if (currentContactElement) currentContactElement.classList.add('active');
 
     chatInput.placeholder = `Type here to ${contact.username}...`;
 };
